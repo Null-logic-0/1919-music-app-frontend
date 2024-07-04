@@ -2,13 +2,15 @@ import { useState } from 'react';
 import Image from 'next/image';
 import styles from './HeartLike.module.scss';
 import { HeartLikeEnum } from '../../enums/heartLike.enums';
+import React from 'react';
+
 
 interface Props {
   isDisabled?: boolean;
   onClick?: () => void;
 }
 
-const HeartLike = ({ isDisabled = false, onClick }: Props) => {
+const HeartLike = ({ isDisabled, onClick }: Props) => {
   const [isClicked, setIsClicked] = useState(false);
 
   const getIconSource = () => {

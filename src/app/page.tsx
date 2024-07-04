@@ -6,7 +6,7 @@ import HeartLike from "./Components/HeartLike/HeartLike";
 export default function Home() {
   return (
     <main>
-      {/*<HeartLike/>*/}
+
       
     </main>
   );
