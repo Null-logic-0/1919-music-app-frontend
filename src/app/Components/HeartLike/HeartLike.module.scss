@@ -1,0 +1,25 @@
+.heartLike{
+    background-color: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.icon {
+    width: 32px;
+    height: 32px;
+}
+
+@media (max-width:834px){
+    .icon{
+        width: 24px;
+        height: 16px;
+    }
+}
+
+@media (max-width:393px){
+    .icon {
+        width: 16px;
+        height: 16px;
+    }
+}
