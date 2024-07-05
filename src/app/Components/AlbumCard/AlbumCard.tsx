@@ -1,56 +1,49 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './AlbumCard.module.scss';
+import { ImageSizeVariant, imageSizeVariants } from '../../enums/imageSizeVariants';
 
 type AlbumProps = {
     showDetails?: boolean;
     title: string;
     subtitle: string;
     direction?: 'row' | 'column';
-    imageSizeVariant?: 'small' | 'medium' | 'large' | 'Xlarge' | 'rounded'| 'roundedXl'|'roundedXxl';
+    imageSizeVariant?: ImageSizeVariant;
     images: string;
 };
 
-const imageSizeVariants = {
-    small: { width: 106, height: 106 },
-    medium: { width: 292, height: 292 },
-    large: { width: 372, height: 217 },
-    Xlarge: { width: 372, height: 285 },
-    rounded: { width: 176, height: 176 },
-    roundedXl: { width: 240, height: 240 },
-    roundedXxl: { width: 240, height: 240 },
-
-
-};
-
-const AlbumCard = ({ showDetails, title, subtitle, direction, imageSizeVariant = 'medium', images }: AlbumProps) => {
+const AlbumCard = ({ showDetails, title, subtitle, direction, imageSizeVariant = ImageSizeVariant.Medium, images }: AlbumProps) => {
     const classNames = [styles.container];
     if (direction === 'row') classNames.push(styles.row);
     else classNames.push(styles.column);
 
     const classes = [styles.info];
-    if (imageSizeVariant == 'Xlarge') classes.push(styles.info)
-    else if (direction === 'row') classes.push(styles.columnInfo);
-    else if (imageSizeVariant === 'roundedXxl' || 'roundedXl') classes.push(styles.roundedColumn);
+    if (imageSizeVariant === ImageSizeVariant.XLarge || imageSizeVariant === ImageSizeVariant.RoundedXL) {
+        classes.push(styles.info); 
+    } else if (direction === 'row') {
+        classes.push(styles.columnInfo);
+    } else if (imageSizeVariant === ImageSizeVariant.RoundedXXL) {
+        classes.push(styles.roundedColumn);
+    }
 
     const { width, height } = imageSizeVariants[imageSizeVariant];
     const imageClass = `${styles.image} ${styles[imageSizeVariant]}`;
 
     const getTitleClass = () => {
-        if (imageSizeVariant === 'Xlarge' || imageSizeVariant === 'small' || imageSizeVariant === 'roundedXl') {
+        if (imageSizeVariant === ImageSizeVariant.XLarge || imageSizeVariant === ImageSizeVariant.Small || imageSizeVariant === ImageSizeVariant.RoundedXL) {
             return styles.mediumTitle;
-        } else if (imageSizeVariant === 'large' || imageSizeVariant === 'roundedXxl') {
+        } else if (imageSizeVariant === ImageSizeVariant.Large || imageSizeVariant === ImageSizeVariant.RoundedXXL) {
             return styles.largeTitle;
         }
         return '';
     };
 
     const getSubtitleClass = () => {
-        if (imageSizeVariant === 'Xlarge' || imageSizeVariant === 'small'|| imageSizeVariant === 'roundedXl') {
+        if (imageSizeVariant === ImageSizeVariant.XLarge || imageSizeVariant === ImageSizeVariant.Small || imageSizeVariant === ImageSizeVariant.RoundedXL) {
             return styles.mediumSubtitle;
-        } else if (imageSizeVariant === 'large' || imageSizeVariant === 'roundedXxl') {
+        } else if (imageSizeVariant === ImageSizeVariant.Large || imageSizeVariant === ImageSizeVariant.RoundedXXL) {
             return styles.largeSubtitle;
-        } else
+        }
         return '';
     };
 
