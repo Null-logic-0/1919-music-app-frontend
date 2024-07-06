@@ -7,9 +7,7 @@ import { ImageSizeVariant } from "./enums/imageSizeVariants";
 export default function Home() {
   return (
     <main>
-      <AlbumCard title={"name"} subtitle={"song"} images={"/images/albumCard.png"} showDetails
-      imageSizeVariant={ImageSizeVariant.Large} direction="row"/>
-
+    
     </main>
   );
 }
