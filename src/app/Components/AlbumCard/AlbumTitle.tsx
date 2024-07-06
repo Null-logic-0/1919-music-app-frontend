@@ -8,9 +8,13 @@ type TitleProps = {
 
 const AlbumTitle = ({ title, imageSizeVariant }: TitleProps) => {
     const getTitleClass = () => {
-        if (imageSizeVariant === ImageSizeVariant.XLarge || imageSizeVariant === ImageSizeVariant.Small || imageSizeVariant === ImageSizeVariant.RoundedXL) {
+        if (imageSizeVariant === ImageSizeVariant.XLarge || 
+            imageSizeVariant === ImageSizeVariant.Small || 
+            imageSizeVariant === ImageSizeVariant.RoundedXL || 
+            imageSizeVariant === ImageSizeVariant.Player) {
             return styles.mediumTitle;
-        } else if (imageSizeVariant === ImageSizeVariant.Large || imageSizeVariant === ImageSizeVariant.RoundedXXL) {
+        } else if (imageSizeVariant === ImageSizeVariant.Large ||
+            imageSizeVariant === ImageSizeVariant.RoundedXXL) {
             return styles.largeTitle;
         }
         return '';

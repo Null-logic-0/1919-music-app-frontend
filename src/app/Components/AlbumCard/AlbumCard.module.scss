@@ -68,6 +68,7 @@
     font-weight: 400;
 }
 
+
 .image {
     &.small {
         width: 106px;
@@ -112,108 +113,136 @@
         border-radius: $rounded;
 
     }
+
+    &.player {
+        width: 134px;
+        height: 112px;
+        border-radius: $small;
+
+    }
 }
 
-@media (max-width:768px){
+@media (max-width:768px) {
 
     .image {
         &.small {
             width: 72px;
             height: 72px;
         }
-    
+
         &.medium {
             width: 80px;
             height: 72px;
         }
-    
+
         &.large {
             width: 172px;
             height: 96px;
         }
-    
+
         &.Xlarge {
             width: 173px;
             height: 102px;
         }
-    
+
         &.rounded {
             width: 72px;
             height: 72px;
         }
+
         &.roundedXl {
             width: 104px;
             height: 104px;
-    
+
         }
-    
+
         &.roundedXxl {
             width: 146px;
             height: 146px;
-    
+
         }
+
+        &.player {
+            width: 44px;
+            height: 44px;
+            border-radius: $small;
+
+        }
+
     }
 
     .mediumTitle {
         font-size: 14px;
         font-weight: 500px;
     }
-    
+
     .largeTitle {
         font-size: 20px;
         font-weight: 500px;
     }
-    
+
     .mediumSubtitle {
         font-size: 12px;
         font-weight: 400;
     }
-    
+
     .largeSubtitle {
         font-size: 16px;
         font-weight: 400;
     }
 
+    .hiddenDetails {
+        display: none;
+    }
+
+    
 }
 
-@media (max-width:1024px){
+@media (max-width:1024px) {
 
     .image {
         &.small {
             width: 96px;
             height: 96px;
         }
-    
+
         &.medium {
             width: 136px;
             height: 136px;
         }
-    
+
         &.large {
             width: 280px;
             height: 172px;
         }
-    
+
         &.Xlarge {
             width: 249px;
             height: 182px;
         }
-    
+
         &.rounded {
             width: 112px;
             height: 112px;
         }
-       
+
         &.roundedXl {
             width: 160px;
             height: 160px;
-    
+
         }
-    
+
         &.roundedXxl {
             width: 160px;
             height: 160px;
-    
+
+        }
+
+        &.player {
+            width: 72px;
+            height: 72px;
+            border-radius: $small;
+
         }
     }
 
@@ -221,21 +250,20 @@
         font-size: 14px;
         font-weight: 500px;
     }
-    
+
     .largeTitle {
         font-size: 36px;
         font-weight: 500px;
     }
-    
+
     .mediumSubtitle {
         font-size: 16px;
         font-weight: 400;
     }
-    
+
     .largeSubtitle {
         font-size: 24px;
         font-weight: 400;
     }
-
+    
 }
-

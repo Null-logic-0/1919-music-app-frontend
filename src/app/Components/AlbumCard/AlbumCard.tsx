@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import styles from './AlbumCard.module.scss';
 import AlbumImage from './AlbumImage';
 import AlbumTitle from './AlbumTitle';
@@ -14,6 +15,21 @@ type AlbumProps = {
 };
 
 const AlbumCard = ({ showDetails, title, subtitle, direction, imageSizeVariant = ImageSizeVariant.Medium, images }: AlbumProps) => {
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+
+        handleResize();
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
     const classNames = [styles.container];
     if (direction === 'row') classNames.push(styles.row);
     else classNames.push(styles.column);
@@ -36,7 +52,7 @@ const AlbumCard = ({ showDetails, title, subtitle, direction, imageSizeVariant =
             />
 
             {showDetails && (
-                <div className={classes.join(' ').trim()}>
+                <div className={`${classes.join(' ').trim()} ${(isMobile && imageSizeVariant === ImageSizeVariant.Player) ? styles.hiddenDetails : ''}`}>
                     <AlbumTitle title={title} imageSizeVariant={imageSizeVariant} />
                     <AlbumSubtitle subtitle={subtitle} imageSizeVariant={imageSizeVariant} />
                 </div>
