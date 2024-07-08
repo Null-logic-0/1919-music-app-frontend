@@ -68,7 +68,6 @@
     font-weight: 400;
 }
 
-
 .image {
     &.small {
         width: 106px;
@@ -114,12 +113,6 @@
 
     }
 
-    &.player {
-        width: 134px;
-        height: 112px;
-        border-radius: $small;
-
-    }
 }
 
 @media (max-width:768px) {
@@ -161,14 +154,6 @@
             height: 146px;
 
         }
-
-        &.player {
-            width: 44px;
-            height: 44px;
-            border-radius: $small;
-
-        }
-
     }
 
     .mediumTitle {
@@ -189,13 +174,7 @@
     .largeSubtitle {
         font-size: 16px;
         font-weight: 400;
-    }
-
-    .hiddenDetails {
-        display: none;
-    }
-
-    
+    }    
 }
 
 @media (max-width:1024px) {
@@ -238,12 +217,6 @@
 
         }
 
-        &.player {
-            width: 72px;
-            height: 72px;
-            border-radius: $small;
-
-        }
     }
 
     .mediumTitle {
@@ -264,6 +237,5 @@
     .largeSubtitle {
         font-size: 24px;
         font-weight: 400;
-    }
-    
+    }   
 }

@@ -12,6 +12,7 @@ type AlbumProps = {
     direction?: 'row' | 'column';
     imageSizeVariant?: ImageSizeVariant;
     images: string;
+    
 };
 
 const AlbumCard = ({ showDetails, title, subtitle, direction, imageSizeVariant = ImageSizeVariant.Medium, images }: AlbumProps) => {
@@ -34,6 +35,7 @@ const AlbumCard = ({ showDetails, title, subtitle, direction, imageSizeVariant =
     if (direction === 'row') classNames.push(styles.row);
     else classNames.push(styles.column);
 
+
     const classes = [styles.info];
     if (imageSizeVariant === ImageSizeVariant.XLarge ) {
         classes.push(styles.info); 
@@ -41,7 +43,10 @@ const AlbumCard = ({ showDetails, title, subtitle, direction, imageSizeVariant =
         classes.push(styles.columnInfo);
     } else if (imageSizeVariant === ImageSizeVariant.RoundedXXL || imageSizeVariant === ImageSizeVariant.RoundedXL) {
         classes.push(styles.roundedColumn);
-    }
+    } 
+
+    
+    
 
     return (
         <div className={classNames.join(' ').trim()}>
@@ -52,7 +57,7 @@ const AlbumCard = ({ showDetails, title, subtitle, direction, imageSizeVariant =
             />
 
             {showDetails && (
-                <div className={`${classes.join(' ').trim()} ${(isMobile && imageSizeVariant === ImageSizeVariant.Player) ? styles.hiddenDetails : ''}`}>
+                <div className={`${classes.join(' ').trim()} `}>
                     <AlbumTitle title={title} imageSizeVariant={imageSizeVariant} />
                     <AlbumSubtitle subtitle={subtitle} imageSizeVariant={imageSizeVariant} />
                 </div>

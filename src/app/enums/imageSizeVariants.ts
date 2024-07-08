@@ -6,7 +6,6 @@ export enum ImageSizeVariant {
     Rounded = 'rounded',
     RoundedXL = 'roundedXl',
     RoundedXXL = 'roundedXxl',
-    Player = 'player'
 
 }
 
@@ -19,5 +18,4 @@ export const imageSizeVariants = {
     [ImageSizeVariant.Rounded]: { width: 176, height: 176 },
     [ImageSizeVariant.RoundedXL]: { width: 240, height: 240 },
     [ImageSizeVariant.RoundedXXL]: { width: 240, height: 240 },
-    [ImageSizeVariant.Player]: { width: 134, height: 112 },
 };
