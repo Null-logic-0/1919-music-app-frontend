@@ -1,0 +1,82 @@
+@import '../../../styles/globalColors/color.scss';
+@import '../../../styles/globalBorders/borders.scss';
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 133px;
+
+}
+
+.img {
+    border-radius: $small;
+    width: 134px;
+    height: 112px;
+    object-fit: cover;
+
+}
+
+.title {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.artist {
+    color: $lighter;
+    font-size: 20px;
+    font-weight: 400;
+
+}
+
+
+
+
+@media (max-width:768px) {
+    .heartBtn {
+        display: none;
+    }
+
+
+    .img {
+        width: 44px;
+        height: 44px;
+    }
+
+    .text {
+        display: none;
+
+    }
+
+}
+
+@media (max-width:1024px) {
+
+
+    .img {
+        width: 72px;
+        height: 72px;
+    }
+
+    .text {
+        width: 110px;
+
+    }
+
+    .title {
+        font-size: 20px;
+    }
+
+    .artist {
+        font-size: 16px;
+    }
+}

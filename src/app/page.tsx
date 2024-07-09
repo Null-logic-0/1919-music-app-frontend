@@ -7,6 +7,7 @@ import { ImageSizeVariant } from "./enums/imageSizeVariants";
 export default function Home() {
   return (
     <main>
+
     
     </main>
   );

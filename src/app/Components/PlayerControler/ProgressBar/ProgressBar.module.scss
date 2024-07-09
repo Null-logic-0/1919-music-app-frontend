@@ -1,0 +1,162 @@
+@import '../../../styles/globalColors/color.scss';
+
+.time {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.timing {
+    color: #fff;
+    font-size: 12px;
+    font-weight: 400;
+    white-space: nowrap;
+}
+
+.progressBar {
+    --bar-bg: #fff;
+    --seek-before-width: 0%;
+    --seek-before-color: #232323;
+    --knobby: #232323;
+
+    appearance: none;
+    background: var(--bar-bg);
+    border-radius: 24px;
+    position: relative;
+    width: 407px;
+    height: 11px;
+    outline: none;
+    cursor: pointer;
+}
+
+/* progress bar - safari */
+.progressBar::-webkit-slider-runnable-track {
+    background: var(--bar-bg);
+    border-radius: 24px;
+    position: relative;
+    width: 100%;
+    height: 11px;
+    outline: none;
+}
+
+/* progress bar - firefox */
+.progressBar::-moz-range-track {
+    background: var(--bar-bg);
+    border-radius: 24px;
+    position: relative;
+    width: 100%;
+    height: 11px;
+    outline: none;
+}
+
+.progressBar::-moz-focus-outer {
+    border: 0;
+}
+
+/* progress bar - chrome and safari */
+.progressBar::before {
+    content: '';
+    height: 12px;
+    width: var(--seek-before-width);
+    background-color: var(--seek-before-color);
+    border-radius: 24px;
+
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    z-index: 3;
+}
+
+/* progress bar - firefox */
+.progressBar::-moz-range-progress {
+    background-color: var(--seek-before-color);
+    border-radius: 24px;
+    height: 12px;
+}
+
+/* knobby - chrome and safari */
+.progressBar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 24px;
+    border: none;
+    background-color: var(--knobby);
+    cursor: pointer;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 3;
+    box-sizing: border-box;
+}
+
+/* knobby while dragging - chrome and safari */
+.progressBar:active::-webkit-slider-thumb {
+    transform: translateY(-50%) scale(1.2);
+    background: var(--selectedKnobby);
+}
+
+/* knobby - firefox */
+.progressBar::-moz-range-thumb {
+    height: 20px;
+    width: 20px;
+    border-radius: 24px;
+    border: transparent;
+    background-color: var(--knobby);
+    cursor: pointer;
+    position: relative;
+    z-index: 3;
+    box-sizing: border-box;
+}
+
+/* knobby while dragging - firefox */
+.progressBar:active::-moz-range-thumb {
+    transform: scale(1.2);
+    background: var(--selectedKnobby);
+}
+
+
+@media (max-width:1024px){
+    
+    .timing {
+        display: none;
+    }
+    
+    .progressBar {
+       
+        width: 217px;
+        height: 12px;
+    }
+    
+    /* progress bar - safari */
+    .progressBar::-webkit-slider-runnable-track {
+        height: 12px;
+    
+    }
+    
+    /* progress bar - firefox */
+    .progressBar::-moz-range-track {
+        height: 12px;
+    }
+    
+    
+    /* progress bar - chrome and safari */
+    .progressBar::before {
+        content: '';
+        height: 13px;
+        border-radius: 24px;
+        left: 0;
+        z-index: 1;
+    }
+    
+    /* progress bar - firefox */
+    .progressBar::-moz-range-progress {
+        height: 13px;
+    }
+    
+   
+
+}
