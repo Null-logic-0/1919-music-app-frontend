@@ -27,7 +27,7 @@ const HeartLike = ({ isDisabled, onClick }: Props) => {
 
   return (
     <button className={styles.heartLike} onClick={handleClick} disabled={isDisabled}>
-      <Image src={getIconSource()} alt="Heart Icon"  width={0}  height={0} className={styles.icon}/>
+      <Image src={getIconSource()} alt="Heart Icon"  width={32}  height={32} className={styles.icon}/>
     </button>
   );
 };
