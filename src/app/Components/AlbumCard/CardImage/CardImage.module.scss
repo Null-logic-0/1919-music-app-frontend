@@ -1,0 +1,133 @@
+@import '../../../styles/globalBorders/borders.scss';
+.image {
+    &.small {
+        width: 106px;
+        height: 106px;
+        border-radius: $small;
+    }
+
+    &.medium {
+        width: 292px;
+        height: 292px;
+        border-radius: $medium;
+    }
+
+    &.large {
+        width: 372px;
+        height: 217px;
+        border-radius: $large;
+    }
+
+    &.Xlarge {
+        width: 372px;
+        height: 285px;
+        border-radius: $large;
+    }
+
+    &.rounded {
+        width: 176px;
+        height: 176px;
+        border-radius: $rounded;
+    }
+
+    &.roundedXl {
+        width: 240px;
+        height: 240px;
+        border-radius: $rounded;
+
+    }
+
+    &.roundedXxl {
+        width: 240px;
+        height: 240px;
+        border-radius: $rounded;
+
+    }
+
+}
+
+@media (max-width:768px) {
+
+    .image {
+        &.small {
+            width: 72px;
+            height: 72px;
+        }
+
+        &.medium {
+            width: 80px;
+            height: 72px;
+        }
+
+        &.large {
+            width: 172px;
+            height: 96px;
+        }
+
+        &.Xlarge {
+            width: 173px;
+            height: 102px;
+        }
+
+        &.rounded {
+            width: 72px;
+            height: 72px;
+        }
+
+        &.roundedXl {
+            width: 104px;
+            height: 104px;
+
+        }
+
+        &.roundedXxl {
+            width: 146px;
+            height: 146px;
+
+        }
+    }
+}
+
+@media (max-width:1024px) {
+
+    .image {
+        &.small {
+            width: 96px;
+            height: 96px;
+        }
+
+        &.medium {
+            width: 136px;
+            height: 136px;
+        }
+
+        &.large {
+            width: 280px;
+            height: 172px;
+        }
+
+        &.Xlarge {
+            width: 249px;
+            height: 182px;
+        }
+
+        &.rounded {
+            width: 112px;
+            height: 112px;
+        }
+
+        &.roundedXl {
+            width: 160px;
+            height: 160px;
+
+        }
+
+        &.roundedXxl {
+            width: 160px;
+            height: 160px;
+
+        }
+
+    }
+    
+}

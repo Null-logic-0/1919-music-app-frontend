@@ -1,0 +1,41 @@
+@import '../../../styles/globalColors/color.scss';
+
+.subtitle {
+    color: $lighter;
+}
+
+.mediumSubtitle {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.largeSubtitle {
+    font-size: 24px;
+    font-weight: 400;
+}
+
+@media (max-width:768px) {
+
+    .mediumSubtitle {
+        font-size: 12px;
+        font-weight: 400;
+    }
+
+    .largeSubtitle {
+        font-size: 16px;
+        font-weight: 400;
+    }
+}
+
+
+@media (max-width:1024px) {
+    .mediumSubtitle {
+        font-size: 16px;
+        font-weight: 400;
+    }
+
+    .largeSubtitle {
+        font-size: 24px;
+        font-weight: 400;
+    }
+}
