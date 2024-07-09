@@ -1,5 +1,5 @@
 import { ImageSizeVariant } from '@/app/enums/imageSizeVariants';
-import styles from './AlbumCard.module.scss';
+import styles from './CardTitle.module.scss';
 
 type TitleProps = {
     title?: string;
@@ -7,7 +7,7 @@ type TitleProps = {
     
 };
 
-const AlbumTitle = ({ title, imageSizeVariant }: TitleProps) => {
+const CardTitle = ({ title, imageSizeVariant }: TitleProps) => {
     const getTitleClass = () => {
         if (imageSizeVariant === ImageSizeVariant.XLarge || 
             imageSizeVariant === ImageSizeVariant.Small || 
@@ -24,4 +24,4 @@ const AlbumTitle = ({ title, imageSizeVariant }: TitleProps) => {
     return <span className={titleClass}>{title}</span>;
 };
 
-export default AlbumTitle;
+export default CardTitle;

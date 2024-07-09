@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import styles from './AlbumCard.module.scss';
-import { ImageSizeVariant, imageSizeVariants } from '../../enums/imageSizeVariants';
+import styles from './CardImage.module.scss';
+import { ImageSizeVariant, imageSizeVariants } from '../../../enums/imageSizeVariants';
 
 type ImageProps = {
     src: string;
@@ -9,7 +9,7 @@ type ImageProps = {
     imageSizeVariant: ImageSizeVariant;
 };
 
-const AlbumImage = ({ src, alt, imageSizeVariant }: ImageProps) => {
+const CardImage = ({ src, alt, imageSizeVariant }: ImageProps) => {
     const { width, height } = imageSizeVariants[imageSizeVariant];
     const imageClass = `${styles.image} ${styles[imageSizeVariant]}`;
 
@@ -26,4 +26,4 @@ const AlbumImage = ({ src, alt, imageSizeVariant }: ImageProps) => {
     );
 };
 
-export default AlbumImage;
+export default CardImage;

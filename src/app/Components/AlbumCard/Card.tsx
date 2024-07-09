@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import styles from './AlbumCard.module.scss';
-import AlbumImage from './AlbumImage';
-import AlbumTitle from './AlbumTitle';
-import AlbumSubtitle from './AlbumSubtitle';
+import styles from './Card.module.scss';
+import CardImage from './CardImage/CardImage';
 import { ImageSizeVariant } from '../../enums/imageSizeVariants';
 import Link from 'next/link';
+import CardTitle from './CardTitle/CardTitle';
+import CardSubtitle from './CardSubtitle/CardSubtitle';
 
-type AlbumProps = {
+type CardProps = {
     showDetails?: boolean;
     title?: string;
     subtitle?: string;
@@ -16,7 +16,7 @@ type AlbumProps = {
     link?: string;
 };
 
-const AlbumCard = ({
+const Card = ({
     showDetails,
     title,
     subtitle,
@@ -24,7 +24,7 @@ const AlbumCard = ({
     imageSizeVariant = ImageSizeVariant.Medium,
     images,
     link, 
-}: AlbumProps) => {
+}: CardProps) => {
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
@@ -60,20 +60,20 @@ const AlbumCard = ({
         <div className={classNames.join(' ').trim()}>
             {link ? (
                 <Link href={link || '#'}>
-                    <AlbumImage src={images} alt="Album Cover" imageSizeVariant={imageSizeVariant} />
+                    <CardImage src={images} alt="Album Cover" imageSizeVariant={imageSizeVariant} />
                 </Link>
             ) : (
-                <AlbumImage src={images} alt="Album Cover" imageSizeVariant={imageSizeVariant} />
+                <CardImage src={images} alt="Album Cover" imageSizeVariant={imageSizeVariant} />
             )}
 
             {showDetails && (
                 <div className={`${classes.join(' ').trim()} `}>
-                    {title && <AlbumTitle title={title} imageSizeVariant={imageSizeVariant} />}
-                    {subtitle && <AlbumSubtitle subtitle={subtitle} imageSizeVariant={imageSizeVariant} />}
+                    {title && <CardTitle title={title} imageSizeVariant={imageSizeVariant} />}
+                    {subtitle && <CardSubtitle subtitle={subtitle} imageSizeVariant={imageSizeVariant} />}
                 </div>
             )}
         </div>
     );
 };
 
-export default AlbumCard;
+export default Card;

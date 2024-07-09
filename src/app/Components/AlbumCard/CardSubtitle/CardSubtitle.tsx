@@ -1,12 +1,12 @@
 import { ImageSizeVariant } from '@/app/enums/imageSizeVariants';
-import styles from './AlbumCard.module.scss';
+import styles from './CardSubtitle.module.scss';
 
 type SubtitleProps = {
     subtitle?: string;
     imageSizeVariant: ImageSizeVariant;
 };
 
-const AlbumSubtitle = ({ subtitle, imageSizeVariant }: SubtitleProps) => {
+const CardSubtitle = ({ subtitle, imageSizeVariant }: SubtitleProps) => {
     const getSubtitleClass = () => {
         if (imageSizeVariant === ImageSizeVariant.XLarge || 
             imageSizeVariant === ImageSizeVariant.Small || 
@@ -22,4 +22,4 @@ const AlbumSubtitle = ({ subtitle, imageSizeVariant }: SubtitleProps) => {
     return <span className={subtitleClass}>{subtitle}</span>;
 };
 
-export default AlbumSubtitle;
+export default CardSubtitle;
