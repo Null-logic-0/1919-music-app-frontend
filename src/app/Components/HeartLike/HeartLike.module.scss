@@ -1,5 +1,5 @@
 .heartLike{
-    background-color: none;
+    background-color: transparent;
     border: none;
     cursor: pointer;
     transition: all 0.3s;
@@ -17,7 +17,7 @@
 @media (max-width:1024px){
     .icon{
         width: 24px;
-        height: 16px;
+        height: 24px;
     }
 }
 
