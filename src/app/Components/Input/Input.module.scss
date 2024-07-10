@@ -2,8 +2,10 @@
 @import '../../styles/GlobalBorders/borders.scss';
 
 
+
 .input {
-    width: 488px;
+    width: 100%;
+    max-width: 616px;
     height: 56px;
     border-radius: $medium;
     border: 1px solid $dark1;
@@ -19,4 +21,15 @@
 .input:disabled{
    border: 1px solid $error;
    cursor: not-allowed;
+}
+@media(max-width:1024px) {
+    .input{
+        max-width: 488px;
+    }
+}
+
+@media(max-width:768px){
+    .input{
+        max-width:361px ;
+    }
 }
