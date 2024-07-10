@@ -1,0 +1,22 @@
+@import'../../styles/GlobalColors/color.scss';
+@import '../../styles/GlobalBorders/borders.scss';
+
+
+.input {
+    width: 488px;
+    height: 56px;
+    border-radius: $medium;
+    border: 1px solid $dark1;
+    padding: 15px;
+}
+
+.input:focus{
+   border: 1px solid $mainColor;
+    outline: none;
+   
+}
+
+.input:disabled{
+   border: 1px solid $error;
+   cursor: not-allowed;
+}
