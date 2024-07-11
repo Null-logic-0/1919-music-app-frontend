@@ -13,8 +13,8 @@ interface TrackDisplayProps {
 }
 
 const TrackDisplay = ({ currentTrack }: TrackDisplayProps) => {
-    const truncatedTitle = currentTrack.title.length > 20 ? `${currentTrack.title.slice(0, 20)}...` : currentTrack.title;
-    const truncatedArtist = currentTrack.artist.length > 20 ? `${currentTrack.artist.slice(0, 20)}...` : currentTrack.artist;
+    const truncatedTitle = currentTrack.title.length > 10 ? `${currentTrack.title.slice(0, 10)}...` : currentTrack.title;
+    const truncatedArtist = currentTrack.artist.length > 8 ? `${currentTrack.artist.slice(0, 8)}...` : currentTrack.artist;
 
     return (
         <Link href="/">
