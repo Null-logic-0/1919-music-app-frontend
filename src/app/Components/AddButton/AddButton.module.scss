@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+}
+
+.button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.title {
+    color:  #FFF;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 28px;
+}
