@@ -5,13 +5,14 @@ type Props = {
     disabled?:boolean;
     onChange?:() => void;
     mode?:'natural' | 'Success' 
+    type?:"email" | 'password' |'text'
     
 }
 
 const Input = ({className,disabled,onChange,mode}:Props)=>{
 
     const input =[styles.input];
-    if(mode === 'natural')input.push(styles.natural)
+        if(mode === 'natural')input.push(styles.natural)
         else if(mode === 'Success') input.push(styles.success)
         else if(disabled) input.push(styles.disabled)
 
@@ -20,7 +21,7 @@ const Input = ({className,disabled,onChange,mode}:Props)=>{
     return(
         <div>
             <p>Username or Email</p>
-            <input type="text"  /*disabled*/ className={input.join(' ').trim()}/>
+            <input type='email'  className={input.join(' ').trim()}/>
         </div>
     )
 }
