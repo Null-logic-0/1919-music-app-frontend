@@ -5,9 +5,8 @@ import { ImageSizeVariant } from "./enums/imageSizeVariants";
 import Input from "./Components/Input/Input";
 import AddButton from "./Components/AddButton/AddButton";
 
-
-
 export default function Home() {
+  
   return (
     <main>
     </main>
