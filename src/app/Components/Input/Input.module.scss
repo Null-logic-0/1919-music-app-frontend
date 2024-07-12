@@ -5,11 +5,16 @@
 
 .input {
     width: 100%;
-    max-width: 616px;
-    height: 56px;
+    max-width: 356px;
+    height: 48px;
     border-radius: $medium;
     border: 1px solid $dark1;
     padding: 15px;
+}
+.inputWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
 }
 
 .input:focus{
