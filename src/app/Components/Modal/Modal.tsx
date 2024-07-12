@@ -4,14 +4,20 @@ import CloseButton from '../CloseButton/CloseButton';
 
 interface ModalProps {
     isOpen: boolean;
-    onClose: () => void;
     title?: string;
     children: ReactNode;
-    footer?: ReactNode;
+    setShowModal:(value: boolean) => void;
+
 }
 
-const Modal = ({ isOpen, onClose, title, children, footer }: ModalProps) => {
+const Modal = ({ isOpen, title, children,setShowModal }: ModalProps) => {
     if (!isOpen) return null;
+    const handleCloseModal =()=>{
+        setShowModal(false)
+
+    }
+
+
 
     return (
         <div className={styles.overlay}>
@@ -21,14 +27,14 @@ const Modal = ({ isOpen, onClose, title, children, footer }: ModalProps) => {
                         <p className={styles.title}>
                             {title}
                         </p>}
-                    <CloseButton onclick={onClose} />
+                    <CloseButton onclick={handleCloseModal} />
 
                 </div>
 
                 <>
                     {children}
                 </>
-                {footer && <>{footer}</>}
+               
             </div>
         </div>
     );
