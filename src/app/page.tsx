@@ -10,7 +10,7 @@ import AddButton from "./Components/AddButton/AddButton";
 export default function Home() {
   
   return (
-    <main>
+    <main >
     </main>
   );
 }

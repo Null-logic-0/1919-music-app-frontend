@@ -1,31 +1,58 @@
+import { useState } from "react";
+import HideButton from "./HideButton/HideButton";
 import styles from "./Input.module.scss";
 
-
 type Props = {
-  className?: string;
   disabled?: boolean;
-  mode?: "natural" | "Success";
-  children?: React.ReactNode;
-  text?:string;
+  type?: "text" | "email" | "password";
+  mode?: "natural" | "Success" | "Error";
+  text?: string;
+  showHideButton?: boolean;
+  title?: string;
 };
 
-const Input = ({ className, disabled, children, mode,text}: Props) => {
+const Input = ({ disabled, type = "text", mode, text, showHideButton, title }: Props) => {
   const input = [styles.input];
+
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(event.target.value);
+  };
+
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   if (mode === "natural") input.push(styles.natural);
-  else if (mode === "Success") input.push(styles.success);
-  else if (disabled) input.push(styles.disabled);
+  if (mode === "Success") input.push(styles.success);
+  if (mode === "Error") input.push(styles.error);
 
   return (
-    <div className={`${styles.inputWrapper} ${className || ""}`}>
-      <label htmlFor="Email">{text}</label>
+    <div className={styles.inputWrapper}>
+     
+    <label className={styles.label}>{text}</label>
 
-      <input
-        type="text"
-        id="Email"
-        className={input.join(" ").trim()}
-        disabled={disabled}
-      />
-      {children}
+      <div className={styles.container}>
+        <input
+          id="input"
+          type={type === "password" && showPassword ? 'text' : type}
+          className={input.join(' ')}
+          onChange={type === "password" ? handlePasswordChange : undefined}
+          disabled={disabled}
+          title={title}
+          value={type === "password" ? password : undefined}
+        />
+
+        {type === "password" && showHideButton && (
+          <HideButton
+            showPassword={showPassword}
+            toggleShowPassword={toggleShowPassword}
+          />
+        )}
+      </div>
+      
     </div>
   );
 };
