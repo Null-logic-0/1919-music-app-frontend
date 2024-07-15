@@ -8,7 +8,7 @@
     color: $info;
     display: flex;
     align-items: center;
-    background-color: white;
+    background-color: transparent;
     cursor: pointer;
     
 }
@@ -20,7 +20,8 @@
     color: #FFF;
     margin-left:50px;
     padding: 12px 24px;
-    width: 326px;
+    max-width:326px;
+    width: 100%;
     
     display: inline-block;
     position: absolute;

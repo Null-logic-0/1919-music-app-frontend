@@ -1,20 +1,18 @@
 import styles from "./dropDown.module.scss";
-import React, { useState } from "react";
+import React, { ReactNode, useState } from "react";
 import Image from "next/image";
 
 type Props = {
-  trigger: React.ReactNode;
   children: React.ReactNode;
-  className?: string;
+  Content: string;
 }
-
-const Dropdown = ({children}:Props) => {
+const Dropdown =({children,Content}:Props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className={styles.container}>
       <button onClick={() => setIsOpen(!isOpen)} className={styles.drpButton}>
-        Week
+        {Content}
         <Image
           src={"/icons/chevron-down.svg"}
           alt="icon"
@@ -25,7 +23,7 @@ const Dropdown = ({children}:Props) => {
       {isOpen && (
         <div className={styles.dropContent}>
           <div className={styles.dropContentWrapper}>      
-           {children}
+          {children} 
           </div>
         </div>
       )}
