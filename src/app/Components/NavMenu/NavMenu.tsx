@@ -1,27 +1,28 @@
 import React, { useState } from 'react';
-import Image from 'next/image';
-import NavList from './NavList/NavList';
+import NavItem from './NavItem/NavItem';
 import style from './NavMenu.module.scss';
 import Playlist from './Playlist/Playlist';
 import AddButton from '../AddButton/AddButton';
-import CloseButton from '../CloseButton/CloseButton';
 import Modal from '../Modal/Modal';
 
 const data = [
     {
-        name: 'playlistName',
+        id: '1',
+        name: 'playlistName1',
         song: '23 songs',
         image: '/images/playlist.png',
         link: '/'
     },
     {
-        name: 'playlistName',
+        id: '2',
+        name: 'playlistName2',
         song: '23 songs',
         image: '/images/playlist.png',
         link: '/'
     },
     {
-        name: 'playlistName',
+        id: '3',
+        name: 'playlistName3',
         song: '23 songs',
         image: '/images/playlist.png',
         link: '/'
@@ -30,8 +31,8 @@ const data = [
 
 const NavMenu = () => {
     const links = [
-        { href: "/home", text: "Home" },
-        { href: "/favourite", text: "Favourite" },
+        { key: 'home', href: "/home", text: "Home" },
+        { key: 'favourite', href: "/favourite", text: "Favourite" },
     ];
 
     const iconSrc = ["/icons/home.svg", "/icons/favourite.svg"];
@@ -49,14 +50,14 @@ const NavMenu = () => {
             <h1 className={style.logo}>TnNdshN</h1>
 
             <div className={style.container}>
-                <NavList links={links} iconSrc={iconSrc} activeIcons={activeIcons} />
+                <NavItem iconSrc={iconSrc} activeIcons={activeIcons} links={links} />
 
                 <div className={style.playlist}>
                     <AddButton onClick={toggleModal} text='New Playlist'/>
 
-                    {data.map((list, index) => (
+                    {data.map((list) => (
                         <Playlist
-                            key={index}
+                            key={list.id}
                             image={list.image}
                             name={list.name}
                             link={list.link}
@@ -72,7 +73,6 @@ const NavMenu = () => {
                         title="This modal"
                     >
                         <p>This is the modal.</p>
-                        
                     </Modal>
                 )}
             </div>
