@@ -1,35 +1,53 @@
-@import'../../styles/GlobalColors/color.scss';
-@import '../../styles/GlobalBorders/borders.scss';
-
-
+@import "../../styles/GlobalColors/colors.scss";
+@import "../../styles/GlobalBorders/borders.scss";
 
 .input {
-    width: 100%;
-    max-width: 616px;
-    height: 56px;
-    border-radius: $medium;
-    border: 1px solid $dark1;
-    padding: 15px;
+  width: 616px;
+  border-radius: $medium;
+  border: 1px solid $dark1;
+  padding: 15px;
+  background-color: transparent;
+  position: relative;
 }
 
-.input:focus{
-   border: 1px solid $mainColor;
-    outline: none;
-   
+.input:focus {
+  border: 1px solid $mainColor;
+  outline: none;
 }
 
-.input:disabled{
-   border: 1px solid $error;
-   cursor: not-allowed;
-}
-@media(max-width:1024px) {
-    .input{
-        max-width: 488px;
-    }
+.inputWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    justify-content: center;
 }
 
-@media(max-width:768px){
-    .input{
-        max-width:361px ;
-    }
+.container {
+  position: relative;
+  display: flex;
+}
+.label {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.error {
+  border: 1px solid $error;
+}
+.success {
+  border: 1px solid $success;
+}
+
+
+@media (max-width: 768px) {
+  .input {
+    width: 361px;
+  }
+  .label {
+    font-size: 16px;
+  }
+  .inputWrapper {
+    gap: 8px;
+  }
 }
