@@ -12,9 +12,9 @@ import PlayListFrom from "./Components/PlayListFrom/PlayListFrom";
 
 export default function Home() {
   
-  return (
+  return 
     <main>
-      
+
     </main>
   );
 }
