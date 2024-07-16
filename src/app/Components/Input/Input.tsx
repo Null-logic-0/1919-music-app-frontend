@@ -3,9 +3,8 @@ import HideButton from "./HideButton/HideButton";
 import styles from "./Input.module.scss";
 
 type Props = {
-  disabled?: boolean;
-  type?: "text" | "email" | "password";
-  mode?: "natural" | "Success" | "Error";
+  type: "text" | "email" | "password";
+  mode: "natural" | "Success" | "Error";
   text?: string;
   showHideButton?: boolean;
 }
