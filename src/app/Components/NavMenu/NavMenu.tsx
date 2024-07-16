@@ -41,7 +41,6 @@ const NavMenu = () => {
 
     const toggleModal = () => {
         setShowModal(!showModal);
-        console.log('Modal toggled');
     };
 
     return (
