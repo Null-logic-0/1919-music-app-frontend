@@ -4,22 +4,23 @@ import Image from "next/image";
 
 type Props = {
   children: React.ReactNode;
-  Content: string;
+  button: React.ReactNode;
+  
 }
-const Dropdown =({children,Content}:Props) => {
+const Dropdown =({children,button}:Props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className={styles.container}>
-      <button onClick={() => setIsOpen(!isOpen)} className={styles.drpButton}>
-        {Content}
-        <Image
-          src={"/icons/chevron-down.svg"}
-          alt="icon"
-          width={32}
-          height={32}
-        />
-      </button>
+      <div onClick={() => setIsOpen(!isOpen)} className={styles.drpButton}>
+        {button}
+        {/* <Image
+                    src="/Icons/chevron-down.svg"
+                    alt="icon"
+                    width={32}
+                    height={32}
+                /> */}
+      </div>
       {isOpen && (
         <div className={styles.dropContent}>
           <div className={styles.dropContentWrapper}>      

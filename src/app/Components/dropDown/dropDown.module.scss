@@ -1,11 +1,10 @@
 @import '../../styles/GlobalBorders/borders.scss';
-@import '../../styles/GlobalColors/color.scss';
+@import '../../styles/GlobalColors/colors.scss';
 
 
 
 .drpButton {
     font-size: 24px;
-    color: $info;
     display: flex;
     align-items: center;
     background-color: transparent;
