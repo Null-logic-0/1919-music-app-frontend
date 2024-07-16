@@ -1,3 +1,4 @@
+'use client'
 import NavItem from "../NavItem/NavItem";
 import styles from './ResponsiveMenu.module.scss';
 
@@ -5,27 +6,16 @@ import styles from './ResponsiveMenu.module.scss';
 
 const ResponsiveMenu = () => {
     const links = [
-        { key: 'home',href: "/home", text: "Home" },
-        { key: 'favourite',href: "/favourite", text: "favourite" },
-        { key: 'search',href: "/search", text: "Search" },
+        { key: 'home', href: "/home", text: "Home",activeIcon: '/icons/home-active.svg', iconSrc:'/icons/home.svg'},
+        { key: 'favourite', href: "/favourite", text: "Favourite",activeIcon:'/icons/favourite-active.svg',iconSrc:'/icons/favourite.svg' },
+        { key: 'search',href: "/search", text: "Search" , activeIcon:'/icons/Search-active.svg',iconSrc:'/icons/Search.svg'},
 
     ];
 
-    const iconSrc = [
-        "/icons/home.svg",
-        "/icons/favourite.svg",
-        "/icons/Search.svg"
-    ];
-
-    const activeIcons = [
-        "/icons/home-active.svg",
-        "/icons/favourite-active.svg",
-        "/icons/Search-active.svg"
-
-    ];
+    
     return (
         <div className={styles.container}>
-            <NavItem links={links} iconSrc={iconSrc} activeIcons={activeIcons} />
+            <NavItem links={links}  />
         </div>
     )
 }

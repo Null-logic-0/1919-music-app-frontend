@@ -1,3 +1,4 @@
+'use client'
 import React, { useState } from 'react';
 import NavItem from './NavItem/NavItem';
 import style from './NavMenu.module.scss';
@@ -31,12 +32,10 @@ const data = [
 
 const NavMenu = () => {
     const links = [
-        { key: 'home', href: "/home", text: "Home" },
-        { key: 'favourite', href: "/favourite", text: "Favourite" },
+        { key: 'home', href: "/home", text: "Home",activeIcon: '/icons/home-active.svg', iconSrc:'/icons/home.svg'},
+        { key: 'favourite', href: "/favourite", text: "Favourite",activeIcon:'/icons/favourite-active.svg',iconSrc:'/icons/favourite.svg' },
     ];
 
-    const iconSrc = ["/icons/home.svg", "/icons/favourite.svg"];
-    const activeIcons = ["/icons/home-active.svg", "/icons/favourite-active.svg"];
 
     const [showModal, setShowModal] = useState(false);
 
@@ -50,7 +49,7 @@ const NavMenu = () => {
             <h1 className={style.logo}>TnNdshN</h1>
 
             <div className={style.container}>
-                <NavItem iconSrc={iconSrc} activeIcons={activeIcons} links={links} />
+                <NavItem  links={links}/>
 
                 <div className={style.playlist}>
                     <AddButton onClick={toggleModal} text='New Playlist'/>
