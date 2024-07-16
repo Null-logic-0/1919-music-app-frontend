@@ -13,13 +13,14 @@ const Dropdown =({children,button}:Props) => {
   return (
     <div className={styles.container}>
       <div onClick={() => setIsOpen(!isOpen)} className={styles.drpButton}>
-        {button}
-        {/* <Image
-                    src="/Icons/chevron-down.svg"
-                    alt="icon"
-                    width={32}
-                    height={32}
-                /> */}
+        {button}  
+        <Image
+          src="/Icons/chevron-down.svg"
+          alt="icon"
+          width={32}
+          height={32}
+          />
+        
       </div>
       {isOpen && (
         <div className={styles.dropContent}>
