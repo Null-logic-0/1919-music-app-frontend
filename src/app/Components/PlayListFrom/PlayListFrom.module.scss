@@ -1,0 +1,136 @@
+@import '../../styles/globalColors/color.scss';
+@import '../../styles/globalBorders/borders.scss';
+
+
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding-top: 32px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 636px;
+    width: 100%;
+
+
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.image {
+    border-radius: $medium;
+}
+
+.upload {
+    border: 0.797px solid #FFF;
+    width: 240px;
+    height: 172px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.uploader[type="file"] {
+    display: none;
+}
+
+.label {
+    cursor: pointer;
+}
+
+
+.textarea {
+    background-color: $dark3;
+    border-radius: $small;
+    color: #FFF;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    padding: 8px;
+    width: 372px;
+    height: 111px;
+    outline: none;
+    border: none;
+    resize: none;
+
+    &::placeholder {
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 24px;
+        color: #FFF;
+    }
+
+}
+
+.input {
+    background-color: $dark3;
+    border-radius: $small;
+    color: #FFF;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    padding: 8px;
+    width: 372px;
+    height: 41px;
+    outline: none;
+    border: none;
+
+    &::placeholder {
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 24px;
+        color: #FFF;
+    }
+}
+
+.submit {
+    width: 240px;
+    padding: 16px 8px;
+    border-radius: 24px;
+    background: #FFF;
+    color:  #0D0D0D;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    cursor: pointer;
+    border: none;
+}
+
+
+@media(max-width:1024px) {
+    .textarea {
+        font-size: 14px;
+
+    }
+}
+
+
+@media(max-width:768px) {
+    .upload {
+        width: 122px;
+        height: 88px;
+    }
+
+    .textarea {
+        width: 152px;
+        height: 50px;
+        font-size: 10px;
+    }
+
+    .submit {
+        font-size: 14px;
+        width: 152px;
+    }
+}

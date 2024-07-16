@@ -5,6 +5,7 @@ import { ImageSizeVariant } from "./enums/imageSizeVariants";
 import ToggleSwitch from "./Components/Toggle/Toggle";
 import Input from "./Components/Input/Input";
 import AddButton from "./Components/AddButton/AddButton";
+import PlayListFrom from "./Components/PlayListFrom/PlayListFrom";
 
 
 export default function Home() {
