@@ -7,6 +7,7 @@ import Input from "./Components/Input/Input";
 import AddButton from "./Components/AddButton/AddButton";
 import NavMenu from "./Components/NavMenu/NavMenu";
 import ResponsiveMenu from "./Components/NavMenu/ResponsiveMenu/ResponsiveMenu";
+import PlayListFrom from "./Components/PlayListFrom/PlayListFrom";
 
 
 export default function Home() {
