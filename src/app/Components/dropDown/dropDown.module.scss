@@ -1,0 +1,63 @@
+@import '../../styles/GlobalBorders/borders.scss';
+@import '../../styles/GlobalColors/color.scss';
+
+
+
+.drpButton {
+    font-size: 24px;
+    display: flex;
+    color: $info;
+    align-items: center;
+    background-color: transparent;
+    cursor: pointer;
+    
+}
+
+.dropContent {
+    background-color: $dark3;
+    padding: $large;
+    border-radius: $small;
+    color: #FFF;
+    margin-left:50px;
+    padding: 12px 24px;
+    max-width:326px;
+    width: 100%;
+    
+    display: inline-block;
+    position: absolute;
+
+}
+
+.dropContentWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: start;
+    
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+  }
+  
+.lableWrapper {
+    display: flex;
+    gap:8px;
+    cursor: pointer;
+}
+.radioStyler {
+    cursor: pointer;
+    width: 24px;
+}
+.span {
+   font-size: 24px;
+}
+ 
+
+
+    
+
+
+  
