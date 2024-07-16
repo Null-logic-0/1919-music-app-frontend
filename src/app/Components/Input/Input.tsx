@@ -8,10 +8,9 @@ type Props = {
   mode?: "natural" | "Success" | "Error";
   text?: string;
   showHideButton?: boolean;
-  title?: string;
-};
+}
 
-const Input = ({ disabled, type = "text", mode, text, showHideButton, title }: Props) => {
+const Input = ({type = "text", mode, text, showHideButton}: Props) => {
   const input = [styles.input];
 
   const [password, setPassword] = useState("");
@@ -40,12 +39,10 @@ const Input = ({ disabled, type = "text", mode, text, showHideButton, title }: P
           type={type === "password" && showPassword ? 'text' : type}
           className={input.join(' ')}
           onChange={type === "password" ? handlePasswordChange : undefined}
-          disabled={disabled}
-          title={title}
           value={type === "password" ? password : undefined}
         />
 
-        {type === "password" && showHideButton && (
+          {type === "password" && showHideButton && (
           <HideButton
             showPassword={showPassword}
             toggleShowPassword={toggleShowPassword}
