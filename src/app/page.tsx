@@ -9,17 +9,9 @@ import { useState } from "react";
 import DayWeekDRP from "./Components/dropDown/DayWeekDropContent/DayWeek";
 
 export default function Home() {
-  const [selectedOption, setSelectedOption] = useState('Day')
 
-  const onOptionSelected = (option: string) => {
-    setSelectedOption(option)
-  }
-
- 
   return (
     <main>
-                <Dropdown children={<DayWeekDRP onOptionSelected={onOptionSelected} />} button={selectedOption}  />
-
     </main>
   );
 }
