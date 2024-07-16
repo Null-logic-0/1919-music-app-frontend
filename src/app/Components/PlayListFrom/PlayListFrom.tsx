@@ -63,7 +63,7 @@ const PlayListFrom = ({ setShowModal }:FromProps) => {
           />
         </div>
       </div>
-      <input type="submit" className={styles.submit} value="Submit" />
+      <input type="submit" className={styles.submit} value="Save" />
     </form>
   );
 };
