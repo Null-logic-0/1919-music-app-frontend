@@ -1,19 +1,14 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
 import Image from 'next/image';
 import styles from './PlayListFrom.module.scss';
+import { FormDataInterface } from '@/app/interfaces/PlaylistForm.interface';
 
-type FormData = {
-  img: string;
-  playlistName: string;
-  description: string;
-};
-
-interface FromProps {
+type FromProps = {
   setShowModal: (value: boolean) => void;
 }
 
 const PlayListFrom = ({ setShowModal }:FromProps) => {
-  const { register, handleSubmit, setValue } = useForm<FormData>();
+  const { register, handleSubmit, setValue } = useForm<FormDataInterface>();
 
   const toBase64 = (file: File): Promise<string> =>
     new Promise((resolve, reject) => {
@@ -23,13 +18,12 @@ const PlayListFrom = ({ setShowModal }:FromProps) => {
       reader.onerror = error => reject(error);
     });
 
-  const onSubmit: SubmitHandler<FormData> = async (data) => {
+  const onSubmit: SubmitHandler<FormDataInterface> = async (data) => {
     const formData = {
       img: data.img,
       playlistName: data.playlistName,
       description: data.description,
     };
-    console.log(formData);
     setShowModal(false); 
   };
 
