@@ -5,6 +5,7 @@ import style from './NavMenu.module.scss';
 import Playlist from './Playlist/Playlist';
 import AddButton from '../AddButton/AddButton';
 import Modal from '../Modal/Modal';
+import PlayListFrom from '../PlayListFrom/PlayListFrom';
 
 const data = [
     {
@@ -70,7 +71,7 @@ const NavMenu = () => {
                         isOpen={showModal}
                         title="This modal"
                     >
-                        <p>This is the modal.</p>
+                         <PlayListFrom setShowModal={setShowModal} />
                     </Modal>
                 )}
             </div>
