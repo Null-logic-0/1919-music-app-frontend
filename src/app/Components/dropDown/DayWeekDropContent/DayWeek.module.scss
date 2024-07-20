@@ -1,0 +1,14 @@
+@import '../../../styles/GlobalBorders/borders.scss';
+@import '../../../styles/GlobalColors/color.scss';
+
+.dropdownContent {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    font-size: 24px;
+}
+.lable {
+    display: flex;
+    gap: $small;
+    cursor: pointer;
+}

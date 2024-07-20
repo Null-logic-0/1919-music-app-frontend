@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import RecoilWrapper from "./helpers/RecoilWrapper/RecoilWrapper";
 
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -22,6 +23,8 @@ export default function RootLayout({
           {children}
         </RecoilWrapper>
       </body>
+
+        {children}</body>
     </html>
   );
 }
