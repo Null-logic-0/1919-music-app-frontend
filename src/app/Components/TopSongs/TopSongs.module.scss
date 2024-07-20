@@ -1,0 +1,155 @@
+@import '../../styles/globalColors/color.scss';
+
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 16px;
+    padding-right: 16px;
+    max-width: 1556px;
+    width: 100%;
+}
+
+.headingWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    justify-content: center;
+
+}
+
+.tableRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1556px;
+    width: 100%;
+    padding: 0px 16px;
+
+}
+
+.imageWrapper {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+}
+
+.action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 490px;
+    width: 100%;
+}
+
+.toggleButton {
+    background-color: transparent;
+    color: $info;
+    font-size: 24px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.plays,
+.duration {
+    color: $dark4;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 36px;
+}
+
+.title {
+    color: #FFF;
+    font-weight: 900;
+    font-size: 36px;
+
+}
+
+.count {
+    color: #FFF;
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.dropDown {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.buttonLabel {
+    width: 70px;
+}
+
+@media (max-width:1024px) {
+    .title {
+        font-size: 32px;
+        font-weight: 600;
+    }
+
+    .toggleButton {
+        font-size: 20px;
+    }
+
+    .plays {
+        display: none;
+    }
+
+    .duration {
+        font-size: 20px;
+    }
+
+}
+
+@media (max-width:768px) {
+    .title {
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    .toggleButton {
+        display: none;
+    }
+
+    .action {
+        justify-content: flex-end;
+        gap: 12px;
+    }
+
+    .count {
+        font-size: 20px;
+        font-weight: 400;
+    }
+
+    .header {
+        justify-content: space-between;
+        width: 100%;
+    }
+
+
+}
