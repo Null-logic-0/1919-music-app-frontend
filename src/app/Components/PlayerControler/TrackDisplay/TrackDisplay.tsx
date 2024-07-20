@@ -13,24 +13,27 @@ interface TrackDisplayProps {
 }
 
 const TrackDisplay = ({ currentTrack }: TrackDisplayProps) => {
-    const truncatedTitle = currentTrack.title.length > 10 ? `${currentTrack.title.slice(0, 10)}...` : currentTrack.title;
-    const truncatedArtist = currentTrack.artist.length > 8 ? `${currentTrack.artist.slice(0, 8)}...` : currentTrack.artist;
+    const truncatedTitle = currentTrack.title.length > 20 ? `${currentTrack.title.slice(0, 20)}...` : currentTrack.title;
+    const truncatedArtist = currentTrack.artist.length > 20 ? `${currentTrack.artist.slice(0, 20)}...` : currentTrack.artist;
 
     return (
-        <Link href="/">
-            <div className={styles.container}>
-                <Image src={currentTrack.albumArt} alt="Album Art" width={134} height={112} className={styles.img} />
-                <div className={styles.text}>
-                    <span className={styles.title}>{truncatedTitle}</span>
-                    <span className={styles.artist}>{truncatedArtist}</span>
-                </div>
-                <div className={styles.heartBtn}>
-                    <HeartLike/>
 
-                </div>
+        <div className={styles.container}>
+            <Link href="/">
+                <Image src={currentTrack.albumArt} alt="Album Art" width={134} height={112} className={styles.img} />
+            </Link>
+
+            <div className={styles.text}>
+                <span className={styles.title}>{truncatedTitle}</span>
+                <span className={styles.artist}>{truncatedArtist}</span>
+            </div>
+            <div className={styles.heartBtn}>
+                <HeartLike />
 
             </div>
-        </Link>
+
+        </div>
+
 
     );
 };

@@ -8,7 +8,6 @@ import PlayerController from "./Components/PlayerControler/PlayerControler";
 export default function Home() {
   return (
     <main>
-
     </main>
   );
 }

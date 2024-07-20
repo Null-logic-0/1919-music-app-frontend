@@ -5,7 +5,8 @@
     justify-content: center;
     align-items: center;
     gap: 20px;
-    width: 100%;
+    width: 539px;
+    height: 24px;
 }
 
 .timing {
@@ -155,6 +156,10 @@
     /* progress bar - firefox */
     .progressBar::-moz-range-progress {
         height: 13px;
+    }
+
+    .time {
+        width: 217px;
     }
     
    
