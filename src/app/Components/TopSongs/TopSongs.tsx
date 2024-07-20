@@ -4,8 +4,8 @@ import Card from '../AlbumCard/Card';
 import styles from './TopSongs.module.scss';
 import HeartLike from '../HeartLike/HeartLike';
 import Dropdown from '../dropDown/dropDown';
+import DayWeekDRP from '../dropDown/DayWeekDropContent/DayWeek';
 
-const options = ['Day', 'Week', 'Month']
 
 const TopSongs = () => {
     const songs = [
@@ -28,9 +28,11 @@ const TopSongs = () => {
     const toggleShowAll = () => setShowAll(prevShowAll => !prevShowAll);
     const songsDisplay = showAll ? songs : songs.slice(0, 4);
 
-    const [selectedOption, setSelectedOption] = useState<string>('');
+    const [selectedOption, setSelectedOption] = useState('Day')
 
-    const buttonLabel = selectedOption ? selectedOption : 'Day';
+    const onOptionSelected = (option: string) => {
+        setSelectedOption(option)
+    }
 
     return (
         <div className={styles.main}>
@@ -39,30 +41,7 @@ const TopSongs = () => {
                 <div className={styles.heading}>
                     <div className={styles.header}>
                         <h2 className={styles.title}>Top 10 songs</h2>
-                        <Dropdown button={<span className={styles.buttonLabel}>{buttonLabel}</span>}>
-                            <div className={styles.dropDown}>
-                                {
-                                    options.map((option) => (
-                                        <>
-                                            <label key={option} className={styles.option}>
-                                                <input
-                                                    type='radio'
-                                                    name={option}
-                                                    value={option}
-                                                    checked={selectedOption === option}
-                                                    onChange={(e) => setSelectedOption(e.target.value)}
-                                                />
-                                                {option}
-                                            </label>
-
-                                        </>
-
-                                    ))
-                                }
-
-
-                            </div>
-                        </Dropdown>
+                        <Dropdown button={selectedOption} ><DayWeekDRP onOptionSelected={onOptionSelected} /></Dropdown>
 
                     </div>
 
