@@ -14,7 +14,12 @@ import PlayListFrom from "./Components/PlayListFrom/PlayListFrom";
 
 
 export default function Home() {
-  
+  const [selectedOption, setSelectedOption] = useState('Day')
+
+  const onOptionSelected = (option: string) => {
+    setSelectedOption(option)
+  }
+
   return (
     <main>
     </main>

@@ -11,7 +11,7 @@ const Dropdown =({children,button}:Props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className={styles.container}>
+    <div>
       <div onClick={() => setIsOpen(!isOpen)} className={styles.drpButton}>
         {button}  
         <Image
