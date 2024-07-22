@@ -12,9 +12,8 @@ import DayWeekDRP from "./Components/dropDown/DayWeekDropContent/DayWeek";
 import NavMenu from "./Components/NavMenu/NavMenu";
 import ResponsiveMenu from "./Components/NavMenu/ResponsiveMenu/ResponsiveMenu";
 import PlayListFrom from "./Components/PlayListFrom/PlayListFrom";
+import TopSongs from "./Components/TopSongs/TopSongs";
 import MultiTaskButton from "./Components/MultiTaskButton/MultiTaskButton";
-
-
 
 export default function Home() {
 
