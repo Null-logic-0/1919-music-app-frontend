@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import RecoilWrapper from "./helpers/RecoilWrapper/RecoilWrapper";
+import NavMenu from "./Components/NavMenu/NavMenu";
+import PlayerController from "./Components/PlayerControler/PlayerControler";
+import ResponsiveMenu from "./Components/NavMenu/ResponsiveMenu/ResponsiveMenu";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -20,7 +23,15 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <RecoilWrapper>
-          {children}
+          <div className="root-container">
+            <NavMenu />
+            <div className="content-container">
+              {children}
+            </div>
+
+          </div>
+          <PlayerController />
+          <ResponsiveMenu />
         </RecoilWrapper>
       </body>
     </html>
