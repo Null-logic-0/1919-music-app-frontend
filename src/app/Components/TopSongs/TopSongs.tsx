@@ -44,7 +44,7 @@ const TopSongs = () => {
                 <div className={styles.heading}>
                     <div className={styles.header}>
                         <h2 className={styles.title}>Top 10 songs</h2>
-                        <Dropdown button={selectedOption} ><DayWeekDRP onOptionSelected={onOptionSelected} /></Dropdown>
+                        <Dropdown button={selectedOption}><DayWeekDRP onOptionSelected={onOptionSelected} /></Dropdown>
 
                     </div>
 
