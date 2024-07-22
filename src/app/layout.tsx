@@ -23,8 +23,6 @@ export default function RootLayout({
           {children}
         </RecoilWrapper>
       </body>
-
-        {children}</body>
     </html>
   );
 }
