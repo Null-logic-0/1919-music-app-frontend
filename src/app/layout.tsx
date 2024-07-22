@@ -5,6 +5,7 @@ import RecoilWrapper from "./helpers/RecoilWrapper/RecoilWrapper";
 import NavMenu from "./Components/NavMenu/NavMenu";
 import PlayerController from "./Components/PlayerControler/PlayerControler";
 import ResponsiveMenu from "./Components/NavMenu/ResponsiveMenu/ResponsiveMenu";
+import HeaderTop from "./Components/HomePage/HeaderTop/HeaderTop";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -23,6 +24,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <RecoilWrapper>
+          <HeaderTop/>
           <div className="root-container">
             <NavMenu />
             <div className="content-container">
