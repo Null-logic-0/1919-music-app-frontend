@@ -17,8 +17,7 @@ import MultiTaskButton from "./Components/MultiTaskButton/MultiTaskButton";
 export default function Home() {
 
   return (
-    <main style={{backgroundColor:'black'}}>
-      <TopSongs />
+    <main>
     </main>
   );
 }
