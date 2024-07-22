@@ -2,6 +2,7 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import { ImageSizeVariant } from "./enums/imageSizeVariants";
+import PlayerController from "./Components/PlayerControler/PlayerControler";
 import ToggleSwitch from "./Components/Toggle/Toggle";
 import Input from "./Components/Input/Input";
 import AddButton from "./Components/AddButton/AddButton";
