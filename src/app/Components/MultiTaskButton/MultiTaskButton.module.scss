@@ -1,0 +1,11 @@
+.button {
+    background-color: transparent;
+    cursor: pointer;
+}
+
+@media (max-width:1024px){
+    .icon {
+        width: 24px;
+        height: 24px;
+    }
+}
