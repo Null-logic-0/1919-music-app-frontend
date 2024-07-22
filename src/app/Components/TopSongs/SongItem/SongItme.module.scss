@@ -1,0 +1,66 @@
+@import '../../../styles/globalColors/color.scss';
+
+.tableRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1556px;
+    width: 100%;
+    padding: 0px 16px;
+
+}
+
+.imageWrapper {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+}
+
+
+.action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 490px;
+    width: 100%;
+}
+
+
+.count {
+    color: #FFF;
+    font-size: 32px;
+    font-weight: 600;
+    width: 20px;
+    height: 39px;
+}
+
+.plays,
+.duration {
+    color: $dark4;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 36px;
+}
+
+
+@media (max-width:1024px){
+    .plays {
+        display: none;
+    }
+
+    .duration {
+        font-size: 20px;
+    }
+}
+
+@media (max-width:768px) {
+    .action {
+        justify-content: flex-end;
+        gap: 12px;
+    }
+
+    .count {
+        font-size: 20px;
+        font-weight: 400;
+    }
+}

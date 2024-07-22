@@ -5,10 +5,13 @@ import styles from './TopSongs.module.scss';
 import HeartLike from '../HeartLike/HeartLike';
 import Dropdown from '../dropDown/dropDown';
 import DayWeekDRP from '../dropDown/DayWeekDropContent/DayWeek';
+import SongItem from './SongItem/SongsItem';
+import { SongInterface } from '@/app/interfaces/Song.interface';
+
 
 
 const TopSongs = () => {
-    const songs = [
+    const songsData = [
         { id: 1, image: '/images/albumCard.png', title: 'Song Name 1', artist: 'Artist Name 1', duration: '4.32', plays: '523M' },
         { id: 2, image: '/images/albumCard.png', title: 'Song Name 2', artist: 'Artist Name 2', duration: '3.45', plays: '420M' },
         { id: 3, image: '/images/albumCard.png', title: 'Song Name 3', artist: 'Artist Name 3', duration: '5.12', plays: '610M' },
@@ -26,7 +29,7 @@ const TopSongs = () => {
     const [showAll, setShowAll] = useState(false);
 
     const toggleShowAll = () => setShowAll(prevShowAll => !prevShowAll);
-    const songsDisplay = showAll ? songs : songs.slice(0, 4);
+    const songsDisplay = showAll ? songsData : songsData.slice(0, 4);
 
     const [selectedOption, setSelectedOption] = useState('Day')
 
@@ -56,24 +59,7 @@ const TopSongs = () => {
 
             <div className={styles.container}>
                 {songsDisplay.map((song, index) => (
-                    <div className={styles.tableRow} key={song.id}>
-                        <div className={styles.imageWrapper}>
-                            <span className={styles.count}>{index + 1}</span>
-                            <Card
-                                images={song.image}
-                                direction='row'
-                                imageSizeVariant={ImageSizeVariant.Small}
-                                showDetails
-                                title={song.title}
-                                subtitle={song.artist}
-                            />
-                        </div>
-                        <div className={styles.action}>
-                            <span className={styles.duration}>{song.duration}</span>
-                            <span className={styles.plays}>{song.plays} Plays</span>
-                            <HeartLike />
-                        </div>
-                    </div>
+                    <SongItem key={song.id} song={song} index={index} />
                 ))}
             </div>
 
