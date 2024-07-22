@@ -1,0 +1,19 @@
+@import '../../styles/globalColors/color.scss';
+
+.duration {
+    color: $dark4;
+    font-size: 24px;
+    font-weight: 400;
+}
+
+@media (max-width:1024px){
+    .duration {
+        font-size: 20px;
+    }
+}
+
+@media (max-width:768px){
+    .duration {
+        font-size: 12px;
+    }
+}

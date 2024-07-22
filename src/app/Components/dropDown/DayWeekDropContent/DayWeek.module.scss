@@ -12,3 +12,9 @@
     gap: $small;
     cursor: pointer;
 }
+
+@media (max-width:768px){
+    .dropdownContent{
+        font-size: 20px;
+    }
+}
