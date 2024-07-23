@@ -14,6 +14,7 @@ import ResponsiveMenu from "./Components/NavMenu/ResponsiveMenu/ResponsiveMenu";
 import PlayListFrom from "./Components/PlayListFrom/PlayListFrom";
 import TopSongs from "./Components/TopSongs/TopSongs";
 import MultiTaskButton from "./Components/MultiTaskButton/MultiTaskButton";
+import TopCharts from "./Components/TopChartsComponent/TopCharts/TopCharts";
 
 export default function Home() {
 
