@@ -14,11 +14,12 @@ import ResponsiveMenu from "./Components/NavMenu/ResponsiveMenu/ResponsiveMenu";
 import PlayListFrom from "./Components/PlayListFrom/PlayListFrom";
 import TopSongs from "./Components/TopSongs/TopSongs";
 import MultiTaskButton from "./Components/MultiTaskButton/MultiTaskButton";
+import TopArtist from "./Components/TopArtistComponent/TopArtist/TopArtist";
 
 export default function Home() {
 
   return (
-    <main>
+    <main>   
     </main>
   );
 }
