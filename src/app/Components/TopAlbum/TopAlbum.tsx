@@ -24,14 +24,13 @@ import Heading from "../Heading/Heading";
 
 
 const TopAlbum = () => {
-  const [currentAlbums] = useState(AlbumData);
 
   return (
   
     <div className={styles.container}>
         <Heading title="Top Album" />
       <div className={styles.albumWrapper}>
-        {currentAlbums.map((item,index) => (   
+        {AlbumData.map((item,index) => (   
         <Card 
          key={index}
          images={item.image} 
