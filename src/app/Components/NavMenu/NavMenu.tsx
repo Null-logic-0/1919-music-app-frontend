@@ -69,7 +69,7 @@ const NavMenu = () => {
                     <Modal
                         setShowModal={setShowModal}
                         isOpen={showModal}
-                        title="This modal"
+                        title="Edit details"
                     >
                          <PlayListFrom setShowModal={setShowModal} />
                     </Modal>
