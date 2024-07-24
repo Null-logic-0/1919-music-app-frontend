@@ -1,0 +1,31 @@
+@import '../../styles/globalColors/color.scss';
+
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    background-color: $dark1;
+    width: 100%;
+
+
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1500px;
+    width: 100%;
+    padding: 16px 24px 16px 24px;
+
+}
+
+
+@media (max-width:1024px){
+    .main {
+        bottom: 60px;
+    }
+}
