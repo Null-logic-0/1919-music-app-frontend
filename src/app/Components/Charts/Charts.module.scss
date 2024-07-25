@@ -1,0 +1,22 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    justify-content: center;
+    padding: 60px 24px;
+}
+
+
+@media (max-width:1024px){
+    .main {
+        padding-top: 48px;
+    }
+}
+
+@media (max-width:768px){
+    .main{
+        gap:16px;
+        padding-top: 16px;
+    
+    }
+}

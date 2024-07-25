@@ -1,0 +1,59 @@
+.main {
+    display: flex;
+    gap:24px;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    
+   
+}
+
+.cards {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x:hidden;
+    gap: 24px;
+    max-width: 900px;
+    width: 100%;
+   
+
+}
+
+
+
+@media (max-width:1024px){
+    .button{
+        display: none;
+    }
+
+    .cards {
+        max-width: 520px;
+        justify-content: flex-start;
+        width: 100%;
+        overflow-x: scroll;
+        padding: 0 20px 0 20px;
+
+    }
+
+    
+}
+
+@media (max-width:768px){
+    .container {
+        gap: 16px;
+    }
+
+    .cards {
+        max-width: 370px;
+
+    }
+
+    
+}
