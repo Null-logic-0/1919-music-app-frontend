@@ -1,0 +1,35 @@
+.container {
+    display: none;
+}
+
+@media (max-width:1024px){
+    .container {
+        display: unset;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px 24px;
+        background-color: #232323;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .title {
+        font-size: 30px;
+        font-family: 600;
+        color: #fff;
+    }
+}
+
+@media (max-width:768px){
+   
+    .title {
+        font-size: 20px;
+    }
+
+    .container {
+        padding: 14px 16px;
+    }
+}
