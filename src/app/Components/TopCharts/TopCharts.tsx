@@ -23,7 +23,7 @@ import Heading from "../Heading/Heading";
 
 
 
-const TopCarts = () => {
+const TopCharts = () => {
 
   return (
   
@@ -45,4 +45,4 @@ const TopCarts = () => {
   );
 };
 
-export default TopCarts;
+export default TopCharts;
