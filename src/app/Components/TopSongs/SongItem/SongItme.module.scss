@@ -4,7 +4,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1556px;
     width: 100%;
     padding: 0px 16px;
 
@@ -20,9 +19,8 @@
 .action {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    max-width: 490px;
-    width: 100%;
+    justify-content: center;
+    gap: 24px;
 }
 
 
@@ -37,7 +35,7 @@
 .plays,
 .duration {
     color: $dark4;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 500;
     line-height: 36px;
 }
@@ -49,7 +47,11 @@
     }
 
     .duration {
-        font-size: 20px;
+        font-size: 16px;
+    }
+
+    .action {
+        gap: 20px;
     }
 }
 
@@ -60,7 +62,7 @@
     }
 
     .count {
-        font-size: 20px;
+        font-size: 16px;
         font-weight: 400;
     }
 }
