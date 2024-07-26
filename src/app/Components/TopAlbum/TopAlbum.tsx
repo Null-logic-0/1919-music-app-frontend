@@ -30,9 +30,9 @@ const TopAlbum = () => {
     <div className={styles.container}>
         <Heading title="Top Album" />
       <div className={styles.albumWrapper}>
-        {AlbumData.map((item,index) => (   
+        {AlbumData.map((item,id) => (   
         <Card 
-         key={index}
+         key={id}
          images={item.image} 
          title={item.title} subtitle={item.subtitle} 
          showDetails  
