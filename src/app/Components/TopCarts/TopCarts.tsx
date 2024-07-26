@@ -30,9 +30,9 @@ const TopCarts = () => {
     <div className={styles.container}>
         <Heading title="Top Chrts" />
       <div className={styles.albumWrapper}>
-        {CartsmData.map((item,index) => (   
+        {CartsmData.map((item,id) => (   
         <Card 
-         key={index}
+         key={id}
          images={item.image} 
          title={item.title} subtitle={item.subtitle} 
          showDetails  
