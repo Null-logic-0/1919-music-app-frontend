@@ -1,32 +1,73 @@
-import React from 'react';
-import MultiCardCarousel from '../MultiCardCarousel/MultiCardCarousel';
+import React, { useState, useEffect } from 'react';
 import Card from '../AlbumCard/Card';
 import Heading from '../Heading/Heading';
 import { ImageSizeVariant } from '@/app/enums/imageSizeVariants';
 import styles from './Charts.module.scss';
+import SeeAllButton from '../SeeAllButton/SeeAllButton';
+
+const ChartsData = [
+    { image: '/images/hit1.png' },
+    { image: '/images/hit2.png' },
+    { image: '/images/hit3.png' },
+    { image: '/images/hit4.png' },
+    { image: '/images/hit5.png' },
+    { image: '/images/hit1.png' },
+    { image: '/images/hit2.png' },
+    { image: '/images/hit3.png' },
+    { image: '/images/hit4.png' },
+    { image: '/images/hit5.png' },
+   
+];
 
 const Charts = () => {
-    const chartsData = [
-        { image: '/images/hit1.png' },
-        { image: '/images/hit2.png' },
-        { image: '/images/hit3.png' },
-        { image: '/images/hit4.png' },
-        { image: '/images/hit5.png' },
-        
-    ];
+    const [showAll, setShowAll] = useState(false);
+    const [cardsToShow, setCardsToShow] = useState(4); 
+    useEffect(() => {
+        const handleResize = () => {
+            const width = window.innerWidth;
+            let visibleCount = 4;
 
-    const renderArtistCard = (card: { image: string }, index: number) => (
-        <Card
-            key={index}
-            images={card.image}
-            imageSizeVariant={ImageSizeVariant.Medium}
-        />
-    );
+            if (width > 2300) {
+                visibleCount = 6;
+            } else if (width >= 1500) {
+                visibleCount = 3 + Math.max(0, Math.floor((width - 1900) / 100));
+                visibleCount = Math.min(visibleCount, 6);
+            } else if (width >= 1280) {
+                visibleCount = 3;
+            } else if (width >= 1075) {
+                visibleCount = 2;
+            } else if (width >= 1025) {
+                visibleCount = 2;
+            }else {
+                visibleCount = 6; 
+            }
+
+            setCardsToShow(visibleCount);
+        };
+
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+    const toggleShowAll = () => setShowAll(prevShowAll => !prevShowAll);
+
+    const trimedData = showAll ? ChartsData : ChartsData.slice(0, cardsToShow);
 
     return (
         <div className={styles.main}>
-            <Heading title="Top Charts" />
-            <MultiCardCarousel  renderCard={renderArtistCard} cards={chartsData} />
+            <div className={styles.container}>
+                <Heading title="Top Charts" />
+                <SeeAllButton showAll={showAll} onclick={toggleShowAll} />
+            </div>
+            <div className={styles.cards}>
+                {trimedData.map((item, id) => (
+                    <Card
+                        key={id}
+                        images={item.image}
+                        imageSizeVariant={ImageSizeVariant.Medium}
+                    />
+                ))}
+            </div>
         </div>
     );
 };
