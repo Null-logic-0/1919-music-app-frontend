@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import AlbumCard from "../AlbumCard/Card";
-import styles from './TopCarts.module.scss';
+import styles from './TopCharts.module.scss';
 import CardSubtitle from "../AlbumCard/CardSubtitle/CardSubtitle";
 import CardTitle from "../AlbumCard/CardTitle/CardTitle";
 import { ImageSizeVariant} from "../../enums/imageSizeVariants";
@@ -28,7 +28,7 @@ const TopCarts = () => {
   return (
   
     <div className={styles.container}>
-        <Heading title="Top Chrts" />
+        <Heading title="Top Charts" />
       <div className={styles.albumWrapper}>
         {CartsmData.map((item,id) => (   
         <Card 
