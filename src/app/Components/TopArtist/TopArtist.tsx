@@ -29,9 +29,9 @@ const TopArtist = () => {
     <div className={styles.container}>
         <Heading title="Top Artist" />
       <div className={styles.albumWrapper}>
-        {ArtistData.map((item,index) => (   
+        {ArtistData.map((item,id) => (   
         <Card 
-         key={index}
+         key={id}
          images={item.image} 
          title={item.title} subtitle={item.subtitle} 
          showDetails  
