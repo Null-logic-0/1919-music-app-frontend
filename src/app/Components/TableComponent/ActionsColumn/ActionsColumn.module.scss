@@ -1,0 +1,13 @@
+.buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 24px;
+}
+
+@media (max-width:1024px){
+    .buttons {
+        gap: 12px;
+    }
+}
+

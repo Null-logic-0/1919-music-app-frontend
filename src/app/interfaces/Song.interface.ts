@@ -5,4 +5,6 @@ export interface SongInterface {
     artist: string;
     duration: string;
     plays: string;
+    album?:string;
+    key?:string;
 }
