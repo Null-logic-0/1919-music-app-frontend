@@ -8,7 +8,7 @@ import Card from "../AlbumCard/Card";
 import Heading from "../Heading/Heading";
 
 
- const CartsmData = [
+ const ChartsData = [
   { title:'Song Name', image: "/images/albumCard.png",subtitle:'100 song'},
   { title:'Song Name', image: "/images/albumCard.png",subtitle:'100 song'},
   { title:'Song Name', image: "/images/albumCard.png",subtitle:'100 song'},
@@ -30,7 +30,7 @@ const TopCharts = () => {
     <div className={styles.container}>
         <Heading title="Top Charts" />
       <div className={styles.albumWrapper}>
-        {CartsmData.map((item,id) => (   
+        {ChartsData.map((item,id) => (   
         <Card 
          key={id}
          images={item.image} 
