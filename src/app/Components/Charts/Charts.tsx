@@ -31,7 +31,7 @@ const Charts = () => {
     return (
         <div className={styles.main}>
             <div className={styles.container}>
-                <Heading title="Top Charts" />
+                <Heading title="Top Charts" link='/topcharts'/>
                 <SeeAllButton showAll={showAll} onclick={toggleShowAll} />
             </div>
             <div className={styles.cards}>

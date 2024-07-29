@@ -32,7 +32,7 @@ const Artist = () => {
     return (
         <div className={styles.main}>
             <div className={styles.container}>
-                <Heading title="Top Artists" />
+                <Heading title="Top Artists" link='/topartist'/>
                 <SeeAllButton showAll={showAll} onclick={toggleShowAll} />
             </div>
             <div className={styles.cards}>
