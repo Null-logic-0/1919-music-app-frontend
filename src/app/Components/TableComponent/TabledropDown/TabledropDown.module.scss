@@ -1,0 +1,38 @@
+.container {
+    border-radius: 8px;
+    background: #232323;
+    display: flex;
+    max-width: 372px;
+    width: 100%;
+    padding: 12px 24px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.button {
+    color: #FFF;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 36px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+@media (max-width:768px){
+    .button{
+        font-size: 16px;
+    }
+
+    .container{
+        padding: 12px 16px;
+        max-width: 196px;
+        width: 100%;
+        gap: 12px;
+
+    }
+}

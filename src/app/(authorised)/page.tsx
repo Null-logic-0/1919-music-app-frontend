@@ -9,9 +9,7 @@ import HomePageTop from "@/app/Components/HomePageTop/HomePageTop";
 
 
 export default function Home() {
-  
-
-
+ 
   return (
     <main>
       <HomePageTop/>
