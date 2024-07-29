@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Card from '../AlbumCard/Card';
 import Heading from '../Heading/Heading';
 import { ImageSizeVariant } from '@/app/enums/imageSizeVariants';
 import styles from './Artist.module.scss';
 import SeeAllButton from '../SeeAllButton/SeeAllButton';
+import ArtistsCardsHelper from '@/app/helpers/ArtistsCardsHelper';
 
 const artistData = [
     { image: '/images/artist1.jpg' },
@@ -21,36 +22,8 @@ const artistData = [
 ];
 
 const Artist = () => {
-    const [showAll, setShowAll] = useState(false);
-    const [cardsToShow, setCardsToShow] = useState(6);
-
-    useEffect(() => {
-        const handleResize = () => {
-            const width = window.innerWidth;
-            let visibleCount = 6;
-
-            if (width > 2300) {
-                visibleCount = 10;
-            } else if (width >= 1500) {
-                visibleCount = 6 + Math.max(0, Math.floor((width - 1900) / 100));
-                visibleCount = Math.min(visibleCount, 10);
-            } else if (width >= 1280) {
-                visibleCount = 4;
-            } else if (width >= 1075) {
-                visibleCount = 3;
-            } else if (width >= 1025) {
-                visibleCount = 3;
-            }else {
-                visibleCount = 6; 
-            }
-
-            setCardsToShow(visibleCount);
-        };
-
-        handleResize();
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
+    const [showAll, setShowAll] = useState<boolean>(false);
+    const cardsToShow = ArtistsCardsHelper();
 
     const toggleShowAll = () => setShowAll(prevShowAll => !prevShowAll);
 
