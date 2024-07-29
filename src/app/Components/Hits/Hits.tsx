@@ -26,8 +26,6 @@ const Hits = () => {
 
     const toggleShowAll = () => setShowAll(prevShowAll => !prevShowAll);
 
-    const trimmedData = showAll ? HitsData : HitsData.slice(0, cardsToShow);
-
     const trimedData = showAll ? HitsData : HitsData.slice(0, cardsToShow);
 
     return (
