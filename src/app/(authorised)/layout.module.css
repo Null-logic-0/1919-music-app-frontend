@@ -1,0 +1,34 @@
+.main{
+    display: flex;
+    flex-direction: column;
+}
+.container {
+    display: flex;
+
+}
+
+.navMenu {
+    left: 0;
+    position: relative;
+}
+
+.content {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.controls {
+    margin-top: 200px;
+}
+
+@media (max-width:1024px){
+    .content {
+        margin-left: 0;
+        align-items: center;
+    }
+
+    .controls {
+        margin-top: 300px;
+    }
+}
