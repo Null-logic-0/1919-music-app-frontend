@@ -1,0 +1,27 @@
+@import '../../styles/globalColors/color.scss';
+
+
+.toggleButton {
+    background-color: transparent;
+    color: $info;
+    font-size: 24px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+@media (max-width:1024px) {
+   
+    .toggleButton {
+        font-size: 20px;
+    }
+
+}
+
+@media (max-width:768px) {
+   
+    .toggleButton {
+        font-size: 18px;
+    }
+
+}
+
