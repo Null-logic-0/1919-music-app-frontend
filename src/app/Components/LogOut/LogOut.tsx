@@ -27,7 +27,7 @@ const Logout = () => {
                     <div className={styles.button}>
 
                         <Button text='Yes' size='inline' borders='small' />
-                        <Button text='NO' size='inline' borders='small' color='changed' />
+                        <Button text='NO' size='inline' borders='small' color='changed' onclick={handleOpen}/>
 
                     </div>
 
