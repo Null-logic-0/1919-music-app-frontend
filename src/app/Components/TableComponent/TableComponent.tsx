@@ -19,7 +19,7 @@ type TableProps = {
   dataSource: SongInterface[]
 };
 
-const SongTable = ({ replaceButton, showThead, dataSource, edit }: TableProps) => {
+const TableComponent = ({ replaceButton, showThead, dataSource, edit }: TableProps) => {
   const [currentTrackIndex, setCurrentTrackIndex] = useRecoilState(currentTrackIndexState);
   const [playbackStatus, setPlaybackStatus] = useRecoilState(playbackStatusState);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -97,4 +97,4 @@ const SongTable = ({ replaceButton, showThead, dataSource, edit }: TableProps) =
   );
 };
 
-export default SongTable;
+export default TableComponent;
