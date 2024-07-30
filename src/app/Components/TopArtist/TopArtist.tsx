@@ -36,7 +36,7 @@ const TopArtist = () => {
          title={item.title} subtitle={item.subtitle} 
          showDetails  
          direction="column" 
-         imageSizeVariant={ImageSizeVariant.RoundedXXL}
+         imageSizeVariant={ImageSizeVariant.RoundedAbsolute}
          />          
         ))}
       </div>

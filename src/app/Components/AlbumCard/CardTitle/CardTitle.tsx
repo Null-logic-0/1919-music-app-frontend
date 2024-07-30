@@ -11,7 +11,9 @@ const CardTitle = ({ title, imageSizeVariant }: TitleProps) => {
     const getTitleClass = () => {
         if (imageSizeVariant === ImageSizeVariant.XLarge || 
             imageSizeVariant === ImageSizeVariant.Small || 
-            imageSizeVariant === ImageSizeVariant.RoundedXL) {
+            imageSizeVariant === ImageSizeVariant.RoundedXL|| 
+            imageSizeVariant === ImageSizeVariant.Absolute ||
+            imageSizeVariant === ImageSizeVariant.RoundedAbsolute) {
             return styles.mediumTitle;
         } else if (imageSizeVariant === ImageSizeVariant.Large ||
             imageSizeVariant === ImageSizeVariant.RoundedXXL) {

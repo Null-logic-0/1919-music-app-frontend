@@ -8,13 +8,16 @@ type SubtitleProps = {
 
 const CardSubtitle = ({ subtitle, imageSizeVariant }: SubtitleProps) => {
     const getSubtitleClass = () => {
-        if (imageSizeVariant === ImageSizeVariant.XLarge || 
-            imageSizeVariant === ImageSizeVariant.Small || 
-            imageSizeVariant === ImageSizeVariant.RoundedXL) {
+        if (imageSizeVariant === ImageSizeVariant.XLarge ||
+            imageSizeVariant === ImageSizeVariant.Small ||
+            imageSizeVariant === ImageSizeVariant.RoundedXL ||
+            imageSizeVariant === ImageSizeVariant.Absolute || 
+            imageSizeVariant === ImageSizeVariant.RoundedAbsolute) {
             return styles.mediumSubtitle;
-        } else if (imageSizeVariant === ImageSizeVariant.Large || imageSizeVariant === ImageSizeVariant.RoundedXXL) {
+        } else if (imageSizeVariant === ImageSizeVariant.Large ||
+             imageSizeVariant === ImageSizeVariant.RoundedXXL ) {
             return styles.largeSubtitle;
-        } 
+        }
         return '';
     };
 
