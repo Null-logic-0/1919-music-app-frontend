@@ -18,7 +18,7 @@
     gap: 24px;
     background-color: #232323;
     border-radius: 12px;
-    padding: 12px 24px;
+    padding: 24px 12px;
     position: absolute; 
     top: 50px;
     right: 0; 
@@ -28,12 +28,36 @@
 .button {
     display: flex;
     align-items: center;
-    gap: 12px;
     justify-content: center;
+    gap: 8px;
+    
 }
 
 .text {
     font-size: 24px;
     font-weight: 500;
     color: #fff;
+}
+
+
+@media (max-width:1024px){
+    .text {
+        font-size: 20px;
+
+    }
+
+    .button{
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width:768px){
+    .text {
+        font-size: 16px;
+    }
+
+    .container {
+        padding: 20px 8px;
+
+    }
 }
