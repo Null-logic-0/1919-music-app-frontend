@@ -31,7 +31,7 @@ const Albums = () => {
     return (
         <div className={styles.main}>
             <div className={styles.container}>
-                <Heading title="Top Albums" />
+                <Heading title="Top Albums" link='/topalbum'/>
                 <SeeAllButton showAll={showAll} onclick={toggleShowAll} />
             </div>
             <div className={styles.cards}>
