@@ -3,11 +3,17 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding:44px 28px;
+    padding: 44px 28px;
 }
 
 .link {
-    background:  #232323; 
+    background: #232323;
     border-radius: 12px;
     padding: 4px;
+}
+
+@media (max-width:1024px) {
+    .container {
+        padding-top: 150px;
+    }
 }
