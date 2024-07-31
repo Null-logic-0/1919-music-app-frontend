@@ -51,8 +51,7 @@ const Card = ({
         classes.push(styles.columnInfo);
     } else if (
         imageSizeVariant === ImageSizeVariant.RoundedXXL ||
-        imageSizeVariant === ImageSizeVariant.RoundedXL
-    ) {
+        imageSizeVariant === ImageSizeVariant.RoundedXL) {
         classes.push(styles.roundedColumn);
     }
 

@@ -9,14 +9,14 @@ import Heading from "../Heading/Heading";
 
 
  const ArtistData = [
-  { title:'Song Name', image: "/images/albumCard.png",subtitle:'100 song'},
-  { title:'Song Name', image: "/images/albumCard.png",subtitle:'100 song'},
-  { title:'Song Name', image: "/images/albumCard.png",subtitle:'100 song'},
-  { title:'Song Name', image: "/images/albumCard.png",subtitle:'100 song'},
-  { title:'Song Name', image: "/images/albumCard.png",subtitle:'100 song'},
-  { title:'Song Name', image: "/images/albumCard.png",subtitle:'100 song'},
-  { title:'Song Name', image: "/images/albumCard.png",subtitle:'100 song'},
-  { title:'Song Name', image: "/images/albumCard.png",subtitle:'100 song'}, 
+  { id:1,title:'Song Name', image: "/images/albumCard.png",subtitle:'100 song'},
+  { id:2,title:'Song Name', image: "/images/albumCard.png",subtitle:'100 song'},
+  { id:3,title:'Song Name', image: "/images/albumCard.png",subtitle:'100 song'},
+  { id:4,title:'Song Name', image: "/images/albumCard.png",subtitle:'100 song'},
+  { id:5,title:'Song Name', image: "/images/albumCard.png",subtitle:'100 song'},
+  { id:6,title:'Song Name', image: "/images/albumCard.png",subtitle:'100 song'},
+  { id:7,title:'Song Name', image: "/images/albumCard.png",subtitle:'100 song'},
+  { id:8,title:'Song Name', image: "/images/albumCard.png",subtitle:'100 song'}, 
 ];
 
 
@@ -31,12 +31,12 @@ const TopArtist = () => {
       <div className={styles.albumWrapper}>
         {ArtistData.map((item,id) => (   
         <Card 
-         key={id}
+         key={item.id}
          images={item.image} 
          title={item.title} subtitle={item.subtitle} 
          showDetails  
          direction="column" 
-         imageSizeVariant={ImageSizeVariant.RoundedXXL}
+         imageSizeVariant={ImageSizeVariant.RoundedXL}
          />          
         ))}
       </div>

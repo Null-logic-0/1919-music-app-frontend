@@ -37,7 +37,7 @@ const TopCharts = () => {
          title={item.title} subtitle={item.subtitle} 
          showDetails  
          direction="column" 
-         imageSizeVariant={ImageSizeVariant.XLarge}
+         imageSizeVariant={ImageSizeVariant.Absolute}
          />          
         ))}
       </div>

@@ -6,6 +6,7 @@ export enum ImageSizeVariant {
     Rounded = 'rounded',
     RoundedXL = 'roundedXl',
     RoundedXXL = 'roundedXxl',
+    Absolute = 'absolute',
 
 }
 
@@ -18,4 +19,5 @@ export const imageSizeVariants = {
     [ImageSizeVariant.Rounded]: { width: 176, height: 176 },
     [ImageSizeVariant.RoundedXL]: { width: 240, height: 240 },
     [ImageSizeVariant.RoundedXXL]: { width: 240, height: 240 },
+    [ImageSizeVariant.Absolute] :{ width: 240, height: 240 },
 };
