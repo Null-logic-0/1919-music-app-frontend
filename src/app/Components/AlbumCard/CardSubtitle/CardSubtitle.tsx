@@ -11,8 +11,7 @@ const CardSubtitle = ({ subtitle, imageSizeVariant }: SubtitleProps) => {
         if (imageSizeVariant === ImageSizeVariant.XLarge ||
             imageSizeVariant === ImageSizeVariant.Small ||
             imageSizeVariant === ImageSizeVariant.RoundedXL ||
-            imageSizeVariant === ImageSizeVariant.Absolute || 
-            imageSizeVariant === ImageSizeVariant.RoundedAbsolute) {
+            imageSizeVariant === ImageSizeVariant.Absolute) {
             return styles.mediumSubtitle;
         } else if (imageSizeVariant === ImageSizeVariant.Large ||
              imageSizeVariant === ImageSizeVariant.RoundedXXL ) {
