@@ -8,7 +8,8 @@ import PagesHeaderTop from "@/app/Components/PagesHeaderTop/PagesHeaderTop";
 export default function Home() {
 
   return (
-    <main>   
+    <main>  
+        <PagesHeaderTop link="/"/>
         <TopArtist/>
     
     </main>
