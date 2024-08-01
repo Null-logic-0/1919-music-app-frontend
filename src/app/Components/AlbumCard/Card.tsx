@@ -26,7 +26,6 @@ const Card = ({
     link, 
 }: CardProps) => {
     const [isMobile, setIsMobile] = useState(false);
-    console.log(link,'link')
     useEffect(() => {
         const handleResize = () => {
             setIsMobile(window.innerWidth <= 768);
