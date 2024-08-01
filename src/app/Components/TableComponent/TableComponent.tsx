@@ -1,3 +1,4 @@
+'use client'
 import { Table } from 'antd';
 import { SongInterface } from '@/app/interfaces/Song.interface';
 import { useRecoilState } from 'recoil';
@@ -60,7 +61,28 @@ const TableComponent = ({ replaceButton, showThead, dataSource, edit }: TablePro
       render: (text: string) => renderDurationColumn(text),
     },
     {
-      title: edit ? (<MultiTaskButton icon="/icons/edit.svg" onclick={toggleDropdown} />) : '',
+      title: edit ? (
+        <div className={styles.main}>
+          <div className={styles.pen}>
+            <MultiTaskButton icon="/icons/edit.svg" onclick={toggleDropdown} />
+          </div>
+          <div className={styles.container}>
+            {dropdownOpen && (
+              <>
+                <TabledropDown onEdit={toggleModal} />
+                {showModal && (
+                  <Modal
+                    setShowModal={setShowModal}
+                    isOpen={showModal}
+                    title="Edit details"
+                  >
+                    <PlayListFrom setShowModal={setShowModal} />
+                  </Modal>
+                )}
+              </>
+            )}
+          </div>
+        </div>) : '',
       key: 'actions',
       render: (text: string, record: SongInterface) => {
         return <TrackActions record={record} replaceButton={replaceButton} dataSource={dataSource} />;
@@ -76,23 +98,9 @@ const TableComponent = ({ replaceButton, showThead, dataSource, edit }: TablePro
         pagination={false}
         showHeader={showThead}
         rowKey="key"
+        className={styles.table}
       />
-      <div className={styles.container}>
-        {dropdownOpen && (
-          <>
-            <TabledropDown onEdit={toggleModal} />
-            {showModal && (
-              <Modal
-                setShowModal={setShowModal}
-                isOpen={showModal}
-                title="Edit details"
-              >
-                <PlayListFrom setShowModal={setShowModal} />
-              </Modal>
-            )}
-          </>
-        )}
-      </div>
+
     </div>
   );
 };
