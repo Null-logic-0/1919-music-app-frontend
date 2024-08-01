@@ -14,15 +14,13 @@ const CardImage = ({ src, alt, imageSizeVariant }: ImageProps) => {
     const imageClass = `${styles.image} ${styles[imageSizeVariant]}`;
 
     return (
-        <Link href="/">
-            <Image
-                src={src}
-                alt={alt}
-                width={width}
-                height={height}
-                className={imageClass}
-            />
-        </Link>
+        <Image
+            src={src}
+            alt={alt}
+            width={width}
+            height={height}
+            className={imageClass}
+        />
     );
 };
 
