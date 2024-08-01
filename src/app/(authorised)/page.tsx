@@ -6,6 +6,7 @@ import TopSongs from "@/app/Components/TopSongs/TopSongs";
 import Charts from "@/app/Components/Charts/Charts";
 import Hits from "@/app/Components/Hits/Hits";
 import HomePageTop from "@/app/Components/HomePageTop/HomePageTop";
+import TableComponent from "../Components/TableComponent/TableComponent";
 
 
 export default function Home() {
