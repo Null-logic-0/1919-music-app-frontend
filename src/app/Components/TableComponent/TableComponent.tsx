@@ -12,6 +12,7 @@ import TabledropDown from './TabledropDown/TabledropDown';
 import Modal from '../Modal/Modal';
 import PlayListFrom from '../PlayListFrom/PlayListFrom';
 import TrackActions from './TrackActions/TrackActions';
+import Edit from './Edit/Edit';
 
 type TableProps = {
   replaceButton: boolean;
@@ -23,12 +24,7 @@ type TableProps = {
 const TableComponent = ({ replaceButton, showThead, dataSource, edit }: TableProps) => {
   const [currentTrackIndex, setCurrentTrackIndex] = useRecoilState(currentTrackIndexState);
   const [playbackStatus, setPlaybackStatus] = useRecoilState(playbackStatusState);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-
-  const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
-
-  const toggleModal = () => setShowModal(!showModal);
+  
 
   const columns = [
     {
@@ -61,28 +57,8 @@ const TableComponent = ({ replaceButton, showThead, dataSource, edit }: TablePro
       render: (text: string) => renderDurationColumn(text),
     },
     {
-      title: edit ? (
-        <div className={styles.main}>
-          <div className={styles.pen}>
-            <MultiTaskButton icon="/icons/edit.svg" onclick={toggleDropdown} />
-          </div>
-          <div className={styles.container}>
-            {dropdownOpen && (
-              <>
-                <TabledropDown onEdit={toggleModal} />
-                {showModal && (
-                  <Modal
-                    setShowModal={setShowModal}
-                    isOpen={showModal}
-                    title="Edit details"
-                  >
-                    <PlayListFrom setShowModal={setShowModal} />
-                  </Modal>
-                )}
-              </>
-            )}
-          </div>
-        </div>) : '',
+
+      title: edit ? (<Edit/>) : '',
       key: 'actions',
       render: (text: string, record: SongInterface) => {
         return <TrackActions record={record} replaceButton={replaceButton} dataSource={dataSource} />;
