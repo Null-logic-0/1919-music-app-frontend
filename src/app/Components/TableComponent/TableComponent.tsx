@@ -57,6 +57,7 @@ const TableComponent = ({ replaceButton, showThead, dataSource, edit }: TablePro
       render: (text: string) => renderDurationColumn(text),
     },
     {
+
       title: edit ? (<Edit/>) : '',
       key: 'actions',
       render: (text: string, record: SongInterface) => {
