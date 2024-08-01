@@ -14,7 +14,6 @@ const CardImage = ({ src, alt, imageSizeVariant }: ImageProps) => {
     const imageClass = `${styles.image} ${styles[imageSizeVariant]}`;
 
     return (
-        <Link href="/">
             <Image
                 src={src}
                 alt={alt}
@@ -22,7 +21,6 @@ const CardImage = ({ src, alt, imageSizeVariant }: ImageProps) => {
                 height={height}
                 className={imageClass}
             />
-        </Link>
     );
 };
 

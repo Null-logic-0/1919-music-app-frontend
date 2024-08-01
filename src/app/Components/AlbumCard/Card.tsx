@@ -26,7 +26,7 @@ const Card = ({
     link, 
 }: CardProps) => {
     const [isMobile, setIsMobile] = useState(false);
-
+    console.log(link,'link')
     useEffect(() => {
         const handleResize = () => {
             setIsMobile(window.innerWidth <= 768);
@@ -58,7 +58,7 @@ const Card = ({
     return (
         <div className={classNames.join(' ').trim()}>
             {link ? (
-                <Link href={link || '#'}>
+                <Link href={link}>
                     <CardImage src={images} alt="Album Cover" imageSizeVariant={imageSizeVariant} />
                 </Link>
             ) : (
