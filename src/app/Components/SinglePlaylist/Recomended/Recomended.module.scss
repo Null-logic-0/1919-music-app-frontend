@@ -1,0 +1,16 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding: 40px 24px;
+}
+
+.text {
+    color: #FFF;
+    font-family: Inter;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: capitalize;
+}

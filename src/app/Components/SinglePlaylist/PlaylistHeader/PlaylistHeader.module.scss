@@ -1,0 +1,52 @@
+.playlistContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+
+}
+
+.searchContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.edit {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.search {
+    max-width: 636px;
+    width: 100%;
+}
+
+.text {
+    color: #FFF;
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 42px;
+    text-transform: capitalize;
+}
+
+@media (max-width:1024px){
+    .search{
+        max-width: 1024px;
+    }
+
+    .text {
+        font-size: 20px;
+    }
+}
+
+
+@media (max-width:768px){
+    .text {
+        display: none;
+    }
+
+    .edit{
+        display: none;
+    }
+}
