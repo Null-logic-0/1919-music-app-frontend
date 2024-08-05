@@ -31,7 +31,7 @@ const data = [
 const NavMenu = () => {
     const links = [
         { key: 'home', href: "/", text: "Home",activeIcon: '/icons/home-active.svg', iconSrc:'/icons/home.svg'},
-        { key: 'favourite', href: "/favourite", text: "Favourite",activeIcon:'/icons/favourite-active.svg',iconSrc:'/icons/favourite.svg' },
+        { key: 'favourite', href: "/playlist", text: "Favourite",activeIcon:'/icons/favourite-active.svg',iconSrc:'/icons/favourite.svg' },
     ];
 
 

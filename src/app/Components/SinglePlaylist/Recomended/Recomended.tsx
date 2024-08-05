@@ -1,9 +1,10 @@
 import { SongInterface } from '@/app/interfaces/Song.interface';
 import TableComponent from '../../TableComponent/TableComponent';
 import styles from './Recomended.module.scss';
+import MultiTaskButton from '../../MultiTaskButton/MultiTaskButton';
 
 
-const  musics:SongInterface[] = [
+const musics: SongInterface[] = [
     {
         id: 1,
         image: '/Images/DesirelessCover.jpg',
@@ -34,12 +35,21 @@ const  musics:SongInterface[] = [
         album: 'Songs 20',
         key: '3'
     }
-]
-const Recomended =()=>{
+];
+
+type Props ={
+    onclick?:()=>void;
+}
+const Recomended = ({onclick}:Props) => {
     return (
         <div className={styles.main}>
-            <p className={styles.text}>Recommended</p>
-            <TableComponent replaceButton={false} dataSource={musics} showThead={false}/>
+            <div className={styles.container}>
+                <p className={styles.text}>Recommended</p>
+                <MultiTaskButton icon='/Icons/closeX.svg' onclick={onclick}/>
+
+            </div>
+
+            <TableComponent replaceButton={false} dataSource={musics} showThead={false} />
 
         </div>
     )

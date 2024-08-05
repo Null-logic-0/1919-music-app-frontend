@@ -53,15 +53,19 @@ const SinglePlaylist = () => {
     const [showRecommended, setShowRecommended] = useState(false);
 
     const handleAddMusic = () => {
-        setShowRecommended(!showRecommended);
+        setShowRecommended(true);
     };
+
+    const handleClose =()=>{
+        setShowRecommended(false)
+    }
 
     const isTableEmpty = playlist.musics.length === 0;
 
 
     return (
         <div className={styles.main}>
-            <PagesHeaderTop link='/' />
+            <PagesHeaderTop link='/playlist' />
             <div className={styles.container}>
                 <div className={styles.playlistHeader}>
                     <PlaylistHeader
@@ -82,7 +86,7 @@ const SinglePlaylist = () => {
 
             </div>
 
-            {showRecommended && <Recomended />}
+            {showRecommended && <Recomended onclick={handleClose}/>}
 
         </div>
     )
