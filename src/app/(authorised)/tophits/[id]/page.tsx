@@ -1,13 +1,15 @@
-import Image from "next/image";
-import styles from "./page.module.scss";
-import OneHit from "@/app/Components/OneHit/OneHit";
+import OneHit from '@/app/Components/OneHit/OneHit';
+import styles from './page.module.scss';
+import OneAtrist from '@/app/Components/OneArtist/OneArtist';
 
 
-export default function Home() {
-
-  return (
-    <main className={styles.main}>
-        <OneHit />
-    </main>
-  )
+const HitId = () => {
+   
+    return (
+        <div className={styles.main}>
+           <OneHit/>
+        </div>
+    )
 }
+
+export default HitId;
