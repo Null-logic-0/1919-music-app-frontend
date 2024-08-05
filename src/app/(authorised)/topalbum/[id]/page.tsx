@@ -1,13 +1,15 @@
-import Image from "next/image";
-import styles from "./page.module.scss";
-import OneAlbum from "@/app/Components/OneAlbum/OneAlbum";
+import OneAlbum from '@/app/Components/OneAlbum/OneAlbum';
+import styles from './page.module.scss';
+import OneAtrist from '@/app/Components/OneArtist/OneArtist';
 
 
-export default function Home() {
-
-  return (
-    <main className={styles.main}>
-        <OneAlbum />
-    </main>
-  )
+const AlbumId = () => {
+   
+    return (
+        <div className={styles.main}>
+           <OneAlbum/>
+        </div>
+    )
 }
+
+export default AlbumId
