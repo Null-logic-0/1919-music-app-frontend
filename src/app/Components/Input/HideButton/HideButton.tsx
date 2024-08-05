@@ -3,7 +3,6 @@ import styles from './HideButton.module.scss'
 import Image from 'next/image';
 
 interface ToggleButtonProps {
-  showPassword?: boolean;
   toggleShowPassword?: () => void;
 }
 
