@@ -112,8 +112,11 @@
 @media(max-width:1024px) {
     .textarea {
         font-size: 14px;
+        width: 100%;
 
     }
+
+   
 }
 
 
@@ -129,8 +132,21 @@
         font-size: 10px;
     }
 
+    .input{
+        width: 152px;
+        font-size: 10px;
+    }
+
     .submit {
         font-size: 14px;
         width: 152px;
+        padding: 8px;
     }
+
+    .main{
+        padding-top: 16px;
+        gap: 16px;
+    }
+
+
 }
