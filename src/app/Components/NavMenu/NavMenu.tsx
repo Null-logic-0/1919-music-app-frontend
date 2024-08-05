@@ -13,28 +13,25 @@ const data = [
         name: 'playlistName1',
         song: '23 songs',
         image: '/images/playlist.png',
-        link: '/'
     },
     {
         id: '2',
         name: 'playlistName2',
         song: '23 songs',
         image: '/images/playlist.png',
-        link: '/'
     },
     {
         id: '3',
         name: 'playlistName3',
         song: '23 songs',
         image: '/images/playlist.png',
-        link: '/'
     },
 ];
 
 const NavMenu = () => {
     const links = [
         { key: 'home', href: "/", text: "Home",activeIcon: '/icons/home-active.svg', iconSrc:'/icons/home.svg'},
-        { key: 'favourite', href: "/favourite", text: "Favourite",activeIcon:'/icons/favourite-active.svg',iconSrc:'/icons/favourite.svg' },
+        { key: 'favourite', href: "/playlist", text: "Favourite",activeIcon:'/icons/favourite-active.svg',iconSrc:'/icons/favourite.svg' },
     ];
 
 
@@ -59,7 +56,7 @@ const NavMenu = () => {
                             key={list.id}
                             image={list.image}
                             name={list.name}
-                            link={list.link}
+                            link={`/playlist/${list.id}`}
                             song={list.song}
                         />
                     ))}

@@ -19,9 +19,10 @@ type TableProps = {
   showThead?: boolean;
   edit?: boolean;
   dataSource: SongInterface[]
+  add?:()=>void;
 };
 
-const TableComponent = ({ replaceButton, showThead, dataSource, edit }: TableProps) => {
+const TableComponent = ({ replaceButton, showThead, dataSource, edit,add }: TableProps) => {
   const [currentTrackIndex, setCurrentTrackIndex] = useRecoilState(currentTrackIndexState);
   const [playbackStatus, setPlaybackStatus] = useRecoilState(playbackStatusState);
   
@@ -58,7 +59,7 @@ const TableComponent = ({ replaceButton, showThead, dataSource, edit }: TablePro
     },
     {
 
-      title: edit ? (<Edit/>) : '',
+      title: edit ? (<Edit addMusic={add}/>) : '',
       key: 'actions',
       render: (text: string, record: SongInterface) => {
         return <TrackActions record={record} replaceButton={replaceButton} dataSource={dataSource} />;

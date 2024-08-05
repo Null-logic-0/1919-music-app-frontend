@@ -1,20 +1,22 @@
 import Modal from '../../Modal/Modal';
 import MultiTaskButton from '../../MultiTaskButton/MultiTaskButton';
 import PlayListFrom from '../../PlayListFrom/PlayListFrom';
-import TabledropDown from '../TabledropDown/TabledropDown';
-import styles from './Edit.module.scss';
+import TabledropDown from '../../TableComponent/TabledropDown/TabledropDown';
+import styles from './EditPlaylist.module.scss';
 import { useState } from 'react';
 
 interface addMusicProps {
-    addMusic?:()=>void;
+    addMusic:()=>void;
 }
-const Edit = ({addMusic}:addMusicProps) => {
+const EditPlaylist = ({addMusic}:addMusicProps) => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [showModal, setShowModal] = useState(false);
   
     const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
   
     const toggleModal = () => setShowModal(!showModal);
+
+
     
     return (
         <div className={styles.main}>
@@ -41,4 +43,4 @@ const Edit = ({addMusic}:addMusicProps) => {
     )
 }
 
-export default Edit;
+export default EditPlaylist;
