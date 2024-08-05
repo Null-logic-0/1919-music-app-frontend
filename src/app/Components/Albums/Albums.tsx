@@ -7,16 +7,16 @@ import SeeAllButton from '../SeeAllButton/SeeAllButton';
 import CardsHelper from '@/app/helpers/CardsHelper';
 
 const AlbumsData = [
-    { image: '/images/album1.png' },
-    { image: '/images/album2.png' },
-    { image: '/images/album3.png' },
-    { image: '/images/album4.png' },
-    { image: '/images/album5.png' },
-    { image: '/images/album1.png' },
-    { image: '/images/album2.png' },
-    { image: '/images/album3.png' },
-    { image: '/images/album4.png' },
-    { image: '/images/album5.png' },
+    { id:1,image: '/images/album1.png' },
+    { id:2,image: '/images/album2.png' },
+    { id:3,image: '/images/album3.png' },
+    { id:4,image: '/images/album4.png' },
+    { id:5,image: '/images/album5.png' },
+    { id:6,image: '/images/album1.png' },
+    { id:7,image: '/images/album2.png' },
+    { id:8,image: '/images/album3.png' },
+    { id:9,image: '/images/album4.png' },
+    { id:10,image: '/images/album5.png' },
    
 ];
 
@@ -35,11 +35,12 @@ const Albums = () => {
                 <SeeAllButton showAll={showAll} onclick={toggleShowAll} />
             </div>
             <div className={styles.cards}>
-                {trimmedData.map((item, id) => (
+                {trimmedData.map((item) => (
                     <Card
-                        key={id}
+                        key={item.id}
                         images={item.image}
                         imageSizeVariant={ImageSizeVariant.Medium}
+                        link={`/topalbum/${item.id}`}
                     />
                 ))}
             </div>
