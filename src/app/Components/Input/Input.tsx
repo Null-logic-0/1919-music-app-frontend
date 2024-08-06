@@ -1,56 +1,43 @@
-import { useState } from "react";
+import React, { forwardRef, useState } from "react";
 import HideButton from "./HideButton/HideButton";
 import styles from "./Input.module.scss";
+import { RegisterOptions } from 'react-hook-form';
 
 type Props = {
-  type: "text" | "email" | "password";
-  mode: "natural" | "Success" | "Error";
+  type: "email" | "password";
   text?: string;
   showHideButton?: boolean;
-}
+  className?: string;
+  register?: React.Ref<HTMLInputElement>;
+};
 
-const Input = ({type = "text", mode, text, showHideButton}: Props) => {
-  const input = [styles.input];
-
-  const [password, setPassword] = useState("");
+const Input = forwardRef<HTMLInputElement, Props>(({ type, text, showHideButton, className, register, ...rest }, ref) => {
   const [showPassword, setShowPassword] = useState(false);
-
-  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
-  };
-
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
-  if (mode === "natural") input.push(styles.natural);
-  if (mode === "Success") input.push(styles.success);
-  if (mode === "Error") input.push(styles.error);
-
   return (
-    <div className={styles.inputWrapper}>
-     
-    <label className={styles.label}>{text}</label>
+    <>
+      <label className={styles.label}>{text}</label>
 
       <div className={styles.container}>
         <input
-          id="input"
           type={type === "password" && showPassword ? 'text' : type}
-          className={input.join(' ')}
-          onChange={type === "password" ? handlePasswordChange : undefined}
-          value={type === "password" ? password : undefined}
+          className={`${styles.input} ${className}`}
+          ref={ref}
+          {...rest}
         />
 
-          {type === "password" && showHideButton && (
-          <HideButton
-            showPassword={showPassword}
-            toggleShowPassword={toggleShowPassword}
-          />
+        {showHideButton && (
+          <HideButton toggleShowPassword={toggleShowPassword} />
         )}
       </div>
-      
-    </div>
+
+    </>
   );
-};
+});
+
+Input.displayName = "Input";
 
 export default Input;
