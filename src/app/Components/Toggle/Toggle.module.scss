@@ -12,8 +12,8 @@
 .switchContainer {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
-    width: 15%;
+    gap:12px;
+    justify-content: center;
 }
 
 .switch input {
@@ -52,6 +52,8 @@ input:checked + .slider:before {
     transform: translateX(16px);
 }
 
-.label-text {
-    font-size: 16px;
+.labelText {
+    color:  #FFF;
+    font-size: 12px;
+    font-weight: 500;
 }
