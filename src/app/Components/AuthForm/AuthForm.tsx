@@ -6,6 +6,7 @@ import { RegisterFormInterface } from '@/app/interfaces/Register.interface';
 import { useForm } from 'react-hook-form';
 import Button from '../Button/Button';
 import Toggle from '../Toggle/Toggle';
+import Link from 'next/link';
 
 
 const AuthForm = () => {
@@ -58,7 +59,7 @@ const AuthForm = () => {
                 </div>
                 <Button text='Log in' size='inline' />
                 <div className={styles.container}>
-                    <a href='/register' className={styles.link}> Dont have an account? </a>
+                    <Link href={'/register'} className={styles.link} > Dont have an account? </Link>
                     <span className={styles.link}>Sing Up For 1919</span>
 
                 </div>
