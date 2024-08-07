@@ -26,12 +26,30 @@ const data = [
         song: '23 songs',
         image: '/images/playlist.png',
     },
+    {
+        id: '1',
+        name: 'playlistName1',
+        song: '23 songs',
+        image: '/images/playlist.png',
+    },
+    {
+        id: '2',
+        name: 'playlistName2',
+        song: '23 songs',
+        image: '/images/playlist.png',
+    },
+    {
+        id: '3',
+        name: 'playlistName3',
+        song: '23 songs',
+        image: '/images/playlist.png',
+    },
 ];
 
 const NavMenu = () => {
     const links = [
-        { key: 'home', href: "/", text: "Home",activeIcon: '/icons/home-active.svg', iconSrc:'/icons/home.svg'},
-        { key: 'Playlists', href: "/playlist", text: "Playlists",activeIcon:'/icons/playlists-active.svg',iconSrc:'/icons/playlists.svg' },
+        { key: 'home', href: "/", text: "Home", activeIcon: '/icons/home-active.svg', iconSrc: '/icons/home.svg' },
+        { key: 'Playlists', href: "/playlist", text: "Playlists", activeIcon: '/icons/playlists-active.svg', iconSrc: '/icons/playlists.svg' },
     ];
 
 
@@ -46,20 +64,23 @@ const NavMenu = () => {
             <h1 className={style.logo}>TnNdshN</h1>
 
             <div className={style.container}>
-                <NavItem  links={links}/>
+                <NavItem links={links} />
 
                 <div className={style.playlist}>
-                    <AddButton onClick={toggleModal} text='New Playlist'/>
+                    <AddButton onClick={toggleModal} text='New Playlist' />
+                    <div className={style.playlists}>
+                        {data.map((list) => (
+                            <Playlist
+                                key={list.id}
+                                image={list.image}
+                                name={list.name}
+                                link={`/playlist/${list.id}`}
+                                song={list.song}
+                            />
+                        ))}
 
-                    {data.map((list) => (
-                        <Playlist
-                            key={list.id}
-                            image={list.image}
-                            name={list.name}
-                            link={`/playlist/${list.id}`}
-                            song={list.song}
-                        />
-                    ))}
+                    </div>
+
                 </div>
 
                 {showModal && (
@@ -68,7 +89,7 @@ const NavMenu = () => {
                         isOpen={showModal}
                         title="Edit details"
                     >
-                         <PlayListFrom setShowModal={setShowModal} />
+                        <PlayListFrom setShowModal={setShowModal} />
                     </Modal>
                 )}
             </div>
