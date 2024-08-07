@@ -4,10 +4,9 @@
     align-items: center;
     max-width: 312px;
     width: 100%;
-    height: 1350px;
     background-color: #141317;
     padding: 24px;
-    gap: 72px;
+    gap: 60px;
     position: sticky;
     top: 0;
 }
@@ -23,30 +22,34 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 112px;
+    gap: 60px;
     max-width: 268px;
     width: 100%;
-    height: 100%;
-   
-
 }
 
 .playlist {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.playlists {
+    height: 300px;
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 24px;
-
+    padding: 24px 0px 24px 0px;  
 }
 
-.playlist::-webkit-scrollbar {
+.playlists::-webkit-scrollbar {
     display: none;
 }
 
-.playlist {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+.playlists {
+  -ms-overflow-style: none; 
+  scrollbar-width: none;  
 }
 
 @media (max-width:1024px){
