@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 type Props ={
  text?:string;
  setIsChecked:(value:boolean)=>void;
- isChecked:boolean;
+ isChecked?:boolean;
 }
 
 const ToggleSwitch = ({text,setIsChecked,isChecked}:Props) => {
@@ -13,7 +13,7 @@ const ToggleSwitch = ({text,setIsChecked,isChecked}:Props) => {
     setIsChecked(!isChecked);
   };
   return (
-    <div className={`${styles.switchContainer}`}>
+    <div className={styles.switchContainer}>
       <div className={styles.switch}>
          <label>
            <input
