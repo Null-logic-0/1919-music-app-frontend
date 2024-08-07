@@ -40,7 +40,7 @@ const AuthForm = () => {
                     <Input
                         type='password'
                         showHideButton
-                        text='Create a password'
+                        text='Password'
                         className={classNames({ [styles.inputError]: errors.password })}
                         {...register('password', {
                             required: 'Password is required',
