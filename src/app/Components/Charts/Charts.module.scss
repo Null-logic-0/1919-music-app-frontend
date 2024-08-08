@@ -13,19 +13,30 @@
 }
 
 
-.cards {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    gap: 10px;
-    justify-content: flex-start;
-    align-items: center;
-
-}
-
 .cardsContainer {
     display: flex;
     justify-content: center;
+}
+
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    width: 100%;
+    gap: 10px;
+}
+
+@media (min-width:1920px) {
+    .cards {
+        grid-template-columns: repeat(6,1fr);
+
+    }
+}
+
+@media (min-width:1600px) and (max-width:1920px) {
+    .cards {
+        grid-template-columns: repeat(6,1fr);
+    }
 }
 
 
@@ -35,6 +46,7 @@
         max-width: 800px;
         width: 100%;
         scroll-behavior: smooth;
+        display: flex;
         justify-content: flex-start;
         flex-wrap: nowrap;
         padding: 0 20px 0 20px;
