@@ -15,21 +15,21 @@
 
 .cards {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(6,1fr);
     width: 100%;
     gap: 24px;
 }
 
 @media (min-width:1920px){
     .cards{
-      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+      grid-template-columns: repeat(10,1fr);
   
     }
   }
   
   @media (min-width:1600px)  and (max-width:1920px){
     .cards{
-      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;  
+      grid-template-columns:repeat(9,1fr);  
     }
   }
 
