@@ -10,25 +10,27 @@ const ArtistsCardsHelper = () => {
 
             if (width > 2300) {
                 visibleCount = 10;
-            } else if (width >= 1500) {
-                visibleCount = 6 + Math.max(0, Math.floor((width - 1900) / 100));
-                visibleCount = Math.min(visibleCount, 10);
-            } else if (width >= 1280) {
-                visibleCount = 4;
+            } else if (width >= 2260) {
+                visibleCount = 10;
+            } else if (width >= 2000) {
+                visibleCount = 9;
+
+            } else if (width >= 1900) {
+                visibleCount = 8;
+            } else if (width >= 1680) {
+                visibleCount = 7;
             } else if (width >= 1075) {
-                visibleCount = 3;
-            } else if (width >= 1025) {
-                visibleCount = 3;
+                visibleCount = 6;
             } else {
-                visibleCount = 6; 
+                visibleCount = 6;
             }
 
             setCardsToShow(visibleCount);
         };
 
-        handleResize();
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
+        handleResize(); // Call once on initial render
+        window.addEventListener('resize', handleResize); // Add listener for resize events
+        return () => window.removeEventListener('resize', handleResize); // Clean up listener
     }, []);
 
     return cardsToShow;

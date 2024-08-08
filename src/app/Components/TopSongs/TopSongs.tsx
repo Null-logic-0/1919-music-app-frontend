@@ -1,12 +1,9 @@
+'use client'
 import { useState } from 'react';
-import { ImageSizeVariant } from '@/app/enums/imageSizeVariants';
-import Card from '../AlbumCard/Card';
 import styles from './TopSongs.module.scss';
-import HeartLike from '../HeartLike/HeartLike';
 import Dropdown from '../dropDown/dropDown';
 import DayWeekDRP from '../dropDown/DayWeekDropContent/DayWeek';
 import SongItem from './SongItem/SongsItem';
-import { SongInterface } from '@/app/interfaces/Song.interface';
 
 
 
