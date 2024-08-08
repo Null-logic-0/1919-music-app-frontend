@@ -12,13 +12,20 @@
     width: 100%;
 }
 
+
 .cards {
     display: flex;
-    gap: 24px;
-    justify-content: space-around;
-    align-items: center;
-    width: 100%;
     flex-wrap: wrap;
+    width: 100%;
+    gap: 10px;
+    justify-content: flex-start;
+    align-items: center;
+
+}
+
+.cardsContainer {
+    display: flex;
+    justify-content: center;
 }
 
 

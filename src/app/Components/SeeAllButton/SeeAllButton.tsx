@@ -9,7 +9,7 @@ type ButtonProps = {
 const SeeAllButton = ({ onclick, showAll }: ButtonProps) => {
     return (
         <button className={styles.toggleButton} onClick={onclick}>
-            {showAll ? 'show less' : 'see all'}
+            {showAll ? 'show less' : 'show all'}
         </button>
     )
 }

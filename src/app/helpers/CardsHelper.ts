@@ -11,7 +11,7 @@ const CardsHelper = () => {
             if (width > 2300) {
                 visibleCount = 6;
             } else if (width >= 1500) {
-                visibleCount = 3 + Math.max(0, Math.floor((width - 1900) / 100));
+                visibleCount = 4 + Math.max(0, Math.floor((width - 1900) / 100));
                 visibleCount = Math.min(visibleCount, 6);
             } else if (width >= 1280) {
                 visibleCount = 3;

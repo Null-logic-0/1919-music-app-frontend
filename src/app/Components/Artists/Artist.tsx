@@ -1,3 +1,4 @@
+'use client'
 import React, { useState } from 'react';
 import Card from '../AlbumCard/Card';
 import Heading from '../Heading/Heading';
