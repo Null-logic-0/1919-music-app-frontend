@@ -1,13 +1,11 @@
-'use client'
-import Image from "next/image";
-import styles from "./page.module.css";
+import styles from "./page.module.scss";
 import TopCharts from "@/app/Components/TopCharts/TopCharts";
 import PagesHeaderTop from "@/app/Components/PagesHeaderTop/PagesHeaderTop";
 
 export default function Home() {
 
   return (
-    <main>
+    <main className={styles.main}>
       <PagesHeaderTop link="/" />
       <TopCharts />
     </main>

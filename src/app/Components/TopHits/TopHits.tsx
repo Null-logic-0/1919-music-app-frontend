@@ -1,7 +1,6 @@
+'use client'
 import React, { useState } from "react";
 import styles from './TopHits.module.scss';
-import CardSubtitle from "../AlbumCard/CardSubtitle/CardSubtitle";
-import CardTitle from "../AlbumCard/CardTitle/CardTitle";
 import { ImageSizeVariant} from "../../enums/imageSizeVariants";
 import Card from "../AlbumCard/Card";
 import Heading from "../Heading/Heading";
