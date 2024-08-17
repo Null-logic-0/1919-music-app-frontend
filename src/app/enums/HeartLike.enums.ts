@@ -1,5 +1,5 @@
 export enum HeartLikeEnum {
-    Disabled = '/icons/heartDisabled.svg',
-    Clicked = '/icons/heart2.svg',
-    Default = '/icons/heart1.svg',
+    Disabled = '/Icons/heartDisabled.svg',
+    Clicked = '/Icons/heart2.svg',
+    Default = '/Icons/heart1.svg',
 }

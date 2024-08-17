@@ -12,7 +12,7 @@ const PagesHeaderTop = ({ link }: Props) => {
     return (
         <div className={styles.container}>
             <Link href={link || '#'} className={styles.link}>
-                <Image src={'/icons/chevron-left.svg'} alt='icon' width={32} height={32} />
+                <Image src={'/Icons/chevron-left.svg'} alt='icon' width={32} height={32} />
             </Link>
             <Logout/>
 

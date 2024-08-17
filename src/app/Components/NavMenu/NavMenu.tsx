@@ -13,44 +13,44 @@ const data = [
         id: '1',
         name: 'playlistName1',
         song: '23 songs',
-        image: '/images/playlist.png',
+        image: '/Images/playlist.png',
     },
     {
         id: '2',
         name: 'playlistName2',
         song: '23 songs',
-        image: '/images/playlist.png',
+        image: '/Images/playlist.png',
     },
     {
         id: '3',
         name: 'playlistName3',
         song: '23 songs',
-        image: '/images/playlist.png',
+        image: '/Images/playlist.png',
     },
     {
         id: '1',
         name: 'playlistName1',
         song: '23 songs',
-        image: '/images/playlist.png',
+        image: '/Images/playlist.png',
     },
     {
         id: '2',
         name: 'playlistName2',
         song: '23 songs',
-        image: '/images/playlist.png',
+        image: '/Images/playlist.png',
     },
     {
         id: '3',
         name: 'playlistName3',
         song: '23 songs',
-        image: '/images/playlist.png',
+        image: '/Images/playlist.png',
     },
 ];
 
 const NavMenu = () => {
     const links = [
-        { key: 'home', href: "/", text: "Home", activeIcon: '/icons/home-active.svg', iconSrc: '/icons/home.svg' },
-        { key: 'Playlists', href: "/playlist", text: "Playlists", activeIcon: '/icons/playlists-active.svg', iconSrc: '/icons/playlists.svg' },
+        { key: 'home', href: "/", text: "Home", activeIcon: '/Icons/home-active.svg', iconSrc: '/Icons/home.svg' },
+        { key: 'Playlists', href: "/playlist", text: "Playlists", activeIcon: '/Icons/playlists-active.svg', iconSrc: '/Icons/playlists.svg' },
     ];
 
 

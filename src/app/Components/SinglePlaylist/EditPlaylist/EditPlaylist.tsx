@@ -21,7 +21,7 @@ const EditPlaylist = ({addMusic}:addMusicProps) => {
     return (
         <div className={styles.main}>
             <div className={styles.pen}>
-                <MultiTaskButton icon="/icons/edit.svg" onclick={toggleDropdown} />
+                <MultiTaskButton icon="/Icons/edit.svg" onclick={toggleDropdown} />
             </div>
             <div className={styles.container}>
                 {dropdownOpen && (

@@ -52,7 +52,7 @@ const TableComponent = ({ replaceButton, showThead, dataSource, edit,add }: Tabl
       render: (text: string) => renderAlbumColumn(text),
     },
     {
-      title: <Image src="/icons/Time.svg" alt="icon" width={36} height={36} />,
+      title: <Image src="/Icons/Time.svg" alt="icon" width={36} height={36} />,
       dataIndex: 'duration',
       key: 'duration',
       render: (text: string) => renderDurationColumn(text),

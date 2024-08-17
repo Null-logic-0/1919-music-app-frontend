@@ -45,7 +45,7 @@ const SongItem = ({ song, index }: SongItemProps) => {
                 <span className={styles.duration}>{song.duration}</span>
                 <span className={styles.plays}>{song.plays} Plays</span>
                 <MultiTaskButton 
-                icon={playbackStatus === PlaybackStatus.PLAYING && currentTrackIndex === index ? '/icons/toPause.svg' : '/icons/toPlay.svg'} 
+                icon={playbackStatus === PlaybackStatus.PLAYING && currentTrackIndex === index ? '/Icons/toPause.svg' : '/Icons/toPlay.svg'} 
                 onclick={togglePlay} />
                 <HeartLike />
             </div>

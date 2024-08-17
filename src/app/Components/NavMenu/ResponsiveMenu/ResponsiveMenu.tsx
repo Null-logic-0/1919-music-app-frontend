@@ -6,9 +6,9 @@ import styles from './ResponsiveMenu.module.scss';
 
 const ResponsiveMenu = () => {
     const links = [
-        { key: 'home', href: "/", text: "Home",activeIcon: '/icons/home-active.svg', iconSrc:'/icons/home.svg'},
-        { key: 'Playlists', href: "/playlist", text: "Playlists",activeIcon:'/icons/playlists-active.svg',iconSrc:'/icons/playlists.svg' },
-        { key: 'search',href: "/search", text: "Search" , activeIcon:'/icons/Search-active.svg',iconSrc:'/icons/Search.svg'},
+        { key: 'home', href: "/", text: "Home",activeIcon: '/Icons/home-active.svg', iconSrc:'/Icons/home.svg'},
+        { key: 'Playlists', href: "/playlist", text: "Playlists",activeIcon:'/Icons/playlists-active.svg',iconSrc:'/Icons/playlists.svg' },
+        { key: 'search',href: "/search", text: "Search" , activeIcon:'/Icons/Search-active.svg',iconSrc:'/Icons/Search.svg'},
 
     ];
 
