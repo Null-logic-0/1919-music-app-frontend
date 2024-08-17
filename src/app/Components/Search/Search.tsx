@@ -33,7 +33,7 @@ const Search = ({ icon, placeHolder, onchange,setSearchTerm,searchTerm }: search
             <div className={styles.inputWrapper}>
 
                 {
-                    icon && <Image src={'/icons/Search.svg'} alt='search icon' width={24} height={24} className={styles.icon} />
+                    icon && <Image src={'/Icons/Search.svg'} alt='search icon' width={24} height={24} className={styles.icon} />
                 }
                 <input type='text' 
                 placeholder={placeHolder} 

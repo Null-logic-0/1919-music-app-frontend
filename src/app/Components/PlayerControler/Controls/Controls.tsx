@@ -56,7 +56,7 @@ const Controls = ({
                 </button>
                 <button onClick={onPlayPause} className={`${style.btn} ${style.circle}`}>
                     <Image
-                        src={playbackStatus === PlaybackStatus.PLAYING ? "/Icons/pause.svg" : "/Icons/play.svg"}
+                        src={playbackStatus === PlaybackStatus.PLAYING ? "/Icons/pause.svg" : "/Icons/Play.svg"}
                         alt={playbackStatus === PlaybackStatus.PLAYING ? "Pause" : "Play"}
                         width={0}
                         height={0}

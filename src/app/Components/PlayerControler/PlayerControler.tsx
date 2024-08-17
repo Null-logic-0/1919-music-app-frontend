@@ -20,20 +20,20 @@ const tracks = [
     {
         title: 'Voyage Voyage',
         artist: 'Desireless',
-        albumArt: '/images/DesirelessCover.jpg',
-        audio: '/music/Desireless.mp3',
+        albumArt: '/Images/DesirelessCover.jpg',
+        audio: '/Music/Desireless.mp3',
     },
     {
         title: 'Enjoy The Silence',
         artist: 'Depeche Mode',
-        albumArt: '/images/D.jpg',
-        audio: '/music/EnjoyTheSilence.mp3',
+        albumArt: '/Images/D.jpg',
+        audio: '/Music/EnjoyTheSilence.mp3',
     },
     {
         title: 'Tourner Dans Le Vide',
         artist: 'Indila',
-        albumArt: '/images/indila.jpg',
-        audio: '/music/Indila.mp3',
+        albumArt: '/Images/indila.jpg',
+        audio: '/Music/Indila.mp3',
     },
 ];
 

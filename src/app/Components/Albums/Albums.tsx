@@ -8,16 +8,16 @@ import SeeAllButton from '../SeeAllButton/SeeAllButton';
 import CardsHelper from '@/app/helpers/CardsHelper';
 
 const AlbumsData = [
-    { id: 1, image: '/images/album1.png' },
-    { id: 2, image: '/images/album2.png' },
-    { id: 3, image: '/images/album3.png' },
-    { id: 4, image: '/images/album4.png' },
-    { id: 5, image: '/images/album5.png' },
-    { id: 6, image: '/images/album1.png' },
-    { id: 7, image: '/images/album2.png' },
-    { id: 8, image: '/images/album3.png' },
-    { id: 9, image: '/images/album4.png' },
-    { id: 10, image: '/images/album5.png' },
+    { id: 1, image: '/Images/album1.png' },
+    { id: 2, image: '/Images/album2.png' },
+    { id: 3, image: '/Images/album3.png' },
+    { id: 4, image: '/Images/album4.png' },
+    { id: 5, image: '/Images/album5.png' },
+    { id: 6, image: '/Images/album1.png' },
+    { id: 7, image: '/Images/album2.png' },
+    { id: 8, image: '/Images/album3.png' },
+    { id: 9, image: '/Images/album4.png' },
+    { id: 10, image: '/Images/album5.png' },
 
 ];
 

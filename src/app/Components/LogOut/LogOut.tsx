@@ -16,7 +16,7 @@ const Logout = () => {
     return (
         <div className={styles.main}>
             <div className={styles.fixed}>
-                <MultiTaskButton icon={'/icons/Logout.svg'} onclick={handleOpen} />
+                <MultiTaskButton icon={'/Icons/Logout.svg'} onclick={handleOpen} />
 
             </div>
 
