@@ -6,6 +6,7 @@ import Playlist from './Playlist/Playlist';
 import AddButton from '../AddButton/AddButton';
 import Modal from '../Modal/Modal';
 import PlayListFrom from '../PlayListFrom/PlayListFrom';
+import Image from 'next/image';
 
 const data = [
     {
@@ -61,7 +62,7 @@ const NavMenu = () => {
 
     return (
         <div className={style.main}>
-            <h1 className={style.logo}>TnNdshN</h1>
+            <Image src={'/Icons/Logo.svg'} alt='logo' width={70} height={75}/>
 
             <div className={style.container}>
                 <NavItem links={links} />
