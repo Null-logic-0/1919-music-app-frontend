@@ -1,20 +1,18 @@
-@import '../../../styles/globalBorders/borders.scss';
-@import '../../../styles/GlobalColors/color.scss';
-
 .dropdownContent {
     display: flex;
     flex-direction: column;
     gap: 28px;
     font-size: 24px;
 }
+
 .lable {
     display: flex;
-    gap: $small;
+    gap: 8px;
     cursor: pointer;
 }
 
-@media (max-width:768px){
-    .dropdownContent{
+@media (max-width:768px) {
+    .dropdownContent {
         font-size: 20px;
     }
 }
