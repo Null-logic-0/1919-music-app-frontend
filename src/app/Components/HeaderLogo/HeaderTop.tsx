@@ -1,10 +1,11 @@
 import styles from './HeaderTop.module.scss';
+import Image from 'next/image';
 
 
 const HeaderTop =()=>{
     return (
         <div className={styles.container}>
-            <h1 className={styles.title}>TnNdShN</h1>
+            <Image src={'/Icons/Logo.svg'} alt='logo' width={48} height={51}/>
         </div>
     )
 }

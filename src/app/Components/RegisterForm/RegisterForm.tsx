@@ -5,7 +5,8 @@ import Input from '../Input/Input';
 import styles from './RegisterFrom.module.scss';
 import { RegisterFormInterface } from '@/app/interfaces/Register.interface';
 import classNames from 'classnames';
-
+import Image
+ from 'next/image';
 const RegisterFrom = () => {
   const { register, handleSubmit, formState: { errors }, watch } = useForm<RegisterFormInterface>();
 
@@ -15,9 +16,9 @@ const RegisterFrom = () => {
 
   return (
     <div className={styles.main}>
-      <h1 className={styles.logo}>TnNdshN</h1>
+      <Image src={'/Icons/Logo.svg'} alt='logo' width={100} height={105}/>
       <div className={styles.text}>
-        <p className={styles.title}>Sign up for free to start listening</p>
+        <p className={styles.title}>Sign up for free to start listening the music</p>
         <p className={styles.subtitle}>Sign up with your email address</p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit(submitRegister)}>
