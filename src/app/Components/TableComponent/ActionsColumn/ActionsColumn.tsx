@@ -11,8 +11,8 @@ type ActionsColumnProps = {
 
 const ActionsColumn = ({ record, replaceButton, isPlaying, onPlayPauseClick }: ActionsColumnProps) => (
   <div className={styles.buttons}>
-    <MultiTaskButton icon={isPlaying ? '/icons/toPause.svg' : '/icons/toPlay.svg'} onclick={onPlayPauseClick} />
-    {replaceButton ? <MultiTaskButton icon="/icons/trash.svg" /> : <MultiTaskButton icon="/icons/plusIcon.png" />}
+    <MultiTaskButton icon={isPlaying ? '/Icons/toPause.svg' : '/Icons/toPlay.svg'} onclick={onPlayPauseClick} />
+    {replaceButton ? <MultiTaskButton icon="/Icons/trash.svg" /> : <MultiTaskButton icon="/Icons/plusIcon.png" />}
   </div>
 );
 
