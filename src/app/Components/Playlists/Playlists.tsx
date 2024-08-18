@@ -13,31 +13,31 @@ const playlistData = [
         id: '1',
         name: 'playlistName1',
         song: '23 songs',
-        image: '/images/album1.png',
+        image: '/Images/album1.png',
     },
     {
         id: '2',
         name: 'playlistName2',
         song: '23 songs',
-        image: '/images/album2.png',
+        image: '/Images/album2.png',
     },
     {
         id: '3',
         name: 'playlistName3',
         song: '23 songs',
-        image: '/images/album3.png',
+        image: '/Images/album3.png',
     },
     {
         id: '4',
         name: 'playlistName1',
         song: '23 songs',
-        image: '/images/album4.png',
+        image: '/Images/album4.png',
     },
     {
         id: '5',
         name: 'playlistName2',
         song: '23 songs',
-        image: '/images/album5.png',
+        image: '/Images/album5.png',
     },
 
 ]

@@ -50,7 +50,7 @@ const PlayListFrom = ({ setShowModal }: FromProps) => {
           </div>
           <div className={styles.upload}>
             <label htmlFor="fileInput" className={styles.label}>
-              <Image src={'/icons/plusIcon.png'} width={63} height={63} alt="icon" />
+              <Image src={'/Icons/plusIcon.png'} width={63} height={63} alt="icon" />
             </label>
             <input
               type="file"
