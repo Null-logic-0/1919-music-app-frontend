@@ -20,9 +20,7 @@ const AuthForm = () => {
 
     const submitLogin = async (values: loginInterface) => {
         try {
-            const response = await axios.post('http://10.10.51.242:3000/auth/login', values, {
-                withCredentials: true,
-            });
+            const response = await axios.post('https://one919-backend.onrender.com/auth/login', values);
 
             console.log('Login successful', response.data);
 
