@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import RecoilWrapper from "./helpers/RecoilWrapper/RecoilWrapper";
+import { AuthProvider } from "./context/AuthContext";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -19,9 +20,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <RecoilWrapper>
-          {children}
-        </RecoilWrapper>
+        <AuthProvider>
+          <RecoilWrapper>
+            {children}
+          </RecoilWrapper>
+        </AuthProvider>
       </body>
     </html>
   );
