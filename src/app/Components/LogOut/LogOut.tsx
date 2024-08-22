@@ -18,7 +18,7 @@ const Logout = () => {
     };
 
     const handleLogout = () => {
-        const accessToken = localStorage.getItem('accesstoken ');
+        const accessToken = localStorage.getItem('accesstoken');
 
         if (!accessToken) {
             router.push('/auth');
@@ -27,7 +27,7 @@ const Logout = () => {
 
         axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
 
-        const response = axios.post(
+        const response = axios.put(
             'https://one919-backend.onrender.com/auth/logout',
             {},
             {
@@ -43,6 +43,7 @@ const Logout = () => {
             setAuth({
                 isAuthenticated: false,
                 user: null,
+                role:''
             });
             router.push('/auth')
         })
