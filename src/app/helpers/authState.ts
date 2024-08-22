@@ -12,21 +12,17 @@ export interface AuthState {
     role?: string;
 }
 
-
-
-
 const initialAuthState: AuthState = {
     isAuthenticated: false,
     user: undefined,
     role: '',
-
 };
 
 const AUTH_STATE_KEY = 'authState';
 
 
 export const authState = atom<AuthState>({
-    key:AUTH_STATE_KEY,
+    key: AUTH_STATE_KEY,
     default: initialAuthState,
     effects_UNSTABLE: [
         ({ setSelf, onSet }) => {
@@ -40,8 +36,8 @@ export const authState = atom<AuthState>({
                     }
                 }
 
-                onSet((newAuthState, _, isReset) => {
-                    if (isReset) {
+                onSet((newAuthState, _, isLogout) => {
+                    if (isLogout) {
                         localStorage.removeItem('auth');
                     } else {
                         localStorage.setItem('auth', JSON.stringify(newAuthState));
