@@ -7,7 +7,6 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useRecoilState } from 'recoil';
 import { authState } from '@/app/helpers/authState';
-import { access } from 'fs';
 
 const Logout = () => {
     const [showDetails, setShowDetails] = useState(false);
@@ -18,32 +17,35 @@ const Logout = () => {
         setShowDetails(prev => !prev);
     };
 
-    const handleLogout = async () => {
-        try {
-            console.log('Sending logout request...');
-            const response = await axios.post('https://one919-backend.onrender.com/auth/logout', {}, {
-                withCredentials: true,
-            });
+    const handleLogout = () => {
+        const accessToken = localStorage.getItem('accesstoken ');
 
-            console.log('Logout response:', response);
-
-            if (response.status === 200 || response.status === 201) {
-                console.log('Logout successful:', response);
-
-                setAuth({
-                    isAuthenticated: false,
-                    user: null,
-                });
-
-                localStorage.removeItem('auth');
-                router.push('/auth');
-            } else {
-                console.error('Unexpected response status:', response.status);
-            }
-        } catch (error) {
-            console.error('Logout failed:', error);
-            
+        if (!accessToken) {
+            router.push('/auth');
+            return;
         }
+
+        axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+
+        const response = axios.post(
+            'https://one919-backend.onrender.com/auth/logout',
+            {},
+            {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            }
+        ).then(() => {
+            localStorage.removeItem('accesstoken')
+            delete axios.defaults.headers.common['Authorization'];
+            localStorage.removeItem('auth');
+
+            setAuth({
+                isAuthenticated: false,
+                user: null,
+            });
+            router.push('/auth')
+        })
     };
 
     return (

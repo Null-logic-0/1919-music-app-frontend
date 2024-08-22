@@ -1,4 +1,5 @@
 'use client';
+
 import classNames from 'classnames';
 import Input from '../Input/Input';
 import styles from './AuthForm.module.scss';
@@ -12,35 +13,73 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useRecoilState } from 'recoil';
 import { authState } from '@/app/helpers/authState';
+import { useState, useEffect } from 'react';
+import Spinner from '../LoadingSpiner/Spiner';
 
 const AuthForm = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm<loginInterface>();
+    const { register, handleSubmit, formState: { errors }, setValue, setError } = useForm<loginInterface>();
     const router = useRouter();
-    const [auth, setAuth] = useRecoilState(authState); 
+    const [auth, setAuth] = useRecoilState(authState);
+    const [isChecked, setIsChecked] = useState(false);
+    const [savedEmail, setSavedEmail] = useState<string | null>(null);
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        const email = localStorage.getItem('savedEmail');
+        const password = localStorage.getItem('savedPassword');
+        const rememberMe = localStorage.getItem('rememberMe') === 'true';
+
+        if (email && password && rememberMe) {
+            setValue('email', email);
+            setValue('password', password);
+            setIsChecked(rememberMe);
+            setSavedEmail(email);
+        }
+    }, [setValue]);
+
+    const handleLoginSuccess = (data: any) => {
+        const { access_token, refresh_token, role } = data;
+
+        localStorage.setItem('auth', JSON.stringify({
+            isAuthenticated: true,
+            accessToken: access_token,
+            refreshToken: refresh_token,
+            role: role,
+        }));
+
+        axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
+
+        setAuth({
+            isAuthenticated: true,
+            role: role,
+        });
+
+        router.push('/');
+        localStorage.setItem('accesstoken', access_token);
+    };
 
     const submitLogin = async (values: loginInterface) => {
+        setLoading(true);
+
+
         try {
-            const response = await axios.post('https://one919-backend.onrender.com/auth/login', values);
-
-            console.log('Login successful', response.data);
-
-            if (response.status === 200 || response.status === 201) {
-                setAuth({
-                    isAuthenticated: true,
-                    user: response.data.user,
-                });
-
-                localStorage.setItem('auth', JSON.stringify({
-                    isAuthenticated: true,
-                    user: response.data.user,
-                }));
-
-                router.push('/');
+            if (isChecked) {
+                localStorage.setItem('savedEmail', values.email);
+                localStorage.setItem('savedPassword', values.password);
+                localStorage.setItem('rememberMe', 'true');
             } else {
-                console.error('Unexpected response status:', response.status);
+                localStorage.removeItem('savedEmail');
+                localStorage.removeItem('savedPassword');
+                localStorage.removeItem('rememberMe');
             }
-        } catch (error) {
-            console.error('Login failed', error);
+
+            const { data, status } = await axios.post('https://one919-backend.onrender.com/auth/login', values);
+
+            if (status === 200 || status === 201) {
+                handleLoginSuccess(data);
+            } 
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -79,17 +118,27 @@ const AuthForm = () => {
                         })}
                     />
                     {errors.password && <span className={styles.error}>{errors.password.message}</span>}
-                    
-                    <Toggle setIsChecked={function (value: boolean): void { }} text='Remember me' />
+
+                    <Toggle text='Remember me' isChecked={isChecked} setIsChecked={setIsChecked} />
                 </div>
 
-                <Button text='Log in' size='inline' />
-                
+                <Button text={loading ? 'Logging in...' : 'Log in'} disabled={loading} />
+
                 <div className={styles.container}>
-                    <Link href='/register' className={styles.link}>Don&apos;t have an account?</Link>
-                    <span className={styles.link}>Sign Up For 1919</span>
+                    <Link href='/register' className={styles.link}>
+                        Don&apos;t have an account?
+                    </Link>
+                    <Link href='/' className={styles.link}>
+                        {savedEmail ? `Sign Up For ${savedEmail}` : ''}
+                    </Link>
                 </div>
             </form>
+
+            {loading && (
+                <div className={styles.background}>
+                    <Spinner />
+                </div>
+            )}
         </div>
     );
 };
