@@ -112,7 +112,11 @@ const RegisterFrom = () => {
           />
           {errors.passwordRepeat && <span className={styles.error}>{errors.passwordRepeat.message}</span>}
         </div>
-        <Button text={loading ? 'Registration...' : 'Sign up'} disabled={loading} />
+        
+        <div className={styles.button}>
+          <Button text={loading ? 'Registration...' : 'Sign up'} disabled={loading} />
+        </div>
+        
       </form>
       {loading && (
         <div className={styles.background}>

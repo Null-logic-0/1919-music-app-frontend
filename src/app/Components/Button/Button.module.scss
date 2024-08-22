@@ -8,24 +8,14 @@
     line-height: normal;
     background-color: #232323;
     border:none;
+    padding: 20px;
+    width: 100%;
     
 }
 
 .button:active,
 .button:hover {
     background-color: #3b8c75;
-}
-
-.inline {
-    padding: 20px 90px;
-    max-width: 232px;
-    width: 100%;
-}
-
-.large {
-    padding: 21px 156px;
-    max-width: 359px;
-    width: 100%;
 }
 
 
@@ -37,7 +27,7 @@
     border-radius: 24px;
 }
 
-.changed {
+.color {
     color:#FF384B;
 }
 

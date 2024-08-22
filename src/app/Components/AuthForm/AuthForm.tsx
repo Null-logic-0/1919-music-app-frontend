@@ -77,7 +77,7 @@ const AuthForm = () => {
 
             if (status === 200 || status === 201) {
                 handleLoginSuccess(data);
-            } 
+            }
         } finally {
             setLoading(false);
         }
@@ -121,8 +121,10 @@ const AuthForm = () => {
 
                     <Toggle text='Remember me' isChecked={isChecked} setIsChecked={setIsChecked} />
                 </div>
+                <div className={styles.button}>
+                    <Button text={loading ? 'Logging in...' : 'Log in'} disabled={loading} />
+                </div>
 
-                <Button text={loading ? 'Logging in...' : 'Log in'} disabled={loading} />
 
                 <div className={styles.container}>
                     <Link href='/register' className={styles.link}>

@@ -70,6 +70,10 @@
     z-index: 1000;
 }
 
+.button {
+    width: 359px;
+}
+
 @media (max-width:1024px) {
 
     .title,
@@ -100,5 +104,9 @@
 
     .inputs {
         gap: 16px;
+    }
+
+    .button {
+        width: 173px;
     }
 }
