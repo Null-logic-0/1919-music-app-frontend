@@ -10,13 +10,38 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useRecoilState } from 'recoil';
 import { authState } from '@/app/helpers/authState';
+import { useState } from 'react';
+import Spinner from '../LoadingSpiner/Spiner';
 
 const RegisterFrom = () => {
   const { register, handleSubmit, formState: { errors }, watch } = useForm<RegisterFormInterface>();
   const router = useRouter();
   const [auth, setAuth] = useRecoilState(authState);
+  const [loading, setLoading] = useState(false);
+
+  const handleRegistrationSuccess = (user: any, token: string) => {
+    setAuth({
+      isAuthenticated: true,
+      user: user,
+    });
+
+    localStorage.setItem('auth', JSON.stringify({
+      isAuthenticated: true,
+      user: user,
+      token: token,
+    }));
+
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+    router.push('/');
+  };
+
+  const handleRegistrationError = (error: any) => {
+    console.error('Registration failed', error);
+  };
 
   const submitRegister = async (values: RegisterFormInterface) => {
+    setLoading(true)
     try {
       const response = await axios.post(
         'https://one919-backend.onrender.com/user/signup',
@@ -28,22 +53,19 @@ const RegisterFrom = () => {
           },
         }
       );
-      
-      setAuth({
-        isAuthenticated: true,
-        user: response.data.user,
-      });
 
-      localStorage.setItem('auth', JSON.stringify({
-        isAuthenticated: true,
-        user: response.data.user,
-      }));
-
-      router.push('/');
+      if (response.status === 200 || response.status === 201) {
+        const { user, token } = response.data;
+        handleRegistrationSuccess(user, token);
+      } else {
+        console.error('Unexpected response status:', response.status);
+      }
     } catch (error) {
-      console.error('Registration failed', error);
-    }
+      handleRegistrationError(error);
+    }finally {
+      setLoading(false);
   }
+  };
 
   return (
     <div className={styles.main}>
@@ -96,10 +118,15 @@ const RegisterFrom = () => {
           />
           {errors.passwordRepeat && <span className={styles.error}>{errors.passwordRepeat.message}</span>}
         </div>
-        <Button text='Sign up' size='large' />
+        <Button text={loading ? 'Registration...' : 'Sign up'} disabled={loading} />
       </form>
+      {loading && (
+        <div className={styles.background}>
+          <Spinner />
+        </div>
+      )}
     </div>
-  )
-}
+  );
+};
 
 export default RegisterFrom;

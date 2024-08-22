@@ -1,18 +1,20 @@
+import { ReactNode } from 'react';
 import styles from './Button.module.scss';
 import Image from 'next/image';
 
 
 type buttonProps ={
     onclick?: ()=> void;
-    text:string;
+    text:ReactNode;
     size?: 'inline' | 'large';
+    disabled?:boolean;
     borders?: 'small'| 'medium';
     color?:'changed';
 
 }
 
 
-const Button =({onclick,text,size,borders,color}:buttonProps)=>{
+const Button =({onclick,text,size,borders,disabled,color}:buttonProps)=>{
     const classNames =[styles.button];
 
     if (size == 'inline') classNames.push(styles.inline);
