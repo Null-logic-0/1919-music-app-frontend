@@ -36,9 +36,6 @@ const RegisterFrom = () => {
     router.push('/');
   };
 
-  const handleRegistrationError = (error: any) => {
-    console.error('Registration failed', error);
-  };
 
   const submitRegister = async (values: RegisterFormInterface) => {
     setLoading(true)
@@ -57,14 +54,11 @@ const RegisterFrom = () => {
       if (response.status === 200 || response.status === 201) {
         const { user, token } = response.data;
         handleRegistrationSuccess(user, token);
-      } else {
-        console.error('Unexpected response status:', response.status);
       }
-    } catch (error) {
-      handleRegistrationError(error);
-    }finally {
+
+    } finally {
       setLoading(false);
-  }
+    }
   };
 
   return (

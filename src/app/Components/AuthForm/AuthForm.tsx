@@ -39,12 +39,6 @@ const AuthForm = () => {
 
     const handleLoginSuccess = (data: any) => {
         const { access_token, refresh_token, role } = data;
-        console.log(data, 'data');
-
-        if (!access_token) {
-            console.error('Access token not found in response');
-            return;
-        }
 
         localStorage.setItem('auth', JSON.stringify({
             isAuthenticated: true,
@@ -61,12 +55,7 @@ const AuthForm = () => {
         });
 
         router.push('/');
-        console.log('Access token:', access_token);
         localStorage.setItem('accesstoken', access_token);
-    };
-
-    const handleLoginError = (error: any) => {
-        console.error('Login failed', error);
     };
 
     const submitLogin = async (values: loginInterface) => {
@@ -88,11 +77,7 @@ const AuthForm = () => {
 
             if (status === 200 || status === 201) {
                 handleLoginSuccess(data);
-            } else {
-                console.error('Unexpected response status:', status);
-            }
-        } catch (error) {
-            handleLoginError(error);
+            } 
         } finally {
             setLoading(false);
         }
