@@ -6,27 +6,20 @@ import Image from 'next/image';
 type buttonProps ={
     onclick?: ()=> void;
     text:ReactNode;
-    size?: 'inline' | 'large';
     disabled?:boolean;
     borders?: 'small'| 'medium';
-    color?:'changed';
+    color?:'color';
 
 }
 
 
-const Button =({onclick,text,size,borders,disabled,color}:buttonProps)=>{
+const Button =({onclick,text,borders,disabled,color}:buttonProps)=>{
     const classNames =[styles.button];
-
-    if (size == 'inline') classNames.push(styles.inline);
-    else classNames.push(styles.large);
 
     if (borders == 'small') classNames.push(styles.small);
     else classNames.push(styles.medium);
 
-    if (color == 'changed') classNames.push(styles.changed);
-
-
-
+    if (color == 'color') classNames.push(styles.changed);
 
     return(
         <button onClick={onclick} className={classNames.join(' ').trim()}>

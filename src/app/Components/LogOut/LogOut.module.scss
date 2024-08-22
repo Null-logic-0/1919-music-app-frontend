@@ -39,11 +39,13 @@
     color: #fff;
 }
 
+.buttonSize {
+    width: 200px;
+}
 
 @media (max-width:1024px){
     .text {
         font-size: 20px;
-
     }
 
     .button{

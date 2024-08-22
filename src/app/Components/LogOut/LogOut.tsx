@@ -58,8 +58,13 @@ const Logout = () => {
                 <div className={styles.container}>
                     <p className={styles.text}>Do you want to Log-Out?</p>
                     <div className={styles.button}>
-                        <Button text='Yes' size='inline' borders='small' onclick={handleLogout} />
-                        <Button text='No' size='inline' borders='small' color='changed' onclick={handleOpen} />
+                        <div className={styles.buttonSize}>
+                            <Button text='Yes' borders='small' onclick={handleLogout} />
+
+                        </div>
+                        <div className={styles.buttonSize}>
+                            <Button text='No' borders='small' color='color' onclick={handleOpen} />
+                        </div>
                     </div>
                 </div>
             )}
