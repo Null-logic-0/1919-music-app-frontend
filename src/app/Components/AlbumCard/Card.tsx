@@ -12,7 +12,7 @@ type CardProps = {
     subtitle?: string;
     direction?: 'row' | 'column';
     imageSizeVariant?: ImageSizeVariant;
-    images: string;
+    photo: any; 
     link?: string;
 };
 
@@ -20,12 +20,13 @@ const Card = ({
     showDetails,
     title,
     subtitle,
-    direction,
+    direction,  
     imageSizeVariant = ImageSizeVariant.Medium,
-    images,
-    link, 
+    photo,
+    link,  
 }: CardProps) => {
     const [isMobile, setIsMobile] = useState(false);
+
     useEffect(() => {
         const handleResize = () => {
             setIsMobile(window.innerWidth <= 768);
@@ -58,10 +59,10 @@ const Card = ({
         <div className={classNames.join(' ').trim()}>
             {link ? (
                 <Link href={link}>
-                    <CardImage src={images} alt="Album Cover" imageSizeVariant={imageSizeVariant} />
+                    <CardImage photo={photo} alt="Album Cover" imageSizeVariant={imageSizeVariant} />
                 </Link>
             ) : (
-                <CardImage src={images} alt="Album Cover" imageSizeVariant={imageSizeVariant} />
+                <CardImage photo={photo} alt="Album Cover" imageSizeVariant={imageSizeVariant} />
             )}
 
             {showDetails && (

@@ -1,53 +1,66 @@
-'use client'
-import React, { useState } from 'react';
-import Card from '../AlbumCard/Card';
-import Heading from '../Heading/Heading';
-import { ImageSizeVariant } from '@/app/enums/imageSizeVariants';
-import styles from './Artist.module.scss';
-import SeeAllButton from '../SeeAllButton/SeeAllButton';
-import ArtistsCardsHelper from '@/app/helpers/ArtistsCardsHelper';
-
-const artistData = [
-    { id:1,image: '/Images/artist1.jpg' },
-    { id:2,image: '/Images/artist2.jpg' },
-    { id:3,image: '/Images/artist3.jpg' },
-    { id:4,image: '/Images/artist4.jpg' },
-    { id:5,image: '/Images/artist5.jpg' },
-    { id:6,image: '/Images/artist6.jpg' },
-    { id:7,image: '/Images/artist1.jpg' },
-    { id:8,image: '/Images/artist2.jpg' },
-    { id:9,image: '/Images/artist3.jpg' },
-    { id:10,image: '/Images/artist4.jpg' },
-    { id:11,image: '/Images/artist5.jpg' },
-    { id:12,image: '/Images/artist6.jpg' },
-];
+"use client";
+import React, { useEffect, useState } from "react";
+import Card from "../AlbumCard/Card";
+import Heading from "../Heading/Heading";
+import { ImageSizeVariant } from "@/app/enums/imageSizeVariants";
+import styles from "./Artist.module.scss";
+import SeeAllButton from "../SeeAllButton/SeeAllButton";
+import ArtistsCardsHelper from "@/app/helpers/ArtistsCardsHelper";
+import axios from "axios";
+import { CardProps } from "antd";
 
 const Artist = () => {
-    const [showAll, setShowAll] = useState<boolean>(false);
-    const cardsToShow = ArtistsCardsHelper();
+  const [artists, setArtists] = useState([]);
+  const [showAll, setShowAll] = useState<boolean>(false);
 
-    const toggleShowAll = () => setShowAll(prevShowAll => !prevShowAll);
+  const cardsToShow = ArtistsCardsHelper();
 
-    const trimmedData = showAll ? artistData : artistData.slice(0, cardsToShow);
+  const toggleShowAll = () => setShowAll((prevShowAll) => !prevShowAll);
 
-    return (
-        <div className={styles.main}>
-            <div className={styles.container}>
-                <Heading title="Top Artists" link='/topartist'/>
-                <SeeAllButton showAll={showAll} onclick={toggleShowAll} />
-            </div>
-            <div className={styles.cards}>
-                {trimmedData.map((item) => (
-                    <Card
-                        key={item.id}
-                        images={item.image}
-                        imageSizeVariant={ImageSizeVariant.Rounded}
-                        link={`/topartist/${item.id}`} 
-                    />
-                ))}
-            </div>
-        </div>
-    );
+  useEffect(() => {
+    const accesstoken = localStorage.getItem("accesstoken");
+
+    if (!accesstoken) {
+      console.error("Access token is missing. Please log in.");
+      
+      return;
+    }
+
+    console.log("Access Token:", accesstoken);
+
+    axios
+      .get("https://one919-backend.onrender.com/author/top", {
+        headers: {
+          Authorization: `Bearer ${accesstoken}`,
+        },
+      })
+      .then((response) => {
+        console.log("API Response:", response.data);
+        setArtists(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
+  return (
+    <div className={styles.main}>
+      <div className={styles.container}>
+        <Heading title="Top Artists" link="/topartist" />
+        <SeeAllButton showAll={showAll} onclick={toggleShowAll} />
+      </div>
+      <div className={styles.cards}>
+        {artists.map((item: CardProps) => (
+          <Card
+            key={item.id}
+            photo={item.photo.url}
+            imageSizeVariant={ImageSizeVariant.Rounded}
+            link={`/topartist/${item.id}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default Artist;
