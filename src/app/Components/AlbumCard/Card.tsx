@@ -11,14 +11,14 @@ type CardProps = {
   showDetails?: boolean;
   name?: string;
   title?: string;
-  count?: number; // Updated to number
-  authorName?: string; // Updated to string
+  count?: number; 
+  authorName?: string; 
   direction?: "row" | "column";
   imageSizeVariant?: ImageSizeVariant;
   images: string;
   link?: string;
-  id?: any; // Ensure id is a number
-  remove?: (id: number) => void; // Updated to handle id as number
+  id?: any; 
+  remove?: (id: number) => void; 
 };
 
 const Card = ({
@@ -82,7 +82,7 @@ const Card = ({
       )}
 
       {showDetails && (
-        <div>
+        <div className={styles.remove}>
           <div className={`${classes.join(" ").trim()} `}>
             {name && (
               <CardTitle name={name} imageSizeVariant={imageSizeVariant} />

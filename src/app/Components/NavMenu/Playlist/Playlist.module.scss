@@ -9,7 +9,7 @@
 .container {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    width: 100px;
 
 }
 
@@ -26,4 +26,13 @@
     font-size: 20px;
     font-weight: 500;
     line-height: 28px;
+}
+
+.mainContainer {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    align-items: center;
+    
+
 }

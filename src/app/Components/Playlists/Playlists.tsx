@@ -90,8 +90,8 @@ const Playlists = () => {
                             showDetails
                             name={list.name}
                             count={list.count}
-                            imageSizeVariant={ImageSizeVariant.Small}
-                            direction="row"
+                            imageSizeVariant={ImageSizeVariant.Medium}
+                            direction="column"
                             link={`/playlist/${list.id}`}
                             remove={deletePlaylist} 
                             id={list.id} 

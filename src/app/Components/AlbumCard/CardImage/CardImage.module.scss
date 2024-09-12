@@ -1,6 +1,7 @@
 @import '../../../styles/globalBorders/borders.scss';
 
 .image {
+    object-fit: cover;
     &.small {
         width: 106px;
         height: 106px;
