@@ -1,40 +1,41 @@
+/* eslint-disable @next/next/no-img-element */
 import React from 'react';
-import Image from 'next/image';
 import styles from './TrackDisplay.module.scss';
-import Link from 'next/link';
 import HeartLike from '../../HeartLike/HeartLike';
 
 interface TrackDisplayProps {
     currentTrack: {
-        title: string;
-        artist: string;
-        albumArt: string;
+        name: string;
+        authorName: string;
+        photo: {
+            url: string;
+        };
     };
 }
 
 const TrackDisplay = ({ currentTrack }: TrackDisplayProps) => {
-    const truncatedTitle = currentTrack.title.length > 20 ? `${currentTrack.title.slice(0, 20)}...` : currentTrack.title;
-    const truncatedArtist = currentTrack.artist.length > 20 ? `${currentTrack.artist.slice(0, 20)}...` : currentTrack.artist;
+    if (!currentTrack) {
+        return null; 
+    }
+
+    const title = currentTrack.name || '';
+    const artist = currentTrack.authorName || '';
+    const photoUrl = currentTrack.photo?.url || '';
+
+    const truncatedTitle = title.length > 20 ? `${title.slice(0, 20)}...` : title;
+    const truncatedArtist = artist.length > 20 ? `${artist.slice(0, 20)}...` : artist;
 
     return (
-
         <div className={styles.container}>
-            <Link href="/">
-                <Image src={currentTrack.albumArt} alt="Album Art" width={134} height={112} className={styles.img} />
-            </Link>
-
+            <img src={photoUrl} alt="Album Art" width={134} height={112} className={styles.img} />
             <div className={styles.text}>
                 <span className={styles.title}>{truncatedTitle}</span>
                 <span className={styles.artist}>{truncatedArtist}</span>
             </div>
             <div className={styles.heartBtn}>
                 <HeartLike />
-
             </div>
-
         </div>
-
-
     );
 };
 

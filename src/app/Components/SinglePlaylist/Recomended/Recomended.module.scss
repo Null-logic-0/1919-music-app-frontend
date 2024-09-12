@@ -1,7 +1,4 @@
-.main {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
+.main {    
     padding: 40px 24px;
 }
 
@@ -19,4 +16,5 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 24px;
 }

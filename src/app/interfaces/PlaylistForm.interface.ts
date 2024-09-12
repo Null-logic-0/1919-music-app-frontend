@@ -1,5 +1,7 @@
 export interface FormDataInterface {
-    img: string;
-    playlistName: string;
-    description: string;
+    photo: any;
+    name: string;
+    id:number;
+    key:string;
+    count?:number;
   };

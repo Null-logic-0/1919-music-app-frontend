@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 type buttonProps ={
     icon:string;
-    onclick?:()=>void;
+    onclick?:(musicId:any)=>void;
 
 }
 
