@@ -6,9 +6,9 @@ import styles from './Edit.module.scss';
 import { useState } from 'react';
 
 interface addMusicProps {
-    addMusic?:()=>void;
+    EditMusic?:()=>void;
 }
-const Edit = ({addMusic}:addMusicProps) => {
+const Edit = ({EditMusic}:addMusicProps) => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [showModal, setShowModal] = useState(false);
   
@@ -24,7 +24,7 @@ const Edit = ({addMusic}:addMusicProps) => {
             <div className={styles.container}>
                 {dropdownOpen && (
                     <>
-                        <TabledropDown onEdit={toggleModal} onAdd={addMusic}/>
+                        <TabledropDown onEdit={toggleModal} onAdd={EditMusic}/>
                         {showModal && (
                             <Modal
                                 setShowModal={setShowModal}

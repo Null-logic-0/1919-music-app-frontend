@@ -1,5 +1,6 @@
 'use client'
-import React, { useRef, useEffect, useCallback } from 'react';
+import React, { useRef, useEffect, useCallback, useState } from 'react';
+import axios from 'axios';
 import { useRecoilState } from 'recoil';
 import {
     playbackStatusState,
@@ -16,26 +17,16 @@ import TrackDisplay from '../../Components/PlayerControler/TrackDisplay/TrackDis
 import styles from './PlayerControler.module.scss';
 import VolumeControl from '../../Components/PlayerControler/VolumeControl/VolumeControl';
 
-const tracks = [
-    {
-        title: 'Voyage Voyage',
-        artist: 'Desireless',
-        albumArt: '/Images/DesirelessCover.jpg',
-        audio: '/Music/Desireless.mp3',
-    },
-    {
-        title: 'Enjoy The Silence',
-        artist: 'Depeche Mode',
-        albumArt: '/Images/D.jpg',
-        audio: '/Music/EnjoyTheSilence.mp3',
-    },
-    {
-        title: 'Tourner Dans Le Vide',
-        artist: 'Indila',
-        albumArt: '/Images/indila.jpg',
-        audio: '/Music/Indila.mp3',
-    },
-];
+interface Track {
+    title: string;
+    artist: string;
+    photo: {
+        url: string;
+    };
+    audio: {
+        url: string;
+    };
+}
 
 const PlayerController = () => {
     const [currentTrackIndex, setCurrentTrackIndex] = useRecoilState(currentTrackIndexState);
@@ -45,7 +36,32 @@ const PlayerController = () => {
     const [shuffleStatus, setShuffleStatus] = useRecoilState(shuffleStatusState);
     const [currentTime, setCurrentTime] = useRecoilState(currentTimeState);
     const [duration, setDuration] = useRecoilState(durationState);
+
+    const [tracks, setTracks] = useState<Track[]>([]);
     const audioRef = useRef<HTMLAudioElement>(null);
+
+    useEffect(() => {
+        const fetchTracks = async () => {
+            const accesstoken = localStorage.getItem('accesstoken');
+            if (!accesstoken) {
+                console.error('Access token is missing');
+                return;
+            }
+
+            try {
+                const response = await axios.get('https://one919-backend.onrender.com/music', {
+                    headers: {
+                        Authorization: `Bearer ${accesstoken}`,
+                    },
+                });
+                setTracks(response.data);
+            } catch (error) {
+                console.error('API Error:', error);
+            }
+        };
+
+        fetchTracks();
+    }, []);
 
     const currentTrack = tracks[currentTrackIndex];
 
@@ -64,7 +80,7 @@ const PlayerController = () => {
         setCurrentTrackIndex(newIndex);
         setCurrentTime(0);
         setPlaybackStatus(PlaybackStatus.PLAYING);
-    }, [shuffleStatus, currentTrackIndex, setCurrentTrackIndex, setCurrentTime, setPlaybackStatus]);
+    }, [shuffleStatus, currentTrackIndex, setCurrentTrackIndex, setCurrentTime, setPlaybackStatus, tracks.length]);
 
     useEffect(() => {
         const audio = audioRef.current;
@@ -94,11 +110,12 @@ const PlayerController = () => {
     }, [playNextTrack, setCurrentTime, setDuration]);
 
     useEffect(() => {
-        if (audioRef.current) {
+        const audio = audioRef.current;
+        if (audio) {
             if (playbackStatus === PlaybackStatus.PLAYING) {
-                audioRef.current.play().catch(error => console.error("Playback failed:", error));
+                audio.play().catch(error => console.error("Playback failed:", error));
             } else {
-                audioRef.current.pause();
+                audio.pause();
             }
         }
     }, [playbackStatus, currentTrackIndex]);
@@ -114,7 +131,7 @@ const PlayerController = () => {
         setCurrentTrackIndex(newIndex);
         setCurrentTime(0);
         setPlaybackStatus(PlaybackStatus.PLAYING);
-    }, [currentTrackIndex, setCurrentTrackIndex, setCurrentTime, setPlaybackStatus]);
+    }, [currentTrackIndex, setCurrentTrackIndex, setCurrentTime, setPlaybackStatus, tracks.length]);
 
     const handleVolumeChange = useCallback((newVolume: number) => {
         setVolume(newVolume);
@@ -150,7 +167,7 @@ const PlayerController = () => {
     return (
         <div className={styles.main}>
             <div className={styles.container}>
-                <TrackDisplay currentTrack={currentTrack} />
+                {currentTrack && <TrackDisplay currentTrack={currentTrack} />}
                 <Controls
                     playbackStatus={playbackStatus}
                     loopStatus={loopStatus}
@@ -166,11 +183,13 @@ const PlayerController = () => {
                     onDoubleClick={handleDoubleClick}
                 />
                 <VolumeControl volume={volume} onVolumeChange={handleVolumeChange} />
-                <audio
-                    ref={audioRef}
-                    src={currentTrack.audio}
-                    onError={() => console.error('Audio failed to load')}
-                />
+                {currentTrack && (
+                    <audio
+                        ref={audioRef}
+                        src={currentTrack.audio.url}
+                       
+                    />
+                )}
             </div>
         </div>
     );

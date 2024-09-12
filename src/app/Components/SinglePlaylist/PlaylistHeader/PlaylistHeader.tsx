@@ -9,18 +9,18 @@ interface PlaylistHeaderProps {
     playlist: ArtistInterface;
     searchTerm: string;
     setSearchTerm: (term: string) => void;
-    addMusics:()=>void;
-    isTablefull:boolean;
+    addMusics: () => void;
+    isTablefull: boolean;
 }
 
-const PlaylistHeader = ({ playlist, searchTerm, setSearchTerm,addMusics,isTablefull }: PlaylistHeaderProps) => {
+const PlaylistHeader = ({ playlist, searchTerm, setSearchTerm, addMusics, isTablefull }: PlaylistHeaderProps) => {
     return (
         <div className={styles.playlistContainer}>
             <Card
-                images={playlist.image}
+                images={playlist.photo.url}
                 showDetails
-                title={playlist.title}
-                subtitle={playlist.subtitle}
+                name={playlist.name}
+                count={playlist.count}
                 direction='row'
                 imageSizeVariant={ImageSizeVariant.Large}
             />
@@ -28,12 +28,16 @@ const PlaylistHeader = ({ playlist, searchTerm, setSearchTerm,addMusics,isTablef
                 <div className={styles.edit}>
                     <p className={styles.text}>Let’s Find Somethings For Your Playlist</p>
                     {
-                        isTablefull &&(<EditPlaylist  addMusic={addMusics}/>)
+                        isTablefull && (<EditPlaylist addMusic={addMusics} playlist={playlist} />)
                     }
-                    
                 </div>
                 <div className={styles.search}>
-                    <Search placeHolder="Search for music" searchTerm={searchTerm} setSearchTerm={setSearchTerm} icon />
+                    <Search
+                        placeHolder="Search for music"
+                        searchTerm={searchTerm}
+                        setSearchTerm={setSearchTerm}
+                        icon
+                    />
                 </div>
             </div>
         </div>

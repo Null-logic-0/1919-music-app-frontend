@@ -13,10 +13,8 @@
 
 .container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    max-width: 636px;
-    width: 100%;
 
 
 }
@@ -35,17 +33,12 @@
 
 .infoContainer {
     display: flex;
+
     flex-direction: column;
-    gap: 5px;
-    align-items: flex-start;
+    gap: 20px;
+    align-items: center;
 }
 
-.info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
 
 .upload {
     border: 0.797px solid #FFF;
@@ -70,28 +63,11 @@
     cursor: pointer;
 }
 
-
-.textarea {
-    background-color: $dark3;
-    border-radius: $small;
-    color: #FFF;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 24px;
-    padding: 8px;
-    width: 372px;
-    height: 131px;
-    outline: none;
-    border: none;
-    resize: none;
-
-    &::placeholder {
-        font-size: 16px;
-        font-weight: 500;
-        line-height: 24px;
-        color: #FFF;
-    }
-
+.info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
 }
 
 .input {
@@ -102,7 +78,7 @@
     font-weight: 500;
     line-height: 24px;
     padding: 8px;
-    width: 372px;
+    width: 240px;
     height: 41px;
     outline: none;
     border: none;
@@ -126,6 +102,7 @@
     line-height: 24px;
     cursor: pointer;
     border: none;
+    margin-bottom: 20px;
 }
 
 .errorContainer {
@@ -145,27 +122,12 @@
     border: 1px solid $error;
 }
 
-@media(max-width:1024px) {
-    .textarea {
-        font-size: 14px;
-        width: 100%;
-
-    }
-
-
-}
 
 
 @media(max-width:768px) {
     .upload {
         width: 122px;
         height: 88px;
-    }
-
-    .textarea {
-        width: 152px;
-        height: 50px;
-        font-size: 10px;
     }
 
     .input {

@@ -1,95 +1,238 @@
-'use client'
-import PagesHeaderTop from '../PagesHeaderTop/PagesHeaderTop';
-import styles from './SinglePlaylist.module.scss';
-import { ArtistInterface } from '@/app/interfaces/Artist.interface';
-import { useState } from 'react';
-import TableComponent from '../TableComponent/TableComponent';
-import Recomended from './Recomended/Recomended';
-import PlaylistHeader from './PlaylistHeader/PlaylistHeader';
-
-const data: ArtistInterface[] = [
-    {
-        title: 'coldplay',
-        image: '/Images/album5.png',
-        subtitle: '100 song',
-        musics: [
-            {
-                id: 1,
-                image: '/Images/DesirelessCover.jpg',
-                title: 'title',
-                artist: 'Name',
-                duration: '4,50',
-                plays: '30000',
-                album: 'Songs 20',
-                key: '1'
-            },
-            {
-                id: 2,
-                image: '/Images/D.jpg',
-                title: 'title',
-                artist: 'Name',
-                duration: '4,50',
-                plays: '30000',
-                album: 'Songs 20',
-                key: '2'
-            },
-            {
-                id: 3,
-                image: '/Images/indila.jpg',
-                title: 'title',
-                artist: 'Name',
-                duration: '4,50',
-                plays: '30000',
-                album: 'Songs 20',
-                key: '3'
-            }
-        ]
-    }
-];
+"use client";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import PagesHeaderTop from "../PagesHeaderTop/PagesHeaderTop";
+import styles from "./SinglePlaylist.module.scss";
+import { ArtistInterface } from "@/app/interfaces/Artist.interface";
+import TableComponent from "../TableComponent/TableComponent";
+import Recomended from "./Recomended/Recomended";
+import PlaylistHeader from "./PlaylistHeader/PlaylistHeader";
+import { useParams } from "next/navigation";
+import { SongInterface } from "@/app/interfaces/Song.interface";
 
 const SinglePlaylist = () => {
-    const playlist = data[0];
-    const [searchTerm, setSearchTerm] = useState(' ');
-    const [showRecommended, setShowRecommended] = useState(false);
+  const [playlist, setPlaylist] = useState<ArtistInterface | null>(null);
+  const [musicList, setMusicList] = useState<SongInterface[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [showRecommended, setShowRecommended] = useState(false);
+  const { id: playlistIdParam } = useParams();
+  const playlistId = Array.isArray(playlistIdParam)
+    ? playlistIdParam[0]
+    : playlistIdParam;
 
-    const handleAddMusic = () => {
-        setShowRecommended(true);
+  useEffect(() => {
+    const fetchPlaylist = async () => {
+      const token = localStorage.getItem("accesstoken");
+
+      if (playlistId) {
+        try {
+          const response = await axios.get(
+            `https://one919-backend.onrender.com/playlist/${playlistId}`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          setPlaylist(response.data);
+        } catch (err) {
+          setError("Failed to load playlist");
+        } finally {
+          setLoading(false);
+        }
+      } else {
+        setError("Playlist ID is missing");
+        setLoading(false);
+      }
     };
 
-    const handleClose =()=>{
-        setShowRecommended(false)
+    fetchPlaylist();
+  }, [playlistId]);
+
+  useEffect(() => {
+    const fetchMusicList = async () => {
+      const token = localStorage.getItem("accesstoken");
+
+      if (playlistId) {
+        try {
+          const response = await axios.get(
+            `https://one919-backend.onrender.com/music/InPlaylist/${playlistId}`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          setMusicList(response.data);
+        } catch (err) {
+          setError("Failed to load music list");
+        }
+      }
+    };
+
+    fetchMusicList();
+  }, [playlistId]);
+
+  useEffect(() => {
+    const searchMusic = async () => {
+      const token = localStorage.getItem("accesstoken");
+
+      if (searchTerm && playlistId) {
+        try {
+          const response = await axios.get(
+            `https://one919-backend.onrender.com/search?q=${searchTerm}`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          setMusicList(response.data);
+        } catch (error) {
+          setError("Failed to search music");
+        }
+      } else if (!searchTerm) {
+        const response = await axios.get(
+          `https://one919-backend.onrender.com/music/InPlaylist/${playlistId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setMusicList(response.data);
+      }
+    };
+
+    searchMusic();
+  }, [searchTerm]);
+
+  const handleAddMusicToPlaylist = async (musicId: string) => {
+    const token = localStorage.getItem("accesstoken");
+
+    if (!playlistId || !musicId) {
+      console.error("Playlist ID or Music ID is missing");
+      return;
     }
 
-    const isTableEmpty = playlist.musics.length === 0;
+    try {
+      await axios.put(
+        `https://one919-backend.onrender.com/playlist/${playlistId}/music/${musicId}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
+      const response = await axios.get(
+        `https://one919-backend.onrender.com/music/InPlaylist/${playlistId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setMusicList(response.data);
+      setShowRecommended(false);
+    } catch (error) {
+      console.error("Failed to add music to playlist", error);
+    }
+  };
 
-    return (
-        <div className={styles.main}>
-            <PagesHeaderTop link='/playlist' />
-            <div className={styles.container}>
-                <div className={styles.playlistHeader}>
-                    <PlaylistHeader
-                        playlist={playlist}
-                        searchTerm={searchTerm}
-                        setSearchTerm={setSearchTerm}
-                        addMusics={handleAddMusic}
-                        isTablefull={isTableEmpty} />
+  const handleDeleteMusicFromPlaylist = async (musicId: string) => {
+    const token = localStorage.getItem("accesstoken");
 
-                </div>
+    if (!playlistId || !musicId) {
+      console.error("Playlist ID or Music ID is missing");
+      return;
+    }
 
-                {
-                    !isTableEmpty
-                        ? (<TableComponent replaceButton={true} dataSource={playlist.musics} edit add={handleAddMusic} />)
-                        : (<Recomended />)
-                }
+    try {
+      await axios.delete(
+        `https://one919-backend.onrender.com/playlist/${playlistId}/music/${musicId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
+      const response = await axios.get(
+        `https://one919-backend.onrender.com/music/InPlaylist/${playlistId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setMusicList(response.data);
+    } catch (error) {
+      console.error("Failed to delete music from playlist", error);
+    }
+  };
 
+  const handleAddMusic = () => {
+    setShowRecommended(true);
+  };
+
+  const handleClose = () => {
+    setShowRecommended(false);
+  };
+
+  if (loading) return <p className={styles.alert}>Loading...</p>;
+  if (error) return <p className={styles.alert}>{error}</p>;
+
+  const isTableFull = musicList.length > 0;
+
+  return (
+    <div className={styles.main}>
+      <PagesHeaderTop link="/playlist" />
+      <div className={styles.container}>
+        {playlist && (
+          <>
+            <div className={styles.playlistHeader}>
+              <PlaylistHeader
+                playlist={playlist}
+                searchTerm={searchTerm}
+                setSearchTerm={setSearchTerm}
+                addMusics={handleAddMusic}
+                isTablefull={isTableFull}
+              />
             </div>
 
-            {showRecommended && <Recomended onclick={handleClose}/>}
+            {isTableFull ? (
+              <TableComponent
+                replaceButton={true}
+                dataSource={musicList}
+                addMusic={handleAddMusicToPlaylist}
+                remove={handleDeleteMusicFromPlaylist} 
+              />
+            ) : (
+              playlistId && (
+                <Recomended
+                  playlistId={playlistId}
+                  addMusic={handleAddMusicToPlaylist}
+                />
+              )
+            )}
+          </>
+        )}
+      </div>
 
-        </div>
-    )
-}
+      {showRecommended && playlistId && (
+        <Recomended
+          playlistId={playlistId}
+          onclick={handleClose}
+          addMusic={handleAddMusicToPlaylist}
+        />
+      )}
+    </div>
+  );
+};
 
 export default SinglePlaylist;

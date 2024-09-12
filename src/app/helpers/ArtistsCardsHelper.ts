@@ -28,9 +28,9 @@ const ArtistsCardsHelper = () => {
             setCardsToShow(visibleCount);
         };
 
-        handleResize(); // Call once on initial render
-        window.addEventListener('resize', handleResize); // Add listener for resize events
-        return () => window.removeEventListener('resize', handleResize); // Clean up listener
+        handleResize(); 
+        window.addEventListener('resize', handleResize); 
+        return () => window.removeEventListener('resize', handleResize); 
     }, []);
 
     return cardsToShow;
