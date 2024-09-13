@@ -1,7 +1,7 @@
-'use client'
-import React, { useRef, useEffect, useCallback, useState } from 'react';
+'use client';
+import React, { useRef, useEffect, useCallback } from 'react';
 import axios from 'axios';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import {
     playbackStatusState,
     volumeState,
@@ -10,25 +10,16 @@ import {
     currentTimeState,
     durationState,
     currentTrackIndexState,
+    musicTracksState,
 } from '../../helpers/State';
 import { PlaybackStatus, LoopStatus, ShuffleStatus } from '../../enums/player.enums';
 import Controls from '../../Components/PlayerControler/Controls/Controls';
 import TrackDisplay from '../../Components/PlayerControler/TrackDisplay/TrackDisplay';
 import styles from './PlayerControler.module.scss';
 import VolumeControl from '../../Components/PlayerControler/VolumeControl/VolumeControl';
+import { Track } from '@/app/interfaces/Track.interface';
 
-interface Track {
-    title: string;
-    artist: string;
-    photo: {
-        url: string;
-    };
-    audio: {
-        url: string;
-    };
-}
-
-const PlayerController = () => {
+const PlayerController = ({ isAlbumMode, albumId }: { isAlbumMode: boolean, albumId?: string }) => {
     const [currentTrackIndex, setCurrentTrackIndex] = useRecoilState(currentTrackIndexState);
     const [playbackStatus, setPlaybackStatus] = useRecoilState(playbackStatusState);
     const [volume, setVolume] = useRecoilState(volumeState);
@@ -36,34 +27,36 @@ const PlayerController = () => {
     const [shuffleStatus, setShuffleStatus] = useRecoilState(shuffleStatusState);
     const [currentTime, setCurrentTime] = useRecoilState(currentTimeState);
     const [duration, setDuration] = useRecoilState(durationState);
+    const [musicTracks, setMusicTracks] = useRecoilState(musicTracksState);
 
-    const [tracks, setTracks] = useState<Track[]>([]);
     const audioRef = useRef<HTMLAudioElement>(null);
 
     useEffect(() => {
         const fetchTracks = async () => {
-            const accesstoken = localStorage.getItem('accesstoken');
-            if (!accesstoken) {
-                console.error('Access token is missing');
-                return;
-            }
-
+            const accessToken = localStorage.getItem('accesstoken');
             try {
-                const response = await axios.get('https://one919-backend.onrender.com/music', {
+                const endpoint = isAlbumMode
+                    ? `https://one919-backend.onrender.com/music/inAlbum?albumId=${albumId}`
+                    : 'https://one919-backend.onrender.com/music';
+                
+                const response = await axios.get(endpoint, {
                     headers: {
-                        Authorization: `Bearer ${accesstoken}`,
+                        Authorization: `Bearer ${accessToken}`,
                     },
                 });
-                setTracks(response.data);
+
+                setMusicTracks(response.data);
             } catch (error) {
-                console.error('API Error:', error);
+                console.error(`API Error: ${error}`);
             }
         };
 
-        fetchTracks();
-    }, []);
+        if (musicTracks.length === 0 || isAlbumMode) {
+            fetchTracks();
+        }
+    }, [isAlbumMode, albumId, musicTracks, setMusicTracks]);
 
-    const currentTrack = tracks[currentTrackIndex];
+    const currentTrack = musicTracks[currentTrackIndex];
 
     useEffect(() => {
         const audio = audioRef.current;
@@ -75,12 +68,12 @@ const PlayerController = () => {
 
     const playNextTrack = useCallback(() => {
         const newIndex = shuffleStatus === ShuffleStatus.ENABLED
-            ? Math.floor(Math.random() * tracks.length)
-            : (currentTrackIndex + 1) % tracks.length;
+            ? Math.floor(Math.random() * musicTracks.length)
+            : (currentTrackIndex + 1) % musicTracks.length;
         setCurrentTrackIndex(newIndex);
         setCurrentTime(0);
         setPlaybackStatus(PlaybackStatus.PLAYING);
-    }, [shuffleStatus, currentTrackIndex, setCurrentTrackIndex, setCurrentTime, setPlaybackStatus, tracks.length]);
+    }, [shuffleStatus, currentTrackIndex, musicTracks.length, setCurrentTrackIndex, setCurrentTime, setPlaybackStatus]);
 
     useEffect(() => {
         const audio = audioRef.current;
@@ -127,11 +120,11 @@ const PlayerController = () => {
     }, [setPlaybackStatus]);
 
     const playPrevious = useCallback(() => {
-        const newIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
+        const newIndex = (currentTrackIndex - 1 + musicTracks.length) % musicTracks.length;
         setCurrentTrackIndex(newIndex);
         setCurrentTime(0);
         setPlaybackStatus(PlaybackStatus.PLAYING);
-    }, [currentTrackIndex, setCurrentTrackIndex, setCurrentTime, setPlaybackStatus, tracks.length]);
+    }, [currentTrackIndex, setCurrentTrackIndex, setCurrentTime, setPlaybackStatus, musicTracks.length]);
 
     const handleVolumeChange = useCallback((newVolume: number) => {
         setVolume(newVolume);
@@ -187,7 +180,6 @@ const PlayerController = () => {
                     <audio
                         ref={audioRef}
                         src={currentTrack.audio.url}
-                       
                     />
                 )}
             </div>

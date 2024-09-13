@@ -13,6 +13,9 @@ type CardProps = {
   title?: string;
   count?: number;
   authorName?: string;
+  count?: number; 
+  listens?:any;
+  authorName?: string; 
   direction?: "row" | "column";
   imageSizeVariant?: ImageSizeVariant;
   images: string;

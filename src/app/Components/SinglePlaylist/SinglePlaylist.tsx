@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import PagesHeaderTop from "../PagesHeaderTop/PagesHeaderTop";
 import styles from "./SinglePlaylist.module.scss";
@@ -9,6 +9,8 @@ import Recomended from "./Recomended/Recomended";
 import PlaylistHeader from "./PlaylistHeader/PlaylistHeader";
 import { useParams } from "next/navigation";
 import { SongInterface } from "@/app/interfaces/Song.interface";
+import { useRecoilState } from 'recoil';
+import { currentTrackState } from '../../helpers/State';  
 
 const SinglePlaylist = () => {
   const [playlist, setPlaylist] = useState<ArtistInterface | null>(null);
@@ -18,9 +20,9 @@ const SinglePlaylist = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [showRecommended, setShowRecommended] = useState(false);
   const { id: playlistIdParam } = useParams();
-  const playlistId = Array.isArray(playlistIdParam)
-    ? playlistIdParam[0]
-    : playlistIdParam;
+  const playlistId = Array.isArray(playlistIdParam) ? playlistIdParam[0] : playlistIdParam;
+  
+  const [, setCurrentTrack] = useRecoilState(currentTrackState);
 
   useEffect(() => {
     const fetchPlaylist = async () => {
@@ -37,7 +39,8 @@ const SinglePlaylist = () => {
             }
           );
           setPlaylist(response.data);
-        } catch (err) {
+          setMusicList(response.data.music || []); 
+        } catch (error) {
           setError("Failed to load playlist");
         } finally {
           setLoading(false);
@@ -65,7 +68,7 @@ const SinglePlaylist = () => {
               },
             }
           );
-          setMusicList(response.data);
+          setMusicList(response.data || []); 
         } catch (err) {
           setError("Failed to load music list");
         }
@@ -89,7 +92,7 @@ const SinglePlaylist = () => {
               },
             }
           );
-          setMusicList(response.data);
+          setMusicList(response.data || []); 
         } catch (error) {
           setError("Failed to search music");
         }
@@ -102,12 +105,12 @@ const SinglePlaylist = () => {
             },
           }
         );
-        setMusicList(response.data);
+        setMusicList(response.data || []); 
       }
     };
 
     searchMusic();
-  }, [searchTerm]);
+  }, [playlistId, searchTerm]);
 
   const handleAddMusicToPlaylist = async (musicId: string) => {
     const token = localStorage.getItem("accesstoken");
@@ -137,7 +140,7 @@ const SinglePlaylist = () => {
           },
         }
       );
-      setMusicList(response.data);
+      setMusicList(response.data || []); 
       setShowRecommended(false);
     } catch (error) {
       console.error("Failed to add music to playlist", error);
@@ -170,7 +173,7 @@ const SinglePlaylist = () => {
           },
         }
       );
-      setMusicList(response.data);
+      setMusicList(response.data || []); 
     } catch (error) {
       console.error("Failed to delete music from playlist", error);
     }
@@ -184,10 +187,14 @@ const SinglePlaylist = () => {
     setShowRecommended(false);
   };
 
+  const handlePlayMusic = useCallback((track: SongInterface) => {
+    setCurrentTrack(track);  
+  }, [setCurrentTrack]);
+
   if (loading) return <p className={styles.alert}>Loading...</p>;
   if (error) return <p className={styles.alert}>{error}</p>;
 
-  const isTableFull = musicList.length > 0;
+  const isTableFull = Array.isArray(musicList) && musicList.length > 0;
 
   return (
     <div className={styles.main}>
@@ -211,6 +218,7 @@ const SinglePlaylist = () => {
                 dataSource={musicList}
                 addMusic={handleAddMusicToPlaylist}
                 remove={handleDeleteMusicFromPlaylist} 
+                onPlayMusic={handlePlayMusic}  
               />
             ) : (
               playlistId && (
