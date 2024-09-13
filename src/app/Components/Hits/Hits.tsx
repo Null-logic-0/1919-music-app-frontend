@@ -25,7 +25,7 @@ const Hits = () => {
           try {
             const accessToken = localStorage.getItem('accesstoken');;
             const response = await axios.get(
-              "https://one919-backend.onrender.com/album/top",
+              "https://one919-backend.onrender.com/music/hits",
               {
                 headers: {
                   Authorization: `Bearer ${accessToken}`,
