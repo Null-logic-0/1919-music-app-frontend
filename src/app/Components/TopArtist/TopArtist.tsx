@@ -1,46 +1,58 @@
-'use client'
-import React, { useState } from "react";
-import styles from './TopArtist.module.scss'
+"use client";
+import React, { useEffect, useState } from "react";
+import styles from "./TopArtist.module.scss";
 import { ImageSizeVariant } from "../../enums/imageSizeVariants";
 import Card from "../AlbumCard/Card";
 import Heading from "../Heading/Heading";
 import Link from "next/link";
-
-
-const ArtistData = [
-  { id: 1, title: 'Song Name', image: "/Images/albumCard.png", subtitle: '100 song' },
-  { id: 2, title: 'Song Name', image: "/Images/albumCard.png", subtitle: '100 song' },
-  { id: 3, title: 'Song Name', image: "/Images/albumCard.png", subtitle: '100 song' },
-  { id: 4, title: 'Song Name', image: "/Images/albumCard.png", subtitle: '100 song' },
-  { id: 5, title: 'Song Name', image: "/Images/albumCard.png", subtitle: '100 song' },
-  { id: 6, title: 'Song Name', image: "/Images/albumCard.png", subtitle: '100 song' },
-  { id: 7, title: 'Song Name', image: "/Images/albumCard.png", subtitle: '100 song' },
-  { id: 8, title: 'Song Name', image: "/Images/albumCard.png", subtitle: '100 song' },
-];
-
-
+import axios from "axios";
 
 
 
 const TopArtist = () => {
-  return (
+  const [artistData, setArtistData] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
+  useEffect(() => {
+    const fetchArtists = async () => {
+        try {
+            const token = localStorage.getItem('accesstoken'); 
+
+            const response = await axios.get('https://one919-backend.onrender.com/author/top', {
+                headers: {
+                    Authorization: `Bearer ${token}` 
+                }
+            });
+
+            console.log(response,'zd');
+            
+
+            setArtistData(response.data);
+        } catch (error) {
+            setError('Failed to fetch artist data');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    fetchArtists();
+}, []);
+  return (
     <div className={styles.container}>
       <Heading title="Top Artists" />
       <div className={styles.albumWrapper}>
-        {ArtistData.map((artist) => (
-
+        {artistData.map((artist) => (
           <Card
-            link={`/topartist/${artist.id}`} 
+            link={`/topartist/${artist.id}`}
             key={artist.id}
-            images={artist.image}
-            title={artist.title}
-            subtitle={artist.subtitle}
+            images={artist.photo.url}
+            name={artist.firstName}
+            authorName={artist.lastName}
             showDetails
             direction="column"
             imageSizeVariant={ImageSizeVariant.RoundedXL}
           />
-
         ))}
       </div>
     </div>
