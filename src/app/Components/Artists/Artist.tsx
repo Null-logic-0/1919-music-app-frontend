@@ -7,10 +7,16 @@ import { ImageSizeVariant } from '@/app/enums/imageSizeVariants';
 import styles from './Artist.module.scss';
 import SeeAllButton from '../SeeAllButton/SeeAllButton';
 import ArtistsCardsHelper from '@/app/helpers/ArtistsCardsHelper';
+import { photoInterface } from '@/app/interfaces/photo.interface';
+
+interface Artist {
+    id:number;
+    photo:photoInterface;
+}
 
 const Artist = () => {
     const [showAll, setShowAll] = useState<boolean>(false);
-    const [artistData, setArtistData] = useState<any[]>([]);
+    const [artistData, setArtistData] = useState<Artist[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const cardsToShow = ArtistsCardsHelper();

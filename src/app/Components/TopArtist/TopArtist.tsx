@@ -6,11 +6,17 @@ import Card from "../AlbumCard/Card";
 import Heading from "../Heading/Heading";
 import Link from "next/link";
 import axios from "axios";
+import { photoInterface } from "@/app/interfaces/photo.interface";
 
-
+interface Artist {
+  id:number;
+  photo:photoInterface;
+  firstName:string;
+  lastName:string;
+}
 
 const TopArtist = () => {
-  const [artistData, setArtistData] = useState<any[]>([]);
+  const [artistData, setArtistData] = useState<Artist[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
