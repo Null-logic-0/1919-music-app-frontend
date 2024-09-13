@@ -12,6 +12,7 @@ type CardProps = {
   name?: string;
   title?: string;
   count?: number; 
+  listens?:any;
   authorName?: string; 
   direction?: "row" | "column";
   imageSizeVariant?: ImageSizeVariant;
