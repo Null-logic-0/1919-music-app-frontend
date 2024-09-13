@@ -10,8 +10,8 @@ import ArtistsCardsHelper from '@/app/helpers/ArtistsCardsHelper';
 import { photoInterface } from '@/app/interfaces/photo.interface';
 
 interface Artist {
-    id:number;
-    photo:photoInterface;
+    id: number;
+    photo: photoInterface;
 }
 
 const Artist = () => {

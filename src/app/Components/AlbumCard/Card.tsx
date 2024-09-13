@@ -19,6 +19,7 @@ type CardProps = {
   link?: string;
   id?: any;
   remove?: (id: number) => void;
+  biography?:string;
 };
 
 const Card = ({
@@ -32,6 +33,7 @@ const Card = ({
   count,
   remove,
   id,
+  biography
 }: CardProps) => {
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
@@ -96,6 +98,12 @@ const Card = ({
             {count && (
               <CardSubtitle
                 count={`${count} songs`}
+                imageSizeVariant={imageSizeVariant}
+              />
+            )}
+            {biography && (
+              <CardSubtitle
+                biography={biography}
                 imageSizeVariant={imageSizeVariant}
               />
             )}
