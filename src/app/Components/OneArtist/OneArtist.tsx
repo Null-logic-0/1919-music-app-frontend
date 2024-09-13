@@ -55,7 +55,7 @@ const OneArtist = () => {
             <div className={styles.card}>
 
                 <Card
-                    images={artist.image}
+                    images={artist.photo}
                     title={artist.title}
                     subtitle={artist.subtitle}
                     showDetails
