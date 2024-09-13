@@ -11,6 +11,8 @@ type CardProps = {
   showDetails?: boolean;
   name?: string;
   title?: string;
+  count?: number;
+  authorName?: string;
   count?: number; 
   listens?:any;
   authorName?: string; 
@@ -18,8 +20,9 @@ type CardProps = {
   imageSizeVariant?: ImageSizeVariant;
   images: string;
   link?: string;
-  id?: any; 
-  remove?: (id: number) => void; 
+  id?: any;
+  remove?: (id: number) => void;
+  biography?:string;
 };
 
 const Card = ({
@@ -32,7 +35,8 @@ const Card = ({
   link,
   count,
   remove,
-  id
+  id,
+  biography
 }: CardProps) => {
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
@@ -100,12 +104,19 @@ const Card = ({
                 imageSizeVariant={imageSizeVariant}
               />
             )}
+            {biography && (
+              <CardSubtitle
+                biography={biography}
+                imageSizeVariant={imageSizeVariant}
+              />
+            )}
           </div>
-          {
-            remove && (
-                <MultiTaskButton icon={"/Icons/trash.svg"} onclick={() => remove?.(id)} />
-            )
-          }
+          {remove && (
+            <MultiTaskButton
+              icon={"/Icons/trash.svg"}
+              onclick={() => remove?.(id)}
+            />
+          )}
         </div>
       )}
     </div>
