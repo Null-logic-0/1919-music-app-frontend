@@ -14,6 +14,7 @@ type TableProps = {
   addMusic?: (musicId: string) => void;
   editMusic?: () => void;
   remove?: (musicId: string) => void;
+  onPlayMusic?: (track: SongInterface) => void;  // Updated
 };
 
 const TableComponent = ({
@@ -24,6 +25,7 @@ const TableComponent = ({
   remove,
   addMusic,
   editMusic,
+  onPlayMusic,  
 }: TableProps) => {
   const columns = [
     {
@@ -33,7 +35,6 @@ const TableComponent = ({
       render: (text: string, record: SongInterface) =>
         renderTitleColumn(record),
     },
-
     {
       title: edit ? <Edit EditMusic={editMusic} /> : "",
       key: "actions",
@@ -45,6 +46,7 @@ const TableComponent = ({
             record={record}
             replaceButton={replaceButton}
             dataSource={dataSource}
+            onPlayMusic={() => onPlayMusic?.(record)}  
           />
         );
       },

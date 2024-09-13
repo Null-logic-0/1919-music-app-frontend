@@ -11,8 +11,9 @@ type TrackActionsProps = {
   record: SongInterface;
   replaceButton: boolean;
   dataSource: SongInterface[];
-  addMusic:(musicId:string)=>void;
-  remove:(musicId:string)=>void;
+  addMusic: (musicId: string) => void;
+  remove: (musicId: string) => void;
+  onPlayMusic?: (track: SongInterface) => void;  // Updated prop name
 };
 
 const TrackActions = ({
@@ -21,6 +22,7 @@ const TrackActions = ({
   dataSource,
   addMusic,
   remove,
+  onPlayMusic,  
 }: TrackActionsProps) => {
   const [currentTrackIndex, setCurrentTrackIndex] = useRecoilState(
     currentTrackIndexState
@@ -48,6 +50,10 @@ const TrackActions = ({
       setCurrentTrackIndex(trackIndex);
       setPlaybackStatus(PlaybackStatus.PLAYING);
     }
+
+    if (onPlayMusic) {
+      onPlayMusic(record);  
+    }
   };
 
   return (
@@ -57,7 +63,7 @@ const TrackActions = ({
       isPlaying={isPlaying}
       onPlayPauseClick={onPlayPauseClick}
       addMusic={() => addMusic(record.id)}
-      remove={()=> remove(record.id)}
+      remove={() => remove(record.id)}
     />
   );
 };
