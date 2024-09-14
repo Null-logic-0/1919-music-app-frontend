@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import React, { useState } from "react";
 import styles from "./TopCharts.module.scss";
 import { ImageSizeVariant } from "../../enums/imageSizeVariants";
 import Card from "../AlbumCard/Card";
@@ -40,7 +39,6 @@ const TopCharts = () => {
 
 
 
-const TopCharts = () => {
   return (
     <div className={styles.container}>
       <Heading title="Top Charts" />
@@ -59,6 +57,6 @@ const TopCharts = () => {
       </div>
     </div>
   );
-};
+}
 
 export default TopCharts;
