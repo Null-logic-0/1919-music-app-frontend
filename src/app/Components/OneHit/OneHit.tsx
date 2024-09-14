@@ -5,49 +5,55 @@ import Card from '../AlbumCard/Card';
 import { ImageSizeVariant } from '@/app/enums/imageSizeVariants';
 import { ArtistInterface } from '@/app/interfaces/Artist.interface';
 import TableComponent from '../TableComponent/TableComponent';
+import { useEffect, useState } from 'react';
+import { useParams } from 'next/navigation';
+import axios from 'axios';
 
-const data: ArtistInterface[] = [
-    {
-        title: 'coldplay',
-        image: '/Images/albumpage.png',
-        subtitle: '100 song',
-        musics: [
-            {
-                id: 1,
-                image: '/Images/DesirelessCover.jpg',
-                title: 'title',
-                artist: 'Name',
-                duration: '4,50',
-                plays: '30000',
-                album: 'Songs 20',
-                key: '1'
-            },
-            {
-                id: 2,
-                image: '/Images/D.jpg',
-                title: 'title',
-                artist: 'Name',
-                duration: '4,50',
-                plays: '30000',
-                album: 'Songs 20',
-                key: '2'
-            },
-            {
-                id: 3,
-                image: '/Images/indila.jpg',
-                title: 'title',
-                artist: 'Name',
-                duration: '4,50',
-                plays: '30000',
-                album: 'Songs 20',
-                key: '3'
-            }
-        ]
-    }
-];
+
 
 const OneHit = () => {
-    const artist = data[0]; 
+    const [hits, setHits] = useState<ArtistInterface | null>(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+    const { id: hitsIdParam } = useParams();
+    const hitsId = Array.isArray(hitsIdParam)
+    ? hitsIdParam[0]
+    : hitsIdParam;
+
+
+    useEffect(() => {
+        const fetchHitsData = async () => {
+            const token = localStorage.getItem('accesstoken')
+            if (hitsId) {
+                try {
+                    const response = await axios.get<ArtistInterface>(`https://one919-backend.onrender.com/music/${hitsId}`, {                        
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
+                        
+                    });
+                    console.log(response,'zd');
+
+                    setHits(response.data);
+                } catch (err) {
+                    setError('Failed to fetch artist data');
+                } finally {
+                    setLoading(false);
+                }
+            }
+            
+            
+        };
+
+        fetchHitsData();
+    }, [hitsId]);
+
+    
+
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>{error}</div>;
+
+    if (!hits) return <div>No artist data available</div>;
 
     return (
         <div className={styles.main}>
@@ -55,9 +61,9 @@ const OneHit = () => {
             <div className={styles.card}>
 
                 <Card
-                    images={artist.image}
-                    title={artist.title}
-                    subtitle={artist.subtitle}
+                    images={hits.photo.url}
+                    name={hits.name}
+                    authorName={hits.authorName}
                     showDetails
                     imageSizeVariant={ImageSizeVariant.Large}
                     direction='row'
@@ -66,7 +72,7 @@ const OneHit = () => {
             </div>
 
             <div className={styles.table}>
-                <TableComponent replaceButton={false} dataSource={artist.musics} />
+                <TableComponent replaceButton={false} dataSource={hits.musics} />
             </div>
         </div>
     );
