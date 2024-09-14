@@ -5,4 +5,5 @@ export interface SongInterface {
     authorName: string;
     album?:string;
     key?:string;
+    url?:string;
 }

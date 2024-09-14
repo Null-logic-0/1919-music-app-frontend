@@ -1,43 +1,62 @@
 'use client'
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from './TopAlbum.module.scss';
 import { ImageSizeVariant } from "../../enums/imageSizeVariants";
 import Card from "../AlbumCard/Card";
 import Heading from "../Heading/Heading";
+import axios from "axios";
+import { photoInterface } from "@/app/interfaces/photo.interface";
 
-
-const AlbumData = [
-  { id:1,title: 'Song Name', image: "/Images/albumCard.png", subtitle: '100 song' },
-  { id:2,title: 'Song Name', image: "/Images/albumCard.png", subtitle: '100 song' },
-  { id:3,title: 'Song Name', image: "/Images/albumCard.png", subtitle: '100 song' },
-  { id:4,title: 'Song Name', image: "/Images/albumCard.png", subtitle: '100 song' },
-  { id:5,title: 'Song Name', image: "/Images/albumCard.png", subtitle: '100 song' },
-  { id:6,title: 'Song Name', image: "/Images/albumCard.png", subtitle: '100 song' },
-  { id:7,title: 'Song Name', image: "/Images/albumCard.png", subtitle: '100 song' },
-  { id:8,title: 'Song Name', image: "/Images/albumCard.png", subtitle: '100 song' },
-];
-
-
-
+interface Album {
+  id: number;
+  photo:photoInterface;
+  title:string;
+}
 
 
 const TopAlbum = () => {
+  const [albums, setAlbums] = useState<Album[]>([]);
+
+  useEffect(() => {
+    const fetchAlbums = async () => {
+      try {
+        const accessToken = localStorage.getItem('accesstoken');;
+        const response = await axios.get(
+          "https://one919-backend.onrender.com/album/top",
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        );
+        setAlbums(response.data);
+        console.log(response,'zd');
+      } catch (error) {
+        console.error("Error fetching albums:", error);
+      }
+    };
+
+    fetchAlbums();
+  }, []);
+
+ 
+  
 
   return (
 
     <div className={styles.container}>
       <Heading title="Top Album" />
       <div className={styles.albumWrapper}>
-        {AlbumData.map((item, id) => (
+        {albums.map((item) => (
 
           <Card
             link={`/topalbum/${item.id}`}
-            key={id}
-            images={item.image}
-            title={item.title} subtitle={item.subtitle}
+            key={item.id}
+            images={item.photo.url}
+            name={item.title} 
             showDetails
             direction="column"
-            imageSizeVariant={ImageSizeVariant.Absolute}
+            imageSizeVariant={ImageSizeVariant.Medium}
           />
 
 
