@@ -7,6 +7,10 @@
     flex-direction: column;
     gap: 30px;
     padding: 60px 24px;
+    background-image: url('../../../../public/Icons/5.png');
+    background-repeat: no-repeat;
+    background-size: 400px;
+    background-position: top 60px right ;
 }
 
 .form {
@@ -107,13 +111,17 @@
 
     .main {
         gap: 42px;
+        background-image: none;
     }
 
     .form {
         gap: 20px;
+        padding-left:24px;
     }
 
     .inputs {
         gap: 16px;
     }
+
+    
 }

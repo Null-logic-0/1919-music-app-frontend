@@ -10,7 +10,7 @@
 
 .albumWrapper {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   width: 100%;
   gap: 24px;
 }
@@ -34,7 +34,7 @@
     padding-top: 68px;
   }
   .albumWrapper{
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns:  1fr 1fr 1fr 1fr 1fr;
   }
 }
 
@@ -43,6 +43,16 @@
     padding-top: 20px;
   }
   .albumWrapper{
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+
+@media (max-width:568px){
+  .container{
+    padding-top: 20px;
+  }
+  .albumWrapper{
+    grid-template-columns: 1fr 1fr 1fr ;
   }
 }

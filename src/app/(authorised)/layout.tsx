@@ -23,7 +23,7 @@ const AuthLayout = (props: Props) => {
                 </div>
             </div>
             <div className={styles.controls}>
-                <PlayerController />
+                <PlayerController isAlbumMode={false} />
                 <ResponsiveMenu />
             </div>
         </div>

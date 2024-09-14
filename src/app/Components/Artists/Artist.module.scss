@@ -14,24 +14,14 @@
 }
 
 .cards {
-    display: grid;
-    grid-template-columns: repeat(6,1fr);
-    width: 100%;
-    gap: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
 }
 
-@media (min-width:1920px){
-    .cards{
-      grid-template-columns: repeat(10,1fr);
-  
-    }
-  }
-  
-  @media (min-width:1600px)  and (max-width:1920px){
-    .cards{
-      grid-template-columns:repeat(9,1fr);  
-    }
-  }
+
 
 @media (max-width:1024px) {
     .cards {

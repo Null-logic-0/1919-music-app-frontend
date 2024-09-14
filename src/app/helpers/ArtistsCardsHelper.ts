@@ -17,10 +17,10 @@ const ArtistsCardsHelper = () => {
 
             } else if (width >= 1900) {
                 visibleCount = 8;
-            } else if (width >= 1680) {
-                visibleCount = 7;
-            } else if (width >= 1075) {
+            } else if (width <= 1619  || width == 1500 ) {
                 visibleCount = 6;
+            } else if (width >= 1075) {
+                visibleCount = 5;
             } else {
                 visibleCount = 6;
             }
