@@ -64,7 +64,7 @@ const OneAlbum = () => {
             <PagesHeaderTop link='/topalbum' />
             <div className={styles.card}>
                 <Card
-                    images={album.photo}
+                    images={album.photo.url}
                     name={album.title}
                     authorName={album.firstName}
                     showDetails
