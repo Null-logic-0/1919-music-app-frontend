@@ -1,22 +1,33 @@
-import { useForm, SubmitHandler } from 'react-hook-form';
-import Image from 'next/image';
-import styles from './PlayListFrom.module.scss';
-import { FormDataInterface } from '@/app/interfaces/PlaylistForm.interface';
-import classNames from 'classnames';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useForm, SubmitHandler } from "react-hook-form";
+import Image from "next/image";
+import styles from "./PlayListFrom.module.scss";
+import { FormDataInterface } from "@/app/interfaces/PlaylistForm.interface";
+import classNames from "classnames";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 type FromProps = {
   setShowModal: (value: boolean) => void;
   addNewPlaylist?: (newPlaylist: FormDataInterface) => void;
-  playlist?:any;
+  playlist?: any;
   updatePlaylist?: (playlist: FormDataInterface) => void;
 };
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
 
-const PlayListFrom = ({ setShowModal, addNewPlaylist, playlist, updatePlaylist }: FromProps) => {
-  const { register, handleSubmit, setValue, formState: { errors }, reset } = useForm<FormDataInterface>();
+const PlayListFrom = ({
+  setShowModal,
+  addNewPlaylist,
+  playlist,
+  updatePlaylist,
+}: FromProps) => {
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+    reset,
+  } = useForm<FormDataInterface>();
   const [imageUploaded, setImageUploaded] = useState<boolean>(false);
 
   useEffect(() => {
@@ -57,8 +68,7 @@ const PlayListFrom = ({ setShowModal, addNewPlaylist, playlist, updatePlaylist }
     }
 
     let request;
-    if (playlist)
-      {
+    if (playlist) {
       request = axios.put(
         `https://one919-backend.onrender.com/playlist/${playlist.id}`,
         formData,
@@ -94,11 +104,11 @@ const PlayListFrom = ({ setShowModal, addNewPlaylist, playlist, updatePlaylist }
         if (playlist) {
           updatePlaylist?.(playlistData);
         } else {
-          addNewPlaylist?.(playlistData);  
+          addNewPlaylist?.(playlistData);
         }
 
         setShowModal(false);
-        reset(); 
+        reset();
       })
       .catch((error) => {
         alert(`Error submitting form: ${error}`);
@@ -112,12 +122,22 @@ const PlayListFrom = ({ setShowModal, addNewPlaylist, playlist, updatePlaylist }
           <div className={styles.info}>
             <p className={styles.uploadImage}>Upload Image</p>
             {imageUploaded && (
-              <Image src={'/Icons/wellDone.png'} alt='icon' width={16} height={16} />
+              <Image
+                src={"/Icons/wellDone.png"}
+                alt="icon"
+                width={16}
+                height={16}
+              />
             )}
           </div>
           <div className={styles.upload}>
             <label htmlFor="fileInput" className={styles.label}>
-              <Image src={'/Icons/plusIcon.png'} width={63} height={63} alt="icon" />
+              <Image
+                src={"/Icons/plusIcon.png"}
+                width={63}
+                height={63}
+                alt="icon"
+              />
             </label>
             <input
               type="file"
@@ -128,23 +148,32 @@ const PlayListFrom = ({ setShowModal, addNewPlaylist, playlist, updatePlaylist }
           </div>
           <div className={styles.errorContainer}>
             <input
-              {...register('name', {
-                required: 'Playlist name is required',
+              {...register("name", {
+                required: "Playlist name is required",
                 maxLength: {
                   value: 20,
-                  message: 'Max length is 20 characters',
+                  message: "Max length is 20 characters",
                 },
               })}
               type="text"
               placeholder="Playlist name.."
-              className={classNames(styles.input, { [styles.error]: errors.name })}
+              className={classNames(styles.input, {
+                [styles.error]: errors.name,
+              })}
             />
-            {errors.name && <span className={styles.errorMessage}>{errors.name.message}</span>}
+            {errors.name && (
+              <span className={styles.errorMessage}>{errors.name.message}</span>
+            )}
           </div>
         </div>
       </div>
-      <input type="submit" className={styles.submit} value={playlist ? 'Update' : 'Save'} />
+      <input
+        type="submit"
+        className={styles.submit}
+        value={playlist ? "Update" : "Save"}
+      />
     </form>
+    
   );
 };
 

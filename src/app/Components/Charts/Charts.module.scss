@@ -18,26 +18,15 @@
     justify-content: center;
 }
 
-
 .cards {
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
     width: 100%;
     gap: 10px;
-}
-
-@media (min-width:1920px) {
-    .cards {
-        grid-template-columns: repeat(6,1fr);
-
-    }
-}
-
-@media (min-width:1600px) and (max-width:1920px) {
-    .cards {
-        grid-template-columns: repeat(6,1fr);
-    }
-}
+  }
+  
 
 
 @media (max-width:1024px) {

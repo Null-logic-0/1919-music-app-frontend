@@ -1,110 +1,72 @@
-@import '../../../styles/globalBorders/borders.scss';
+@import "../../../styles/globalBorders/borders.scss";
 
 .container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 24px;
-    max-width: 608px;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  max-width: 608px;
+  width: 100%;
 }
 
 .buttons {
-    display: flex;
-    align-items: center;
-    gap: 32px;
-    justify-content: center;
-
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  justify-content: center;
 }
 
 .btn {
-    cursor: pointer;
-    border: none;
-    background: none;
+  cursor: pointer;
+  border: none;
+  background: none;
 }
 
 .circle {
-    background-color: #fff;
-    border-radius: $rounded;
-    width: 64px;
-    height: 64px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  background-color: #fff;
+  border-radius: $rounded;
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
 
 .loop,
 .pause {
-    width: 32px;
-    height: 32px;
+  width: 32px;
+  height: 32px;
 }
 
 .next {
-    width: 40px;
-    height: 40px;
+  width: 40px;
+  height: 40px;
 }
 
-@media (max-width:1024px) {
+@media (max-width: 1024px) {
+  .container {
+    gap: 18px;
+  }
 
-    .container {
-        gap: 18px;
-    }
+  .circle {
+    width: 36px;
+    height: 36px;
+  }
 
-    .circle {
-        width: 36px;
-        height: 36px;
-    }
+  .loop,
+  .pause {
+    width: 18px;
+    height: 18px;
+  }
 
+  .next {
+    width: 22px;
+    height: 22px;
+  }
 
-    .loop,
-    .pause {
-        width: 18px;
-        height: 18px;
-        ;
-    }
-
-    .next {
-        width: 22px;
-        height: 22px;
-    }
-
-    .buttons {
-        gap: 8px;
-
-    }
-
-
-}
-
-@media (max-width:768px) {
-    .circle {
-        width: 32px;
-        height: 32px;
-    }
-
-
-    .loop,
-    .pause {
-        width: 16px;
-        height: 16px;
-        ;
-    }
-
-    .next {
-        width: 20px;
-        height: 20px;
-    }
-
-    .buttons {
-        gap: 2px;
-
-    }
-
-    .progressBarHide {
-        display: none;
-    }
-
+  .buttons {
+    gap: 8px;
+  }
 }
 

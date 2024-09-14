@@ -14,7 +14,7 @@ type TableProps = {
   addMusic?: (musicId: string) => void;
   editMusic?: () => void;
   remove?: (musicId: string) => void;
-  onPlayMusic?: (track: SongInterface) => void;  // Updated
+  onPlayMusic?: (track: SongInterface) => void;  
 };
 
 const TableComponent = ({
