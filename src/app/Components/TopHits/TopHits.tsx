@@ -1,41 +1,60 @@
 'use client'
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from './TopHits.module.scss';
 import { ImageSizeVariant} from "../../enums/imageSizeVariants";
 import Card from "../AlbumCard/Card";
 import Heading from "../Heading/Heading";
+import { photoInterface } from "@/app/interfaces/photo.interface";
+import axios from "axios";
 
 
- const HitsData = [
-  { id:1,title:'Song Name', image: "/Images/albumCard.png",subtitle:'100 song'},
-  { id:2,title:'Song Name', image: "/Images/albumCard.png",subtitle:'100 song'},
-  { id:3,title:'Song Name', image: "/Images/albumCard.png",subtitle:'100 song'},
-  { id:4,title:'Song Name', image: "/Images/albumCard.png",subtitle:'100 song'},
-  { id:5,title:'Song Name', image: "/Images/albumCard.png",subtitle:'100 song'},
-  { id:6,title:'Song Name', image: "/Images/albumCard.png",subtitle:'100 song'},
-  { id:7,title:'Song Name', image: "/Images/albumCard.png",subtitle:'100 song'},
-  { id:8,title:'Song Name', image: "/Images/albumCard.png",subtitle:'100 song'}, 
-];
-
-
+ 
+interface Hits {
+  id:number;
+  photo:photoInterface;
+  title:string;
+}
 
 
 
 const TopHits = () => {
+  const [hits,setHits]=useState<Hits[]>([]);
+  
+  useEffect(() => {
+    const fetchHits = async () => {
+      try {
+        const accessToken = localStorage.getItem('accesstoken');;
+        const response = await axios.get(
+          "https://one919-backend.onrender.com/music/week ",
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        );
+        setHits(response.data);
+      } catch (error) {
+        console.error("Error fetching albums:", error);
+      }
+    };
+
+    fetchHits();
+  }, []);
+
   return (
   
     <div className={styles.container}>
         <Heading title="Top Hits" />
       <div className={styles.albumWrapper}>
-        {HitsData.map((item,id) => (   
+        {hits.map((item) => (   
         <Card 
          link={`/tophits/${item.id}`}
-         key={id}
-         images={item.image} 
-         title={item.title} subtitle={item.subtitle} 
+         key={item.id}
+         images={item.photo.url} 
+         name={item.title}  
          showDetails  
          direction="column" 
-         imageSizeVariant={ImageSizeVariant.Absolute}
+         imageSizeVariant={ImageSizeVariant.Medium}
          />          
         ))}
       </div>

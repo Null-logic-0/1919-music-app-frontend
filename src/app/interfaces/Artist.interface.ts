@@ -5,6 +5,7 @@ export interface ArtistInterface {
     photo: any,
     count: any,
     musics:SongInterface[];
+    authorName:string;
     firstName?:string;
     title?:string;
 }

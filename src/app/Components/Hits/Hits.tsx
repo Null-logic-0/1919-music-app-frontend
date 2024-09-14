@@ -6,28 +6,44 @@ import { ImageSizeVariant } from '@/app/enums/imageSizeVariants';
 import styles from './Hits.module.scss';
 import SeeAllButton from '../SeeAllButton/SeeAllButton';
 import CardsHelper from '@/app/helpers/CardsHelper';
+import { photoInterface } from '@/app/interfaces/photo.interface';
+import axios from 'axios';
 
-const HitsData = [
-    { id: 1, image: '/Images/hit1.png' },
-    { id: 2, image: '/Images/hit2.png' },
-    { id: 3, image: '/Images/hit3.png' },
-    { id: 4, image: '/Images/hit4.png' },
-    { id: 5, image: '/Images/hit5.png' },
-    { id: 6, image: '/Images/hit1.png' },
-    { id: 7, image: '/Images/hit2.png' },
-    { id: 8, image: '/Images/hit3.png' },
-    { id: 9, image: '/Images/hit4.png' },
-    { id: 10, image: '/Images/hit5.png' },
-
-];
+interface Hits {
+    id:number;
+    photo:photoInterface;
+}
 
 const Hits = () => {
+    const [hits,setHits]=useState<Hits[]>([]);
     const [showAll, setShowAll] = useState<boolean>(false);
     const cardsToShow = CardsHelper();
+    
+
+    useEffect(() => {
+        const fetchHits = async () => {
+          try {
+            const accessToken = localStorage.getItem('accesstoken');;
+            const response = await axios.get(
+              "https://one919-backend.onrender.com/music/week ",
+              {
+                headers: {
+                  Authorization: `Bearer ${accessToken}`,
+                },
+              }
+            );
+            setHits(response.data);
+          } catch (error) {
+            console.error("Error fetching albums:", error);
+          }
+        };
+    
+        fetchHits();
+      }, []);
 
     const toggleShowAll = () => setShowAll(prevShowAll => !prevShowAll);
 
-    const trimedData = showAll ? HitsData : HitsData.slice(0, cardsToShow);
+    const trimedData = showAll ? hits : hits.slice(0, cardsToShow);
 
     return (
         <div className={styles.main}>
@@ -40,7 +56,7 @@ const Hits = () => {
                     {trimedData.map((item) => (
                         <Card
                             key={item.id}
-                            images={item.image}
+                            images={item.photo.url}
                             imageSizeVariant={ImageSizeVariant.Medium}
                             link={`/tophits/${item.id}`}
                         />
