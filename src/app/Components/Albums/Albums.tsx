@@ -1,55 +1,71 @@
-'use client'
-import React, { useState, useEffect } from 'react';
-import Card from '../AlbumCard/Card';
-import Heading from '../Heading/Heading';
-import { ImageSizeVariant } from '@/app/enums/imageSizeVariants';
-import styles from './Albums.module.scss';
-import SeeAllButton from '../SeeAllButton/SeeAllButton';
-import CardsHelper from '@/app/helpers/CardsHelper';
+"use client";
+import React, { useState, useEffect } from "react";
+import Card from "../AlbumCard/Card";
+import Heading from "../Heading/Heading";
+import { ImageSizeVariant } from "@/app/enums/imageSizeVariants";
+import styles from "./Albums.module.scss";
+import SeeAllButton from "../SeeAllButton/SeeAllButton";
+import CardsHelper from "@/app/helpers/CardsHelper";
+import axios from "axios";
+import { photoInterface } from "@/app/interfaces/photo.interface";
 
-const AlbumsData = [
-    { id: 1, image: '/Images/album1.png' },
-    { id: 2, image: '/Images/album2.png' },
-    { id: 3, image: '/Images/album3.png' },
-    { id: 4, image: '/Images/album4.png' },
-    { id: 5, image: '/Images/album5.png' },
-    { id: 6, image: '/Images/album1.png' },
-    { id: 7, image: '/Images/album2.png' },
-    { id: 8, image: '/Images/album3.png' },
-    { id: 9, image: '/Images/album4.png' },
-    { id: 10, image: '/Images/album5.png' },
 
-];
+interface Album {
+    id: number;
+    photo:photoInterface
+  }
 
 const Albums = () => {
-    const [showAll, setShowAll] = useState<boolean>(false);
-    const cardsToShow = CardsHelper();
+  const [albums, setAlbums] = useState<Album[]>([]);
+  const [showAll, setShowAll] = useState<boolean>(false);
+  const cardsToShow = CardsHelper();
+ 
 
-    const toggleShowAll = () => setShowAll(prevShowAll => !prevShowAll);
+  useEffect(() => {
+    const fetchAlbums = async () => {
+      try {
+        const accessToken = localStorage.getItem('accesstoken');;
+        const response = await axios.get(
+          "https://one919-backend.onrender.com/album/top",
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        );
+        setAlbums(response.data);
+      } catch (error) {
+        console.error("Error fetching albums:", error);
+      }
+    };
 
-    const trimmedData = showAll ? AlbumsData : AlbumsData.slice(0, cardsToShow);
+    fetchAlbums();
+  }, []);
 
-    return (
-        <div className={styles.main}>
-            <div className={styles.container}>
-                <Heading title="Top Albums" link='/topalbum' />
-                <SeeAllButton showAll={showAll} onclick={toggleShowAll} />
-            </div>
-            <div className={styles.cardsContainer}>
-                <div className={styles.cards}>
-                    {trimmedData.map((item) => (
-                        <Card
-                            key={item.id}
-                            images={item.image}
-                            imageSizeVariant={ImageSizeVariant.Medium}
-                            link={`/topalbum/${item.id}`}
-                        />
-                    ))}
-                </div>
+  const toggleShowAll = () => setShowAll((prevShowAll) => !prevShowAll);
 
-            </div>
+  const trimmedData = showAll ? albums : albums.slice(0, cardsToShow);
+
+  return (
+    <div className={styles.main}>
+      <div className={styles.container}>
+        <Heading title="Top Albums" link="/topalbum" />
+        <SeeAllButton showAll={showAll} onclick={toggleShowAll} />
+      </div>
+      <div className={styles.cardsContainer}>
+        <div className={styles.cards}>
+          {trimmedData.map((album) => (
+            <Card
+              key={album.id}
+              images={album.photo.url}
+              imageSizeVariant={ImageSizeVariant.Medium}
+              link={`/topalbum/${album.id}`}
+            />
+          ))}
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default Albums;

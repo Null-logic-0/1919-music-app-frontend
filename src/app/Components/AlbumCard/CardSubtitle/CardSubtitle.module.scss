@@ -2,6 +2,7 @@
 
 .subtitle {
     color: $lighter;
+    text-align: start;
 }
 
 .mediumSubtitle {
@@ -12,6 +13,23 @@
 .largeSubtitle {
     font-size: 24px;
     font-weight: 400;
+}
+
+.trimerButton {
+    font-size: 20px;
+    font-weight: 500;
+    color: #3B8C75;
+    background-color: transparent;
+    width: 100px;
+    cursor: pointer;
+}
+
+.bio {
+    width: 400px;
+    height:100px;
+    text-align: justify;
+    font-size: 18px;
+    padding-bottom: 20px;
 }
 
 @media (max-width:768px) {

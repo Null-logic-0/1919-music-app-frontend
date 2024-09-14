@@ -19,11 +19,11 @@ const TrackDisplay = ({ currentTrack }: TrackDisplayProps) => {
     }
 
     const title = currentTrack.name || '';
-    const artist = currentTrack.authorName || '';
+    const authorName = currentTrack. authorName || '';
     const photoUrl = currentTrack.photo?.url || '';
 
     const truncatedTitle = title.length > 20 ? `${title.slice(0, 20)}...` : title;
-    const truncatedArtist = artist.length > 20 ? `${artist.slice(0, 20)}...` : artist;
+    const truncatedArtist =  authorName.length > 20 ? `${ authorName.slice(0, 20)}...` :  authorName;
 
     return (
         <div className={styles.container}>

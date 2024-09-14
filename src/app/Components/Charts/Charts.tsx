@@ -44,6 +44,7 @@ const Charts = () => {
 
   const trimmedData = showAll ? charts : charts.slice(0, cardsToShow);
 
+
   return (
     <div className={styles.main}>
       <div className={styles.container}>
