@@ -11,9 +11,10 @@ const DayWeekDRP = ({onOptionSelected}:Props) => {
     const [selectedOption, setSelectedOption] = useState('');
 
     const options = [
-        { value: 'Day',   label: 'Day' },
         { value: 'Week',  label: 'Week' },
-        { value: 'Month', label: 'Month' }
+        { value: 'Month', label: 'Month' },
+        { value: 'Day',   label: 'Day' },
+
     ];
 
     const handleOptionChange = (value: string) => {

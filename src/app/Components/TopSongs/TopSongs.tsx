@@ -13,7 +13,7 @@ import { currentTrackIndexState, musicTracksState, playbackStatusState } from '@
 const TopSongs = () => {
     const [songsData, setSongsData] = useState<SongInterface[]>([]); 
     const [showAll, setShowAll] = useState(false);
-    const [selectedOption, setSelectedOption] = useState('Day');
+    const [selectedOption, setSelectedOption] = useState('Week');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
@@ -47,7 +47,7 @@ const TopSongs = () => {
                         endpoint = 'https://one919-backend.onrender.com/music/month';
                         break;
                     default:
-                        endpoint = 'https://one919-backend.onrender.com/music/day';
+                        endpoint = 'https://one919-backend.onrender.com/music/week';
                 }
                 const response = await axios.get(endpoint, {
                     headers: {
