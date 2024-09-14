@@ -1,76 +1,59 @@
 "use client";
+import React, { useEffect, useState } from "react";
 import React, { useState } from "react";
 import styles from "./TopCharts.module.scss";
 import { ImageSizeVariant } from "../../enums/imageSizeVariants";
 import Card from "../AlbumCard/Card";
 import Heading from "../Heading/Heading";
+import { photoInterface } from "@/app/interfaces/photo.interface";
+import axios from "axios";
 
-const ChartsData = [
-  {
-    id: 1,
-    title: "Song Name",
-    image: "/Images/albumCard.png",
-    subtitle: "100 song",
-  },
-  {
-    id: 3,
-    title: "Song Name",
-    image: "/Images/albumCard.png",
-    subtitle: "100 song",
-  },
-  {
-    id: 4,
-    title: "Song Name",
-    image: "/Images/albumCard.png",
-    subtitle: "100 song",
-  },
-  {
-    id: 5,
-    title: "Song Name",
-    image: "/Images/albumCard.png",
-    subtitle: "100 song",
-  },
-  {
-    id: 6,
-    title: "Song Name",
-    image: "/Images/albumCard.png",
-    subtitle: "100 song",
-  },
-  {
-    id: 7,
-    title: "Song Name",
-    image: "/Images/albumCard.png",
-    subtitle: "100 song",
-  },
-  {
-    id: 8,
-    title: "Song Name",
-    image: "/Images/albumCard.png",
-    subtitle: "100 song",
-  },
-  {
-    id: 9,
-    title: "Song Name",
-    image: "/Images/albumCard.png",
-    subtitle: "100 song",
-  },
-];
+interface Charts {
+  id: number;
+  photo: photoInterface;
+  title: string;
+}
+
+const TopCharts = () => {
+  const [charts, setCharts] = useState<Charts[]>([]);
+
+  useEffect(() => {
+    const fetchHits = async () => {
+      try {
+        const accessToken = localStorage.getItem("accesstoken");
+        const response = await axios.get(
+          "https://one919-backend.onrender.com/music/charts",
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        );
+        setCharts(response.data);
+      } catch (error) {
+        console.error("Error fetching albums:", error);
+      }
+    };
+
+    fetchHits();
+  }, []);
+
+
 
 const TopCharts = () => {
   return (
     <div className={styles.container}>
       <Heading title="Top Charts" />
       <div className={styles.albumWrapper}>
-        {ChartsData.map((item, id) => (
+        {charts.map((item) => (
           <Card
             link={`/topcharts/${item.id}`}
-            key={id}
-            images={item.image}
-            title={item.title}
-            subtitle={item.subtitle}
+            key={item.id}
+            images={item.photo.url}
+            name={item.title}
             showDetails
             direction="column"
-            imageSizeVariant={ImageSizeVariant.Absolute}
+            imageSizeVariant={ImageSizeVariant.Medium}
           />
         ))}
       </div>
