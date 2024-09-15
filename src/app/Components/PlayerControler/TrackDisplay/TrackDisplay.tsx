@@ -13,7 +13,7 @@ interface TrackDisplayProps {
     };
 }
 
-const TrackDisplay = ({ currentTrack }: TrackDisplayProps) => {
+const TrackDisplay = ({ currentTrack}: TrackDisplayProps) => {
     if (!currentTrack) {
         return null; 
     }
@@ -31,9 +31,6 @@ const TrackDisplay = ({ currentTrack }: TrackDisplayProps) => {
             <div className={styles.text}>
                 <span className={styles.title}>{truncatedTitle}</span>
                 <span className={styles.artist}>{truncatedArtist}</span>
-            </div>
-            <div className={styles.heartBtn}>
-                <HeartLike />
             </div>
         </div>
     );

@@ -160,7 +160,7 @@ const PlayerController = ({ isAlbumMode, albumId }: { isAlbumMode: boolean, albu
     return (
         <div className={styles.main}>
             <div className={styles.container}>
-                {currentTrack && <TrackDisplay currentTrack={currentTrack} />}
+                {currentTrack && <TrackDisplay currentTrack={currentTrack}  />}
                 <Controls
                     playbackStatus={playbackStatus}
                     loopStatus={loopStatus}

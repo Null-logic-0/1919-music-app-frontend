@@ -29,9 +29,9 @@ const TableComponent = ({
 }: TableProps) => {
   const columns = [
     {
-      title: "Title",
-      dataIndex: "title",
-      key: "title",
+      title: "Music Title",
+      dataIndex: "music title",
+      key: "music title",
       render: (text: string, record: SongInterface) =>
         renderTitleColumn(record),
     },

@@ -1,16 +1,15 @@
-import { useState } from 'react';
-import Image from 'next/image';
-import styles from './HeartLike.module.scss';
-import { HeartLikeEnum } from '../../enums/HeartLike.enums';
-import React from 'react';
-
+import { useState } from "react";
+import Image from "next/image";
+import styles from "./HeartLike.module.scss";
+import { HeartLikeEnum } from "../../enums/HeartLike.enums";
+import axios from "axios";
 
 interface Props {
+  musicId: string;
   isDisabled?: boolean;
-  onClick?: () => void;
 }
 
-const HeartLike = ({ isDisabled, onClick }: Props) => {
+const HeartLike = ({ musicId, isDisabled }: Props) => {
   const [isClicked, setIsClicked] = useState(false);
 
   const getIconSource = () => {
@@ -18,16 +17,40 @@ const HeartLike = ({ isDisabled, onClick }: Props) => {
     return isClicked ? HeartLikeEnum.Clicked : HeartLikeEnum.Default;
   };
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (!isDisabled) {
-      setIsClicked((prev) => !prev);
-      onClick?.();
+      const accessToken = localStorage.getItem("accesstoken"); 
+      if (!accessToken) {
+        console.error("No access token found");
+        return;
+      }
+
+      try {
+        await axios.put(
+          `https://one919-backend.onrender.com/favorites/addMusic/${musicId}`,
+          {}, 
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`, 
+            },
+          }
+        );
+        setIsClicked((prev) => !prev); 
+      } catch (error) {
+        console.error("Failed to add music to favorites:", error);
+      }
     }
   };
 
   return (
     <button className={styles.heartLike} onClick={handleClick} disabled={isDisabled}>
-      <Image src={getIconSource()} alt="Heart Icon"  width={32}  height={32} className={styles.icon}/>
+      <Image
+        src={getIconSource()}
+        alt="Heart Icon"
+        width={32}
+        height={32}
+        className={styles.icon}
+      />
     </button>
   );
 };

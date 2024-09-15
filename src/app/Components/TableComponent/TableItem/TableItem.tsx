@@ -14,7 +14,7 @@ export const renderTitleColumn = (record: SongInterface) => (
     showDetails
     imageSizeVariant={ImageSizeVariant.Small}
     direction="row"
-    images={record.photo.url}
+    images={record.photo}
   />
 );
 

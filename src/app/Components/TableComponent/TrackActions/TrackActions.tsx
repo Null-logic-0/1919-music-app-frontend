@@ -13,7 +13,7 @@ type TrackActionsProps = {
   dataSource: SongInterface[];
   addMusic: (musicId: string) => void;
   remove: (musicId: string) => void;
-  onPlayMusic?: (track: SongInterface) => void;  // Updated prop name
+  onPlayMusic?: (track: SongInterface) => void;  
 };
 
 const TrackActions = ({
