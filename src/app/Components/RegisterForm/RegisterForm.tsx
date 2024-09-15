@@ -41,7 +41,7 @@ const RegisterFrom = () => {
 
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-    router.push("/");
+    router.push("/auth");
   };
 
   const submitRegister = async (values: RegisterFormInterface) => {
