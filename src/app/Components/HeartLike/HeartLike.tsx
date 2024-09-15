@@ -7,38 +7,52 @@ import axios from "axios";
 interface Props {
   musicId: string;
   isDisabled?: boolean;
+  initialIsLiked?: boolean; 
 }
 
-const HeartLike = ({ musicId, isDisabled }: Props) => {
-  const [isClicked, setIsClicked] = useState(false);
+const HeartLike = ({ musicId, isDisabled, initialIsLiked = false }: Props) => {
+  const [isLiked, setIsLiked] = useState(initialIsLiked); 
 
   const getIconSource = () => {
     if (isDisabled) return HeartLikeEnum.Disabled;
-    return isClicked ? HeartLikeEnum.Clicked : HeartLikeEnum.Default;
+    return isLiked ? HeartLikeEnum.Clicked : HeartLikeEnum.Default;
   };
 
   const handleClick = async () => {
-    if (!isDisabled) {
-      const accessToken = localStorage.getItem("accesstoken"); 
-      if (!accessToken) {
-        console.error("No access token found");
-        return;
-      }
+    if (isDisabled) return;
 
-      try {
-        await axios.put(
-          `https://one919-backend.onrender.com/favorites/addMusic/${musicId}`,
-          {}, 
+    const accessToken = localStorage.getItem("accesstoken");
+    if (!accessToken) {
+      console.error("No access token found");
+      return;
+    }
+
+    setIsLiked((prev) => !prev); 
+
+    try {
+      if (isLiked) {
+        await axios.delete(
+          `https://one919-backend.onrender.com/favorites/deleteMusic/${musicId}`,
           {
             headers: {
-              Authorization: `Bearer ${accessToken}`, 
+              Authorization: `Bearer ${accessToken}`,
             },
           }
         );
-        setIsClicked((prev) => !prev); 
-      } catch (error) {
-        console.error("Failed to add music to favorites:", error);
+      } else {
+        await axios.put(
+          `https://one919-backend.onrender.com/favorites/addMusic/${musicId}`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        );
       }
+    } catch (error) {
+      console.error("Failed to update favorite status:", error);
+      setIsLiked((prev) => !prev); 
     }
   };
 

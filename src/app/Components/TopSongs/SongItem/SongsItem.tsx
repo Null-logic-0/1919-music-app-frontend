@@ -35,7 +35,7 @@ const SongItem = ({ song, index, isPlaying, onclick }: SongItemProps) => {
           icon={isPlaying ? "/Icons/toPause.svg" : "/Icons/toPlay.svg"}
           onclick={onclick}
         />
-        <HeartLike musicId={song.id} />
+        <HeartLike musicId={song.id}/>
       </div>
     </div>
   );
