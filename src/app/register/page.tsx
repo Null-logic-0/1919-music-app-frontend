@@ -1,13 +1,12 @@
-import RegisterFrom from '../Components/RegisterForm/RegisterForm';
-import styles from './page.module.scss'
+import RegisterFrom from "../Components/RegisterForm/RegisterForm";
+import styles from "./page.module.scss";
 
-const Register =()=>{
-    return (
-        <div>
-            <RegisterFrom/>
-
-        </div>
-    )
-}
+const Register = () => {
+  return (
+    <div>
+      <RegisterFrom />
+    </div>
+  );
+};
 
 export default Register;
