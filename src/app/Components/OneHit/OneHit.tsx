@@ -1,81 +1,136 @@
-'use client'
-import styles from './OneHit.module.scss';
-import PagesHeaderTop from '@/app/Components/PagesHeaderTop/PagesHeaderTop';
-import Card from '../AlbumCard/Card';
-import { ImageSizeVariant } from '@/app/enums/imageSizeVariants';
-import { ArtistInterface } from '@/app/interfaces/Artist.interface';
-import TableComponent from '../TableComponent/TableComponent';
-import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
-import axios from 'axios';
-
-
+"use client";
+import styles from "./OneHit.module.scss";
+import PagesHeaderTop from "@/app/Components/PagesHeaderTop/PagesHeaderTop";
+import Card from "../AlbumCard/Card";
+import { ImageSizeVariant } from "@/app/enums/imageSizeVariants";
+import { ArtistInterface } from "@/app/interfaces/Artist.interface";
+import TableComponent from "../TableComponent/TableComponent";
+import { useEffect, useState, useCallback, useRef } from "react";
+import { useParams } from "next/navigation";
+import axios from "axios";
+import { useRecoilState } from "recoil";
+import {
+  currentTrackIndexState,
+  musicTracksState,
+  playbackStatusState,
+} from "@/app/helpers/State";
+import { PlaybackStatus } from "@/app/enums/player.enums";
+import { SongInterface } from "@/app/interfaces/Song.interface";
 
 const OneHit = () => {
-    const [hits, setHits] = useState<ArtistInterface | null>(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
-    const { id: hitsIdParam } = useParams();
-    const hitsId = Array.isArray(hitsIdParam)
-    ? hitsIdParam[0]
-    : hitsIdParam;
+  const [hits, setHits] = useState<ArtistInterface | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const { id: hitsIdParam } = useParams();
+  const hitsId = Array.isArray(hitsIdParam) ? hitsIdParam[0] : hitsIdParam;
 
+  const [currentTrackIndex, setCurrentTrackIndex] = useRecoilState(
+    currentTrackIndexState
+  );
+  const [musicTracks, setMusicTracks] = useRecoilState(musicTracksState);
+  const [playbackStatus, setPlaybackStatus] =
+    useRecoilState(playbackStatusState);
 
-    useEffect(() => {
-        const fetchHitsData = async () => {
-            const token = localStorage.getItem('accesstoken')
-            if (hitsId) {
-                try {
-                    const response = await axios.get<ArtistInterface>(`https://one919-backend.onrender.com/music/${hitsId}`, {                        
-                        headers: {
-                            Authorization: `Bearer ${token}`
-                        }
-                        
-                    });
-                    console.log(response,'zd');
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
-                    setHits(response.data);
-                } catch (err) {
-                    setError('Failed to fetch artist data');
-                } finally {
-                    setLoading(false);
-                }
+  useEffect(() => {
+    const fetchHitsData = async () => {
+      const token = localStorage.getItem("accesstoken");
+      if (hitsId) {
+        try {
+          const response = await axios.get<ArtistInterface>(
+            `https://one919-backend.onrender.com/album/${hitsId}`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
             }
-            
-            
-        };
+          );
+          setHits(response.data);
+          setMusicTracks(response.data.musics || []); // Set the music tracks for playback
+        } catch (err) {
+          setError("Failed to fetch artist data");
+        } finally {
+          setLoading(false);
+        }
+      }
+    };
 
-        fetchHitsData();
-    }, [hitsId]);
+    fetchHitsData();
+  }, [hitsId, setMusicTracks]);
 
-    
+  const handleSongClick = useCallback(
+    (songId: string) => {
+      const trackIndex = musicTracks.findIndex((track) => track.id === songId);
+      if (trackIndex !== -1) {
+        if (currentTrackIndex === trackIndex) {
+          setPlaybackStatus((prevStatus) =>
+            prevStatus === PlaybackStatus.PLAYING
+              ? PlaybackStatus.PAUSED
+              : PlaybackStatus.PLAYING
+          );
+        } else {
+          setCurrentTrackIndex(trackIndex);
+          setPlaybackStatus(PlaybackStatus.PLAYING);
+        }
+      } else {
+        console.warn(`Song with ID ${songId} not found in musicTracks`);
+      }
+    },
+    [currentTrackIndex, musicTracks, setCurrentTrackIndex, setPlaybackStatus]
+  );
 
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>{error}</div>;
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (audio && musicTracks.length > 0 && musicTracks[currentTrackIndex]) {
+      if (playbackStatus === PlaybackStatus.PLAYING) {
+        audio.play().catch((err) => console.error("Error playing audio:", err));
+      } else if (playbackStatus === PlaybackStatus.PAUSED) {
+        audio.pause();
+      }
+    }
+  }, [playbackStatus, currentTrackIndex, musicTracks]);
 
-    if (!hits) return <div>No artist data available</div>;
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (audio && musicTracks[currentTrackIndex]) {
+      const currentTrack = musicTracks[currentTrackIndex];
+      audio.src = currentTrack.audioUrl || "";
+      console.log("Now playing track URL:", audio.src); // Log the audio URL
+      if (playbackStatus === PlaybackStatus.PLAYING) {
+        audio.play().catch((err) => console.error("Error playing audio:", err));
+      }
+    }
+  }, [currentTrackIndex, musicTracks, playbackStatus]);
 
-    return (
-        <div className={styles.main}>
-            <PagesHeaderTop link='/tophits' />
-            <div className={styles.card}>
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
+  if (!hits) return <div>No artist data available</div>;
 
-                <Card
-                    images={hits.photo.url}
-                    name={hits.name}
-                    authorName={hits.authorName}
-                    showDetails
-                    imageSizeVariant={ImageSizeVariant.Large}
-                    direction='row'
-                />
+  return (
+    <div className={styles.main}>
+      <PagesHeaderTop link="/tophits" />
+      <div className={styles.card}>
+        <Card
+          images={hits.photo.url}
+          name={hits.name}
+          authorName={hits.authorName}
+          showDetails
+          imageSizeVariant={ImageSizeVariant.Large}
+          direction="row"
+        />
+      </div>
 
-            </div>
-
-            <div className={styles.table}>
-                <TableComponent replaceButton={false} dataSource={hits.musics} />
-            </div>
-        </div>
-    );
-}
+      <div className={styles.table}>
+        <TableComponent
+          replaceButton={false}
+          dataSource={hits.musics}
+          onPlayMusic={(song: SongInterface) => handleSongClick(song.id)}
+          hide={false}
+        />
+      </div>
+    </div>
+  );
+};
 
 export default OneHit;

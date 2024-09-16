@@ -21,13 +21,14 @@ const TopCharts = () => {
       try {
         const accessToken = localStorage.getItem("accesstoken");
         const response = await axios.get(
-          "https://one919-backend.onrender.com/music/charts",
+          "https://one919-backend.onrender.com/album/topCharts",
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
             },
           }
         );
+        
         setCharts(response.data);
       } catch (error) {
         console.error("Error fetching albums:", error);

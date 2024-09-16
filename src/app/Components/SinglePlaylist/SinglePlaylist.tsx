@@ -9,8 +9,13 @@ import Recomended from "./Recomended/Recomended";
 import PlaylistHeader from "./PlaylistHeader/PlaylistHeader";
 import { useParams } from "next/navigation";
 import { SongInterface } from "@/app/interfaces/Song.interface";
-import { useRecoilState } from 'recoil';
-import { currentTrackState } from '../../helpers/State';  
+import { useRecoilState } from "recoil";
+import {
+  currentTrackIndexState,
+  musicTracksState,
+  playbackStatusState,
+} from "@/app/helpers/State";
+import { PlaybackStatus } from "@/app/enums/player.enums";
 
 const SinglePlaylist = () => {
   const [playlist, setPlaylist] = useState<ArtistInterface | null>(null);
@@ -20,14 +25,20 @@ const SinglePlaylist = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [showRecommended, setShowRecommended] = useState(false);
   const { id: playlistIdParam } = useParams();
-  const playlistId = Array.isArray(playlistIdParam) ? playlistIdParam[0] : playlistIdParam;
-  
-  const [, setCurrentTrack] = useRecoilState(currentTrackState);
+  const playlistId = Array.isArray(playlistIdParam)
+    ? playlistIdParam[0]
+    : playlistIdParam;
+
+  const [currentTrackIndex, setCurrentTrackIndex] = useRecoilState(
+    currentTrackIndexState
+  );
+  const [musicTracks, setMusicTracks] = useRecoilState(musicTracksState);
+  const [playbackStatus, setPlaybackStatus] =
+    useRecoilState(playbackStatusState);
 
   useEffect(() => {
     const fetchPlaylist = async () => {
       const token = localStorage.getItem("accesstoken");
-
       if (playlistId) {
         try {
           const response = await axios.get(
@@ -39,8 +50,11 @@ const SinglePlaylist = () => {
             }
           );
           setPlaylist(response.data);
-          setMusicList(response.data.music || []); 
+          setMusicList(response.data.music || []);
+          setMusicTracks(response.data.music || []);
+          console.log("Playlist and music fetched:", response.data.music);
         } catch (error) {
+          console.error("Error fetching playlist:", error);
           setError("Failed to load playlist");
         } finally {
           setLoading(false);
@@ -52,36 +66,11 @@ const SinglePlaylist = () => {
     };
 
     fetchPlaylist();
-  }, [playlistId]);
-
-  useEffect(() => {
-    const fetchMusicList = async () => {
-      const token = localStorage.getItem("accesstoken");
-
-      if (playlistId) {
-        try {
-          const response = await axios.get(
-            `https://one919-backend.onrender.com/music/InPlaylist/${playlistId}`,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
-          setMusicList(response.data || []); 
-        } catch (err) {
-          setError("Failed to load music list");
-        }
-      }
-    };
-
-    fetchMusicList();
-  }, [playlistId]);
+  }, [playlistId, setMusicTracks]);
 
   useEffect(() => {
     const searchMusic = async () => {
       const token = localStorage.getItem("accesstoken");
-
       if (searchTerm && playlistId) {
         try {
           const response = await axios.get(
@@ -92,20 +81,26 @@ const SinglePlaylist = () => {
               },
             }
           );
-          setMusicList(response.data || []); 
+          setMusicList(response.data || []);
         } catch (error) {
+          console.error("Error searching music:", error);
           setError("Failed to search music");
         }
-      } else if (!searchTerm) {
-        const response = await axios.get(
-          `https://one919-backend.onrender.com/music/InPlaylist/${playlistId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        setMusicList(response.data || []); 
+      } else if (!searchTerm && playlistId) {
+        try {
+          const response = await axios.get(
+            `https://one919-backend.onrender.com/music/InPlaylist/${playlistId}`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          setMusicList(response.data || []);
+        } catch (error) {
+          console.error("Error fetching music list:", error);
+          setError("Failed to load music list");
+        }
       }
     };
 
@@ -140,20 +135,15 @@ const SinglePlaylist = () => {
           },
         }
       );
-      setMusicList(response.data || []); 
+      setMusicList(response.data || []);
       setShowRecommended(false);
     } catch (error) {
-      console.error("Failed to add music to playlist", error);
+      alert(`Failed to add music to playlist", ${error}`);
     }
   };
 
   const handleDeleteMusicFromPlaylist = async (musicId: string) => {
     const token = localStorage.getItem("accesstoken");
-
-    if (!playlistId || !musicId) {
-      console.error("Playlist ID or Music ID is missing");
-      return;
-    }
 
     try {
       await axios.delete(
@@ -173,23 +163,33 @@ const SinglePlaylist = () => {
           },
         }
       );
-      setMusicList(response.data || []); 
+      setMusicList(response.data || []);
     } catch (error) {
-      console.error("Failed to delete music from playlist", error);
+      alert(`"Failed to delete music from playlist", ${error}`);
     }
   };
 
-  const handleAddMusic = () => {
-    setShowRecommended(true);
-  };
-
-  const handleClose = () => {
-    setShowRecommended(false);
-  };
-
-  const handlePlayMusic = useCallback((track: SongInterface) => {
-    setCurrentTrack(track);  
-  }, [setCurrentTrack]);
+  const handleSongClick = useCallback(
+    (songId: string) => {
+      const trackIndex = musicTracks.findIndex((track) => track.id === songId);
+      if (trackIndex !== -1) {
+        console.log(`Playing song with ID: ${songId} at index: ${trackIndex}`);
+        if (currentTrackIndex === trackIndex) {
+          setPlaybackStatus((prevStatus) =>
+            prevStatus === PlaybackStatus.PLAYING
+              ? PlaybackStatus.PAUSED
+              : PlaybackStatus.PLAYING
+          );
+        } else {
+          setCurrentTrackIndex(trackIndex);
+          setPlaybackStatus(PlaybackStatus.PLAYING);
+        }
+      } else {
+        alert(`Song with ID ${songId} not found in musicTracks`);
+      }
+    },
+    [currentTrackIndex, musicTracks, setCurrentTrackIndex, setPlaybackStatus]
+  );
 
   if (loading) return <p className={styles.alert}>Loading...</p>;
   if (error) return <p className={styles.alert}>{error}</p>;
@@ -207,7 +207,7 @@ const SinglePlaylist = () => {
                 playlist={playlist}
                 searchTerm={searchTerm}
                 setSearchTerm={setSearchTerm}
-                addMusics={handleAddMusic}
+                addMusics={() => setShowRecommended(true)}
                 isTablefull={isTableFull}
               />
             </div>
@@ -217,14 +217,15 @@ const SinglePlaylist = () => {
                 replaceButton={true}
                 dataSource={musicList}
                 addMusic={handleAddMusicToPlaylist}
-                remove={handleDeleteMusicFromPlaylist} 
-                onPlayMusic={handlePlayMusic}  
-              />
+                remove={handleDeleteMusicFromPlaylist}
+                onPlayMusic={(song) => handleSongClick(song.id)} hide={true}              />
             ) : (
               playlistId && (
                 <Recomended
                   playlistId={playlistId}
                   addMusic={handleAddMusicToPlaylist}
+                  onPlayMusic={(song) => handleSongClick(song.id)}
+                  hide={true}
                 />
               )
             )}
@@ -235,9 +236,9 @@ const SinglePlaylist = () => {
       {showRecommended && playlistId && (
         <Recomended
           playlistId={playlistId}
-          onclick={handleClose}
+          onclick={() => setShowRecommended(false)}
           addMusic={handleAddMusicToPlaylist}
-        />
+          onPlayMusic={(song) => handleSongClick(song.id)} hide={true}        />
       )}
     </div>
   );

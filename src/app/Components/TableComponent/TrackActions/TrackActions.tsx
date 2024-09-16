@@ -1,6 +1,6 @@
 import { useRecoilState } from "recoil";
 import {
-  currentTrackIndexState,
+  currentTrackIdState,  
   playbackStatusState,
 } from "../../../helpers/State";
 import { PlaybackStatus } from "../../../enums/player.enums";
@@ -13,7 +13,8 @@ type TrackActionsProps = {
   dataSource: SongInterface[];
   addMusic: (musicId: string) => void;
   remove: (musicId: string) => void;
-  onPlayMusic?: (track: SongInterface) => void;  // Updated prop name
+  onPlayMusic?: (track: SongInterface) => void;  
+  hide:boolean;
 };
 
 const TrackActions = ({
@@ -22,33 +23,20 @@ const TrackActions = ({
   dataSource,
   addMusic,
   remove,
-  onPlayMusic,  
+  onPlayMusic, 
+  hide
 }: TrackActionsProps) => {
-  const [currentTrackIndex, setCurrentTrackIndex] = useRecoilState(
-    currentTrackIndexState
-  );
-  const [playbackStatus, setPlaybackStatus] =
-    useRecoilState(playbackStatusState);
+  const [currentTrackId, setCurrentTrackId] = useRecoilState(currentTrackIdState);  
+  const [playbackStatus, setPlaybackStatus] = useRecoilState(playbackStatusState);
 
-  const isPlaying =
-    currentTrackIndex !== null &&
-    dataSource[currentTrackIndex]?.id === record.id &&
-    playbackStatus === PlaybackStatus.PLAYING;
+  const isPlaying = currentTrackId === record.id && playbackStatus === PlaybackStatus.PLAYING;
 
   const onPlayPauseClick = () => {
-    const trackIndex = dataSource.findIndex((song) => song.id === record.id);
-
     if (isPlaying) {
-      setPlaybackStatus(PlaybackStatus.PAUSED);
+      setPlaybackStatus(PlaybackStatus.PAUSED);  
     } else {
-      if (
-        playbackStatus === PlaybackStatus.PLAYING &&
-        currentTrackIndex !== trackIndex
-      ) {
-        setPlaybackStatus(PlaybackStatus.PAUSED);
-      }
-      setCurrentTrackIndex(trackIndex);
-      setPlaybackStatus(PlaybackStatus.PLAYING);
+      setCurrentTrackId(record.id);  
+      setPlaybackStatus(PlaybackStatus.PLAYING);  
     }
 
     if (onPlayMusic) {
@@ -58,6 +46,7 @@ const TrackActions = ({
 
   return (
     <ActionsColumn
+      hide={hide}
       record={record}
       replaceButton={replaceButton}
       isPlaying={isPlaying}
