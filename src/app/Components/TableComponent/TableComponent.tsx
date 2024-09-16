@@ -14,7 +14,8 @@ type TableProps = {
   addMusic?: (musicId: string) => void;
   editMusic?: () => void;
   remove?: (musicId: string) => void;
-  onPlayMusic?: (track: SongInterface) => void;  
+  onPlayMusic?: (track: any) => void;
+  hide:boolean;
 };
 
 const TableComponent = ({
@@ -26,6 +27,7 @@ const TableComponent = ({
   addMusic,
   editMusic,
   onPlayMusic,  
+  hide
 }: TableProps) => {
   const columns = [
     {
@@ -46,8 +48,8 @@ const TableComponent = ({
             record={record}
             replaceButton={replaceButton}
             dataSource={dataSource}
-            onPlayMusic={() => onPlayMusic?.(record)}  
-          />
+            onPlayMusic={() => onPlayMusic?.(record)} 
+            hide={hide} />
         );
       },
     },

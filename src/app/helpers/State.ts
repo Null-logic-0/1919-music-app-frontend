@@ -1,6 +1,7 @@
 import { atom } from 'recoil';
 import { PlaybackStatus, LoopStatus, ShuffleStatus } from '../enums/player.enums';
 import { Track } from '../interfaces/Track.interface';
+import { SongInterface } from '../interfaces/Song.interface';
 
 export const playbackStatusState = atom<PlaybackStatus>({
     key: 'playbackStatusState',
@@ -37,10 +38,7 @@ export const currentTrackIndexState = atom<number>({
     default: 0,
 });
 
-export const currentTrackState = atom<string | null>({
-    key:"currentTrackIdState",
-    default:null,
-});
+
 
 export const musicTracksState = atom<Track[]>({
     key: 'musicTracksState',
@@ -51,3 +49,11 @@ export const currentTrackIdState = atom<string | null>({
     key: 'currentTrackIdState',
     default: null,
 });
+
+
+export const currentTrackState = atom<SongInterface | null>({
+    key: 'currentTrackState',
+    default: null,
+  });
+
+ 

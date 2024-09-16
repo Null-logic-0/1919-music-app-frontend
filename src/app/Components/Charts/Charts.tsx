@@ -24,7 +24,7 @@ const Charts = () => {
       try {
         const accessToken = localStorage.getItem("accesstoken");
         const response = await axios.get(
-          "https://one919-backend.onrender.com/music/charts",
+          "https://one919-backend.onrender.com/album/topCharts",
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,

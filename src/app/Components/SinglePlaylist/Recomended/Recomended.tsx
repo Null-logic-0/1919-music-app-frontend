@@ -9,9 +9,11 @@ type Props = {
     onclick?: () => void;
     playlistId?: string; 
     addMusic?: (musicId: string) => void;
+    onPlayMusic?: (musicId: any) => void; 
+    hide:boolean;
 };
 
-const Recomended = ({ onclick, playlistId, addMusic }: Props) => {
+const Recomended = ({ onclick, playlistId, addMusic, onPlayMusic,hide}: Props) => {
     const [musics, setMusics] = useState<SongInterface[]>([]);
 
     useEffect(() => {
@@ -34,6 +36,12 @@ const Recomended = ({ onclick, playlistId, addMusic }: Props) => {
         fetchData();
     }, [playlistId]); 
 
+    const handlePlayMusic = (musicId: string) => {
+        if (onPlayMusic) {
+            onPlayMusic(musicId); 
+        }
+    };
+
     return (
         <div className={styles.main}>
             <div className={styles.container}>
@@ -42,11 +50,11 @@ const Recomended = ({ onclick, playlistId, addMusic }: Props) => {
             </div>
 
             <TableComponent 
-                replaceButton={false} 
-                dataSource={musics} 
-                showThead={false} 
+                replaceButton={false}
+                dataSource={musics}
+                showThead={false}
                 addMusic={(musicId: string) => addMusic?.(musicId)}
-            />
+                onPlayMusic={handlePlayMusic} hide={hide}            />
         </div>
     );
 };

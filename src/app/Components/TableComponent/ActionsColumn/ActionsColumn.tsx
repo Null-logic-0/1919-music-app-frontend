@@ -9,6 +9,7 @@ type ActionsColumnProps = {
   onPlayPauseClick: () => void;
   remove?: (musicId: number) => void;
   addMusic?: (musicId: number) => void;
+  hide: boolean;
 };
 
 const ActionsColumn = ({
@@ -18,20 +19,29 @@ const ActionsColumn = ({
   onPlayPauseClick,
   addMusic,
   remove,
+  hide,
 }: ActionsColumnProps) => (
   <div className={styles.buttons}>
     <MultiTaskButton
       icon={isPlaying ? "/Icons/toPause.svg" : "/Icons/toPlay.svg"}
       onclick={onPlayPauseClick}
     />
-    {replaceButton ? (
-      remove ? (
-        <MultiTaskButton icon="/Icons/trash.svg" onclick={() => remove(record.id)} />
-      ) : null
-    ) : (
-      addMusic ? (
-        <MultiTaskButton icon="/Icons/plusIcon.png" onclick={() => addMusic(record.id)} />
-      ) : null
+    {hide && (
+      <>
+        {replaceButton ? (
+          remove ? (
+            <MultiTaskButton
+              icon="/Icons/trash.svg"
+              onclick={() => remove(record.id)}
+            />
+          ) : null
+        ) : addMusic ? (
+          <MultiTaskButton
+            icon="/Icons/plusIcon.png"
+            onclick={() => addMusic(record.id)}
+          />
+        ) : null}
+      </>
     )}
   </div>
 );
