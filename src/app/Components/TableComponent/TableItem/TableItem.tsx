@@ -9,12 +9,12 @@ import styles from './TableItem.module.scss';
 
 export const renderTitleColumn = (record: SongInterface) => (
   <Card
-    name={record.name}
-    authorName={record.authorName}
+    name={record?.music?.name || record.name}
+    authorName={record?.music?.authorName || record.authorName}
     showDetails
     imageSizeVariant={ImageSizeVariant.Small}
     direction="row"
-    images={record.photo.url}
+    images={record?.music?.photo?.url || record.photo.url}
   />
 );
 
