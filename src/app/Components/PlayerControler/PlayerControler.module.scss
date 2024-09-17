@@ -7,7 +7,7 @@
     align-items: center;
     position: fixed;
     bottom: 0;
-    z-index: 1;
+    z-index: 1000;
     background-color: $dark1;
     width: 100%;
 
@@ -19,7 +19,7 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 16px 24px 16px 24px;
+    padding: 12px 24px 12px 24px;
 
 }
 

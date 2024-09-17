@@ -4,6 +4,8 @@
 }
 
 .container {
+    display: flex;
+    flex-direction: column;
     padding-left: 24px;
     padding-right: 24px;
 
@@ -24,4 +26,13 @@
     justify-content: center;
     align-items: center;
     margin-top: 60px;
+}
+
+
+.tables {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    padding-left: 24px;
 }

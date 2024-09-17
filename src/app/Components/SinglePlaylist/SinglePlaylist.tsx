@@ -50,7 +50,7 @@ const SinglePlaylist = () => {
               },
             }
           );
-          console.log(response.data,'response.data')
+          console.log(response.data, "response.data");
           setPlaylist(response.data);
           setMusicList(response.data.musics);
           setMusicTracks(response.data.musics);
@@ -194,9 +194,7 @@ const SinglePlaylist = () => {
   const isTableFull = musicList.length > 0;
   const isEmpty = musicList.length === 0;
 
-  console.log(isTableFull, "isfull");
-  console.log(musicList, "musicList");
-
+  
   return (
     <div className={styles.main}>
       <PagesHeaderTop link="/createdPlaylists" />
@@ -212,37 +210,38 @@ const SinglePlaylist = () => {
                 isTablefull={isTableFull}
               />
             </div>
-            {isTableFull && (
-              <TableComponent
-                replaceButton={true}
-                dataSource={musicList}
-                addMusic={handleAddMusicToPlaylist}
-                remove={handleDeleteMusicFromPlaylist}
-                onPlayMusic={(song) => handleSongClick(song.id)}
-                hide={true}
-              />
-            )}{" "}
-            {isEmpty && playlistId && (
-              <Recomended
-                playlistId={playlistId}
-                addMusic={handleAddMusicToPlaylist}
-                onPlayMusic={(song) => handleSongClick(song.id)}
-                hide={true}
-              />
-            )}
+            <div className={styles.tables}>
+              {isTableFull && (
+                <TableComponent
+                  replaceButton={true}
+                  dataSource={musicList}
+                  addMusic={handleAddMusicToPlaylist}
+                  remove={handleDeleteMusicFromPlaylist}
+                  onPlayMusic={(song) => handleSongClick(song.id)}
+                  hide={true}
+                />
+              )}
+              {isEmpty && playlistId && (
+                <Recomended
+                  playlistId={playlistId}
+                  addMusic={handleAddMusicToPlaylist}
+                  onPlayMusic={(song) => handleSongClick(song.id)}
+                  hide={true}
+                />
+              )}
+              {showRecommended && playlistId && (
+                <Recomended
+                  playlistId={playlistId}
+                  onclick={() => setShowRecommended(false)}
+                  addMusic={handleAddMusicToPlaylist}
+                  onPlayMusic={(song) => handleSongClick(song.id)}
+                  hide={true}
+                />
+              )}
+            </div>
           </>
         )}
       </div>
-
-      {showRecommended && playlistId && (
-        <Recomended
-          playlistId={playlistId}
-          onclick={() => setShowRecommended(false)}
-          addMusic={handleAddMusicToPlaylist}
-          onPlayMusic={(song) => handleSongClick(song.id)}
-          hide={true}
-        />
-      )}
     </div>
   );
 };

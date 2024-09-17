@@ -9,6 +9,7 @@ import PlayListFrom from "../PlayListFrom/PlayListFrom";
 import Image from "next/image";
 import { FormDataInterface } from "@/app/interfaces/PlaylistForm.interface";
 import axios from "axios";
+import Link from "next/link";
 
 const links = [
   {
@@ -53,8 +54,7 @@ const NavMenu = () => {
         }
       );
       setDataSource(response.data);
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   const addNewPlaylist = (newPlaylist: FormDataInterface) => {
@@ -72,8 +72,7 @@ const NavMenu = () => {
       setDataSource((prevPlaylists) =>
         prevPlaylists.filter((playlist) => playlist.id !== id)
       );
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   const toggleModal = () => {
@@ -82,7 +81,9 @@ const NavMenu = () => {
 
   return (
     <div className={style.main}>
-      <Image src={"/Icons/Logo.svg"} alt="logo" width={70} height={75} />
+      <Link href='/'>
+        <Image src={"/Icons/Logo.svg"} alt="logo" width={70} height={75} />
+      </Link>
 
       <div className={style.container}>
         <NavItem links={links} />
