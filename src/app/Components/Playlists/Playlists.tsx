@@ -18,7 +18,6 @@ const Playlists = () => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const storedToken = localStorage.getItem("accesstoken");
-      console.log("Stored token: ", storedToken);
       setToken(storedToken);
     }
   }, []);
@@ -35,10 +34,8 @@ const Playlists = () => {
           },
         }
       );
-      console.log("API Response: ", response.data);
       setPlaylists(response.data);
     } catch (error) {
-      console.error("Error fetching playlists: ", error);
     }
   };
 
@@ -66,7 +63,6 @@ const Playlists = () => {
       setPlaylists((prevPlaylists) => [...prevPlaylists, response.data]); 
       setShowModal(false); 
     } catch (error) {
-      console.error("Error adding playlist:", error);
     }
   };
 
@@ -81,7 +77,6 @@ const Playlists = () => {
         prevPlaylists.filter((playlist) => playlist.id !== id)
       );
     } catch (error) {
-      console.error(`Error deleting playlist: ${error}`);
     }
   };
 

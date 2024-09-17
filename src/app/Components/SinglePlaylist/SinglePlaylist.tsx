@@ -83,7 +83,6 @@ const SinglePlaylist = () => {
           );
           setMusicList(response.data || []);
         } catch (error) {
-          console.error("Error searching music:", error);
           setError("Failed to search music");
         }
       } else if (!searchTerm && playlistId) {
@@ -98,7 +97,6 @@ const SinglePlaylist = () => {
           );
           setMusicList(response.data || []);
         } catch (error) {
-          console.error("Error fetching music list:", error);
           setError("Failed to load music list");
         }
       }
@@ -111,7 +109,6 @@ const SinglePlaylist = () => {
     const token = localStorage.getItem("accesstoken");
 
     if (!playlistId || !musicId) {
-      console.error("Playlist ID or Music ID is missing");
       return;
     }
 
@@ -137,9 +134,7 @@ const SinglePlaylist = () => {
       );
       setMusicList(response.data || []);
       setShowRecommended(false);
-    } catch (error) {
-      alert(`Failed to add music to playlist", ${error}`);
-    }
+    } catch (error) {}
   };
 
   const handleDeleteMusicFromPlaylist = async (musicId: string) => {
@@ -164,16 +159,13 @@ const SinglePlaylist = () => {
         }
       );
       setMusicList(response.data || []);
-    } catch (error) {
-      alert(`"Failed to delete music from playlist", ${error}`);
-    }
+    } catch (error) {}
   };
 
   const handleSongClick = useCallback(
     (songId: string) => {
       const trackIndex = musicTracks.findIndex((track) => track.id === songId);
       if (trackIndex !== -1) {
-        console.log(`Playing song with ID: ${songId} at index: ${trackIndex}`);
         if (currentTrackIndex === trackIndex) {
           setPlaybackStatus((prevStatus) =>
             prevStatus === PlaybackStatus.PLAYING
@@ -185,7 +177,6 @@ const SinglePlaylist = () => {
           setPlaybackStatus(PlaybackStatus.PLAYING);
         }
       } else {
-        alert(`Song with ID ${songId} not found in musicTracks`);
       }
     },
     [currentTrackIndex, musicTracks, setCurrentTrackIndex, setPlaybackStatus]
@@ -194,7 +185,7 @@ const SinglePlaylist = () => {
   if (loading) return <p className={styles.alert}>Loading...</p>;
   if (error) return <p className={styles.alert}>{error}</p>;
 
-  const isTableFull = Array.isArray(musicList) && musicList.length > 0;
+  const isTableFull =musicList.length > 0;
 
   return (
     <div className={styles.main}>
