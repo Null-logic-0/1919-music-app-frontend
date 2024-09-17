@@ -1,6 +1,8 @@
 import { SongInterface } from "./Song.interface";
 
 export interface ArtistInterface {
+    biography: string;
+    lastName: string;
     name: string,
     photo: any,
     count: any,
