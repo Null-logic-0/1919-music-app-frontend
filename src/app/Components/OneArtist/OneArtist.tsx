@@ -43,6 +43,7 @@ const OneArtist = () => {
                     });
 
                     setArtist(response.data);
+                    // @ts-ignore
                     setMusicTracks(response.data.musics); 
                 } catch (err) {
                     setError('Failed to fetch artist data');

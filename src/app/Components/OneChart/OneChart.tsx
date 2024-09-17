@@ -49,6 +49,7 @@ const OneChart = () => {
             }
           );
           setCharts(response.data);
+          // @ts-ignore
           setMusicTracks(response.data.musics || []);
         } catch (err) {
           setError("Failed to fetch charts data");

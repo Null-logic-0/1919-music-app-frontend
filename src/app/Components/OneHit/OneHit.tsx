@@ -47,7 +47,8 @@ const OneHit = () => {
             }
           );
           setHits(response.data);
-          setMusicTracks(response.data.musics || []); // Set the music tracks for playback
+          // @ts-ignore
+          setMusicTracks(response.data.musics || []); 
         } catch (err) {
           setError("Failed to fetch artist data");
         } finally {
@@ -96,7 +97,6 @@ const OneHit = () => {
     if (audio && musicTracks[currentTrackIndex]) {
       const currentTrack = musicTracks[currentTrackIndex];
       audio.src = currentTrack.audioUrl || "";
-      console.log("Now playing track URL:", audio.src); // Log the audio URL
       if (playbackStatus === PlaybackStatus.PLAYING) {
         audio.play().catch((err) => console.error("Error playing audio:", err));
       }

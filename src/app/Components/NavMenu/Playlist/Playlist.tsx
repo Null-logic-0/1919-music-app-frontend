@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Image from "next/image";
 import styles from "./Playlist.module.scss";
 import Link from "next/link";
