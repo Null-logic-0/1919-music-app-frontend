@@ -1,158 +1,163 @@
-@import '../../styles/globalColors/color.scss';
-@import '../../styles/globalBorders/borders.scss';
-
+@import "../../styles/globalColors/color.scss";
+@import "../../styles/globalBorders/borders.scss";
 
 .main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    padding-top: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding-top: 32px;
 }
 
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .inputs {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-items: baseline;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: baseline;
+  justify-content: center;
 }
 
 .image {
-    border-radius: $medium;
+  border-radius: $medium;
 }
 
 .infoContainer {
-    display: flex;
+  display: flex;
 
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
 }
 
-
 .upload {
-    border: 0.797px solid #FFF;
-    width: 240px;
-    height: 172px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  border: 0.797px solid #fff;
+  width: 240px;
+  height: 172px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .uploadImage {
-    color: #FFF;
-    font-size: 14px;
-    font-weight: 400;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 400;
 }
 
 .uploader[type="file"] {
-    display: none;
+  display: none;
 }
 
 .label {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .info {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
 }
 
 .input {
-    background-color: $dark3;
-    border-radius: $small;
-    color: #FFF;
+  background-color: $dark3;
+  border-radius: $small;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  padding: 8px;
+  width: 240px;
+  height: 41px;
+  outline: none;
+  border: none;
+  margin-bottom: 24px;
+
+  &::placeholder {
     font-size: 16px;
     font-weight: 500;
     line-height: 24px;
-    padding: 8px;
-    width: 240px;
-    height: 41px;
-    outline: none;
-    border: none;
-
-    &::placeholder {
-        font-size: 16px;
-        font-weight: 500;
-        line-height: 24px;
-        color: #FFF;
-    }
+    color: #fff;
+  }
 }
 
 .submit {
-    width: 240px;
-    padding: 16px 8px;
-    border-radius: 24px;
-    background: #FFF;
-    color: #0D0D0D;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 24px;
-    cursor: pointer;
-    border: none;
-    margin-bottom: 20px;
+  width: 240px;
+  padding: 16px 8px;
+  border-radius: 24px;
+  background: #fff;
+  color: #0d0d0d;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  cursor: pointer;
+  border: none;
+  margin-bottom: 20px;
 }
 
+.spinner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
 .errorContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
 }
 
 .errorMessage {
-    color: $error;
-    font-size: 14px;
-    font-weight: 500;
+  color: $error;
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .error {
-    border: 1px solid $error;
+  border: 1px solid $error;
 }
 
+@media (max-width: 768px) {
+  .upload {
+    width: 122px;
+    height: 88px;
+  }
 
+  .input {
+    width: 152px;
+    font-size: 10px;
+  }
 
-@media(max-width:768px) {
-    .upload {
-        width: 122px;
-        height: 88px;
-    }
+  .submit {
+    font-size: 14px;
+    width: 152px;
+    padding: 8px;
+  }
 
-    .input {
-        width: 152px;
-        font-size: 10px;
-    }
+  .main {
+    padding-top: 16px;
+    gap: 16px;
+  }
 
-    .submit {
-        font-size: 14px;
-        width: 152px;
-        padding: 8px;
-    }
+  .errorMessage {
+    display: none;
+  }
 
-    .main {
-        padding-top: 16px;
-        gap: 16px;
-    }
-
-    .errorMessage {
-        display: none;
-    }
-
-    .uploadImage {
-        font-size: 10px;
-    }
-
-
+  .uploadImage {
+    font-size: 10px;
+  }
 }

@@ -5,6 +5,7 @@ import { FormDataInterface } from "@/app/interfaces/PlaylistForm.interface";
 import classNames from "classnames";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Spinner from "../LoadingSpiner/Spiner";
 
 type FromProps = {
   setShowModal: (value: boolean) => void;
@@ -15,7 +16,7 @@ type FromProps = {
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
 
-const PlayListFrom = ({
+const PlayListForm = ({
   setShowModal,
   addNewPlaylist,
   playlist,
@@ -29,6 +30,7 @@ const PlayListFrom = ({
     reset,
   } = useForm<FormDataInterface>();
   const [imageUploaded, setImageUploaded] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     if (playlist) {
@@ -66,6 +68,8 @@ const PlayListFrom = ({
       alert("No token found in localStorage");
       return;
     }
+
+    setLoading(true); 
 
     let request;
     if (playlist) {
@@ -111,69 +115,76 @@ const PlayListFrom = ({
         reset();
       })
       .catch((error) => {
+        console.error("Error:", error);
+      })
+      .finally(() => {
+        setLoading(false); 
       });
   };
 
   return (
-    <form className={styles.main} onSubmit={handleSubmit(onSubmit)}>
-      <div className={styles.container}>
-        <div className={styles.infoContainer}>
-          <div className={styles.info}>
-            <p className={styles.uploadImage}>Upload Image</p>
-            {imageUploaded && (
-              <Image
-                src={"/Icons/wellDone.png"}
-                alt="icon"
-                width={16}
-                height={16}
+    <div className={styles.main}>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className={styles.container}>
+          <div className={styles.infoContainer}>
+            <div className={styles.info}>
+              <p className={styles.uploadImage}>Upload Image</p>
+              {imageUploaded && (
+                <Image
+                  src={"/Icons/wellDone.png"}
+                  alt="icon"
+                  width={16}
+                  height={16}
+                />
+              )}
+            </div>
+            <div className={styles.upload}>
+              <label htmlFor="fileInput" className={styles.label}>
+                <Image
+                  src={"/Icons/plusIcon.png"}
+                  width={63}
+                  height={63}
+                  alt="icon"
+                />
+              </label>
+              <input
+                type="file"
+                id="fileInput"
+                className={styles.uploader}
+                onChange={handleFileChange}
               />
-            )}
-          </div>
-          <div className={styles.upload}>
-            <label htmlFor="fileInput" className={styles.label}>
-              <Image
-                src={"/Icons/plusIcon.png"}
-                width={63}
-                height={63}
-                alt="icon"
+            </div>
+            <div className={styles.errorContainer}>
+              <input
+                {...register("name", {
+                  required: "Playlist name is required",
+                  maxLength: {
+                    value: 20,
+                    message: "Max length is 20 characters",
+                  },
+                })}
+                type="text"
+                placeholder="Playlist name.."
+                className={classNames(styles.input, {
+                  [styles.error]: errors.name,
+                })}
               />
-            </label>
-            <input
-              type="file"
-              id="fileInput"
-              className={styles.uploader}
-              onChange={handleFileChange}
-            />
-          </div>
-          <div className={styles.errorContainer}>
-            <input
-              {...register("name", {
-                required: "Playlist name is required",
-                maxLength: {
-                  value: 20,
-                  message: "Max length is 20 characters",
-                },
-              })}
-              type="text"
-              placeholder="Playlist name.."
-              className={classNames(styles.input, {
-                [styles.error]: errors.name,
-              })}
-            />
-            {errors.name && (
-              <span className={styles.errorMessage}>{errors.name.message}</span>
-            )}
+              {errors.name && (
+                <span className={styles.errorMessage}>{errors.name.message}</span>
+              )}
+            </div>
           </div>
         </div>
-      </div>
-      <input
-        type="submit"
-        className={styles.submit}
-        value={playlist ? "Update" : "Save"}
-      />
-    </form>
-    
+        <input
+          type="submit"
+          className={styles.submit}
+          value={loading ? "Saving..." : playlist ? "Update" : "Save"}
+          disabled={loading} 
+        />
+        {loading && <div className={styles.spinner}><Spinner /></div>} 
+      </form>
+    </div>
   );
 };
 
-export default PlayListFrom;
+export default PlayListForm;

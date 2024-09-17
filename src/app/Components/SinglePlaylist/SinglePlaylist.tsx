@@ -183,10 +183,19 @@ const SinglePlaylist = () => {
     [currentTrackIndex, musicTracks, setCurrentTrackIndex, setPlaybackStatus]
   );
 
-  if (loading) return <div className={styles.spinner}><Spinner/></div>;
+  if (loading)
+    return (
+      <div className={styles.spinner}>
+        <Spinner />
+      </div>
+    );
   if (error) return <p className={styles.alert}>{error}</p>;
 
-  const isTableFull =musicList.length > 0;
+  const isTableFull = musicList.length > 0;
+  const isEmpty = musicList.length === 0;
+
+  console.log(musicList.length, "isfull");
+  console.log(isEmpty, "isEmpty");
 
   return (
     <div className={styles.main}>
@@ -203,8 +212,7 @@ const SinglePlaylist = () => {
                 isTablefull={isTableFull}
               />
             </div>
-
-            {isTableFull ? (
+            {isTableFull && (
               <TableComponent
                 replaceButton={true}
                 dataSource={musicList}
@@ -213,15 +221,14 @@ const SinglePlaylist = () => {
                 onPlayMusic={(song) => handleSongClick(song.id)}
                 hide={true}
               />
-            ) : (
-              playlistId && (
-                <Recomended
-                  playlistId={playlistId}
-                  addMusic={handleAddMusicToPlaylist}
-                  onPlayMusic={(song) => handleSongClick(song.id)}
-                  hide={true}
-                />
-              )
+            )}{" "}
+            {isEmpty && playlistId && (
+              <Recomended
+                playlistId={playlistId}
+                addMusic={handleAddMusicToPlaylist}
+                onPlayMusic={(song) => handleSongClick(song.id)}
+                hide={true}
+              />
             )}
           </>
         )}
