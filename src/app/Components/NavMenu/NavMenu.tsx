@@ -40,7 +40,7 @@ const NavMenu = () => {
 
   useEffect(() => {
     fetchPlaylist();
-  }, []);
+  }, [dataSource]);
 
   const fetchPlaylist = async () => {
     try {
@@ -60,6 +60,7 @@ const NavMenu = () => {
 
   const addNewPlaylist = (newPlaylist: FormDataInterface) => {
     setDataSource((prevPlaylists) => [...prevPlaylists, newPlaylist]);
+    fetchPlaylist();
   };
 
   const deletePlaylist = async (id: number) => {
