@@ -1,77 +1,66 @@
-@import '../../styles/globalBorders/borders.scss';
-@import '../../styles/globalColors/color.scss';
-
 .drpButton {
-    font-size: 24px;
-    display: flex;
-    color: $info;
-    align-items: center;
-    background-color: transparent;
-    cursor: pointer;
-    font-weight: 500;
-
-
+  font-size: 24px;
+  display: flex;
+  color: #1673ff;
+  align-items: center;
+  background-color: transparent;
+  cursor: pointer;
+  font-weight: 500;
 }
 
 .dropContent {
-    background-color: $dark3;
-    padding: $large;
-    border-radius: $small;
-    color: #FFF;
-    margin-left: 50px;
-    padding: 12px 24px;
-    max-width: 326px;
-    width: 100%;
-    position: absolute;
-
-
+  background-color: #232323;
+  padding: 16px;
+  border-radius: 8px;
+  color: #fff;
+  margin-left: 50px;
+  padding: 12px 24px;
+  max-width: 326px;
+  width: 100%;
+  position: absolute;
 }
 
 .dropContentWrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    align-items: start;
-
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
 }
 
 .dropdown {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .lableWrapper {
-    display: flex;
-    gap: 8px;
-    cursor: pointer;
+  display: flex;
+  gap: 8px;
+  cursor: pointer;
 }
 
 .radioStyler {
-    cursor: pointer;
-    width: 24px;
+  cursor: pointer;
+  width: 24px;
 }
 
 .span {
-    font-size: 24px;
+  font-size: 24px;
 }
 
-@media (max-width:1024px) {
-    .drpButton  {
-        font-size: 20px;       
-    }
-
+@media (max-width: 1024px) {
+  .drpButton {
+    font-size: 20px;
+  }
 }
 
-@media (max-width:1024px) {
-    .drpButton  {
-        font-size: 16px;
-        font-weight: 400;
-       
-    }
-    .dropContent {
-        right: 10px;
-    }
-
+@media (max-width: 1024px) {
+  .drpButton {
+    font-size: 16px;
+    font-weight: 400;
+  }
+  .dropContent {
+    right: 10px;
+  }
 }
