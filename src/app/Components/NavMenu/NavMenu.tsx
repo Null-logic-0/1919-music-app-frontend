@@ -54,7 +54,6 @@ const NavMenu = () => {
       );
       setDataSource(response.data);
     } catch (error) {
-      alert(`Error fetching data: ${error}`);
     }
   };
 
@@ -74,7 +73,6 @@ const NavMenu = () => {
         prevPlaylists.filter((playlist) => playlist.id !== id)
       );
     } catch (error) {
-      alert(`Error deleting playlist: ${error}`);
     }
   };
 

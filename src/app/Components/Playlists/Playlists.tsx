@@ -13,20 +13,18 @@ import { FormDataInterface } from "@/app/interfaces/PlaylistForm.interface";
 const Playlists = () => {
   const [playlists, setPlaylists] = useState<FormDataInterface[]>([]);
   const [showModal, setShowModal] = useState(false);
-
   const [token, setToken] = useState<string | null>(null);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       const storedToken = localStorage.getItem("accesstoken");
+      console.log("Stored token: ", storedToken);
       setToken(storedToken);
     }
   }, []);
 
   const fetchPlaylists = async () => {
-    if (!token) {
-      return;
-    }
+    if (!token) return;
 
     try {
       const response = await axios.get(
@@ -37,13 +35,18 @@ const Playlists = () => {
           },
         }
       );
+      console.log("API Response: ", response.data);
       setPlaylists(response.data);
-    } catch (error) {}
+    } catch (error) {
+      console.error("Error fetching playlists: ", error);
+    }
   };
 
   useEffect(() => {
-    fetchPlaylists();
-  }, [playlists]);
+    if (token) {
+      fetchPlaylists();
+    }
+  }, [token]);
 
   const toggleModal = () => {
     setShowModal(!showModal);
@@ -51,7 +54,7 @@ const Playlists = () => {
 
   const handleAddPlaylist = async (newPlaylist: FormDataInterface) => {
     try {
-      await axios.post(
+      const response = await axios.post(
         "https://one919-backend.onrender.com/playlist",
         newPlaylist,
         {
@@ -60,8 +63,8 @@ const Playlists = () => {
           },
         }
       );
-      fetchPlaylists();
-      setShowModal(false);
+      setPlaylists((prevPlaylists) => [...prevPlaylists, response.data]); 
+      setShowModal(false); 
     } catch (error) {
       console.error("Error adding playlist:", error);
     }
@@ -74,7 +77,9 @@ const Playlists = () => {
           Authorization: `Bearer ${localStorage.getItem("accesstoken")}`,
         },
       });
-      fetchPlaylists();
+      setPlaylists((prevPlaylists) =>
+        prevPlaylists.filter((playlist) => playlist.id !== id)
+      );
     } catch (error) {
       console.error(`Error deleting playlist: ${error}`);
     }
