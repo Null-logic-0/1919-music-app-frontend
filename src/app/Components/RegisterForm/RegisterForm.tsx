@@ -51,7 +51,6 @@ const RegisterFrom = () => {
         "https://one919-backend.onrender.com/user/signup",
         values,
         {
-          withCredentials: true,
           headers: {
             "Content-Type": "application/json",
           },
