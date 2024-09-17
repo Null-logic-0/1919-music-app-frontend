@@ -198,7 +198,7 @@ const SinglePlaylist = () => {
 
   return (
     <div className={styles.main}>
-      <PagesHeaderTop link="/playlist" />
+      <PagesHeaderTop link="/createdPlaylists" />
       <div className={styles.container}>
         {playlist && (
           <>
@@ -218,7 +218,9 @@ const SinglePlaylist = () => {
                 dataSource={musicList}
                 addMusic={handleAddMusicToPlaylist}
                 remove={handleDeleteMusicFromPlaylist}
-                onPlayMusic={(song) => handleSongClick(song.id)} hide={true}              />
+                onPlayMusic={(song) => handleSongClick(song.id)}
+                hide={true}
+              />
             ) : (
               playlistId && (
                 <Recomended
@@ -238,7 +240,9 @@ const SinglePlaylist = () => {
           playlistId={playlistId}
           onclick={() => setShowRecommended(false)}
           addMusic={handleAddMusicToPlaylist}
-          onPlayMusic={(song) => handleSongClick(song.id)} hide={true}        />
+          onPlayMusic={(song) => handleSongClick(song.id)}
+          hide={true}
+        />
       )}
     </div>
   );
