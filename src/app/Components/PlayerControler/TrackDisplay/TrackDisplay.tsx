@@ -1,10 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
 import styles from './TrackDisplay.module.scss';
-import HeartLike from '../../HeartLike/HeartLike';
 
 interface TrackDisplayProps {
     currentTrack: {
+        music: {
+            name:string;
+            authorName:string;
+            url:string;
+            photo:{
+                url:string
+            }
+        };
         name: string;
         authorName: string;
         photo: {
@@ -13,14 +20,14 @@ interface TrackDisplayProps {
     };
 }
 
-const TrackDisplay = ({ currentTrack }: TrackDisplayProps) => {
+const TrackDisplay = ({ currentTrack}: TrackDisplayProps) => {
     if (!currentTrack) {
         return null; 
     }
 
-    const title = currentTrack.name || '';
-    const authorName = currentTrack. authorName || '';
-    const photoUrl = currentTrack.photo?.url || '';
+    const title = currentTrack.name || currentTrack?.music?.name;
+    const authorName = currentTrack. authorName || currentTrack?.music?.authorName;
+    const photoUrl = currentTrack.photo?.url || currentTrack?.music?.photo?.url;
 
     const truncatedTitle = title.length > 20 ? `${title.slice(0, 20)}...` : title;
     const truncatedArtist =  authorName.length > 20 ? `${ authorName.slice(0, 20)}...` :  authorName;
@@ -31,9 +38,6 @@ const TrackDisplay = ({ currentTrack }: TrackDisplayProps) => {
             <div className={styles.text}>
                 <span className={styles.title}>{truncatedTitle}</span>
                 <span className={styles.artist}>{truncatedArtist}</span>
-            </div>
-            <div className={styles.heartBtn}>
-                <HeartLike />
             </div>
         </div>
     );

@@ -198,7 +198,7 @@ const PlayerController = () => {
           onDoubleClick={fastForward}
         />
         <VolumeControl volume={volume} onVolumeChange={changeVolume} />
-        {currentTrack && <audio ref={audioRef} src={currentTrack.audio.url} />}
+        {currentTrack && <audio ref={audioRef} src={currentTrack.audio?.url || currentTrack.music?.audio?.url}/>}
       </div>
     </div>
   );

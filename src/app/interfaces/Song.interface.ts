@@ -6,7 +6,8 @@ export interface SongInterface {
   album?: string;
   key?: string;
   url?: string;
-  audioUrl:any;
-  audio:string;
+  audioUrl?:any;
+  audio?:string;
+  music?:any
   
 }

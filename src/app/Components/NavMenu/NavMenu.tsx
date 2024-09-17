@@ -25,6 +25,13 @@ const links = [
     activeIcon: "/Icons/playlists-active.svg",
     iconSrc: "/Icons/playlists.svg",
   },
+  {
+    key: "Favourites",
+    href: "/favourites",
+    text: "Favourites",
+    activeIcon: "/Icons/favourite-active.svg",
+    iconSrc: "/Icons/favourite.svg",
+  },
 ];
 
 const NavMenu = () => {
