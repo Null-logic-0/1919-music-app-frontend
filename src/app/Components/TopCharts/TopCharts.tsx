@@ -31,7 +31,6 @@ const TopCharts = () => {
         
         setCharts(response.data);
       } catch (error) {
-        console.error("Error fetching albums:", error);
       }
     };
 

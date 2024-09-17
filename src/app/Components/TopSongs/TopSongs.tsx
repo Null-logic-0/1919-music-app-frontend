@@ -13,6 +13,7 @@ import {
   musicTracksState,
   playbackStatusState,
 } from "@/app/helpers/State";
+import Spinner from "../LoadingSpiner/Spiner";
 
 const TopSongs = () => {
   const [songsData, setSongsData] = useState<SongInterface[]>([]);
@@ -109,7 +110,7 @@ const TopSongs = () => {
 
       <div className={styles.container}>
         {loading ? (
-          <p>Loading...</p>
+          <div className={styles.spinner}><Spinner/></div>
         ) : error ? (
           <p>{error}</p>
         ) : (

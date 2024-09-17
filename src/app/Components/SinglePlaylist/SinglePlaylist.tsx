@@ -16,6 +16,7 @@ import {
   playbackStatusState,
 } from "@/app/helpers/State";
 import { PlaybackStatus } from "@/app/enums/player.enums";
+import Spinner from "../LoadingSpiner/Spiner";
 
 const SinglePlaylist = () => {
   const [playlist, setPlaylist] = useState<ArtistInterface | null>(null);
@@ -182,7 +183,7 @@ const SinglePlaylist = () => {
     [currentTrackIndex, musicTracks, setCurrentTrackIndex, setPlaybackStatus]
   );
 
-  if (loading) return <p className={styles.alert}>Loading...</p>;
+  if (loading) return <div className={styles.spinner}><Spinner/></div>;
   if (error) return <p className={styles.alert}>{error}</p>;
 
   const isTableFull =musicList.length > 0;

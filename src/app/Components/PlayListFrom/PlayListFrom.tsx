@@ -111,7 +111,6 @@ const PlayListFrom = ({
         reset();
       })
       .catch((error) => {
-        alert(`Error submitting form: ${error}`);
       });
   };
 

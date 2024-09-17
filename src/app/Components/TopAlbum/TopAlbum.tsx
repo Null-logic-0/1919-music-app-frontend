@@ -31,7 +31,6 @@ const TopAlbum = () => {
         );
         setAlbums(response.data);
       } catch (error) {
-        console.error("Error fetching albums:", error);
       }
     };
 

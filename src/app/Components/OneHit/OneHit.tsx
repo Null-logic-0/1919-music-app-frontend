@@ -16,6 +16,7 @@ import {
 } from "@/app/helpers/State";
 import { PlaybackStatus } from "@/app/enums/player.enums";
 import { SongInterface } from "@/app/interfaces/Song.interface";
+import Spinner from "../LoadingSpiner/Spiner";
 
 const OneHit = () => {
   const [hits, setHits] = useState<ArtistInterface | null>(null);
@@ -103,7 +104,7 @@ const OneHit = () => {
     }
   }, [currentTrackIndex, musicTracks, playbackStatus]);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div className={styles.spinner}><Spinner/></div>;
   if (error) return <div>{error}</div>;
   if (!hits) return <div>No artist data available</div>;
 
