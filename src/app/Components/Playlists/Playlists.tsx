@@ -14,11 +14,17 @@ const Playlists = () => {
   const [playlists, setPlaylists] = useState<FormDataInterface[]>([]);
   const [showModal, setShowModal] = useState(false);
 
-  const token = localStorage.getItem("accesstoken");
+  const [token, setToken] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedToken = localStorage.getItem("accesstoken");
+      setToken(storedToken);
+    }
+  }, []);
 
   const fetchPlaylists = async () => {
     if (!token) {
-      console.error("No token found in localStorage");
       return;
     }
 
@@ -32,9 +38,7 @@ const Playlists = () => {
         }
       );
       setPlaylists(response.data);
-    } catch (error) {
-      console.error("Error fetching playlists:", error);
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -91,7 +95,7 @@ const Playlists = () => {
             count={list.count}
             imageSizeVariant={ImageSizeVariant.Medium}
             direction="column"
-            link={`/playlist/${list.id}`}
+            link={`/createdPlaylists/${list.id}`}
             remove={deletePlaylist}
             id={list.id}
           />

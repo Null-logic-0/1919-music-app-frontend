@@ -98,7 +98,7 @@ const NavMenu = () => {
                 id={list.id}
                 image={list.photo.url}
                 name={list.name}
-                link={`/playlist/${list.id}`}
+                link={`/createdPlaylists/${list.id}`}
                 count={list.count}
                 remove={deletePlaylist}
               />
