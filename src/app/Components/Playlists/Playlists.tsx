@@ -106,7 +106,6 @@ const Playlists = () => {
         <Modal
           setShowModal={setShowModal}
           isOpen={showModal}
-          title="Add New Playlist"
         >
           <PlayListFrom
             setShowModal={setShowModal}

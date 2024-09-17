@@ -50,10 +50,10 @@ const SinglePlaylist = () => {
               },
             }
           );
+          console.log(response.data,'response.data')
           setPlaylist(response.data);
-          setMusicList(response.data.music || []);
-          setMusicTracks(response.data.music || []);
-          console.log("Playlist and music fetched:", response.data.music);
+          setMusicList(response.data.musics);
+          setMusicTracks(response.data.musics);
         } catch (error) {
           console.error("Error fetching playlist:", error);
           setError("Failed to load playlist");
@@ -194,8 +194,8 @@ const SinglePlaylist = () => {
   const isTableFull = musicList.length > 0;
   const isEmpty = musicList.length === 0;
 
-  console.log(musicList.length, "isfull");
-  console.log(isEmpty, "isEmpty");
+  console.log(isTableFull, "isfull");
+  console.log(musicList, "musicList");
 
   return (
     <div className={styles.main}>

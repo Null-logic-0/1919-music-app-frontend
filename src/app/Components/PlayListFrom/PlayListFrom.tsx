@@ -115,7 +115,6 @@ const PlayListForm = ({
         reset();
       })
       .catch((error) => {
-        console.error("Error:", error);
       })
       .finally(() => {
         setLoading(false); 
