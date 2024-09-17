@@ -55,6 +55,7 @@ const OneAlbum = () => {
             }
           );
           setAlbum(response.data);
+          // @ts-ignore
           setMusicTracks(response.data.musics || []);
         } catch (err) {
           if (axios.isAxiosError(err) && err.response?.status === 403) {

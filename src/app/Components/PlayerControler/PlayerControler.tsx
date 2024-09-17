@@ -123,7 +123,7 @@ const PlayerController = () => {
         ? PlaybackStatus.PAUSED
         : PlaybackStatus.PLAYING
     );
-  }, [setPlaybackStatus,currentTrack]);
+  }, [setPlaybackStatus]);
 
   const playPreviousTrack = useCallback(() => {
     const prevIndex =
