@@ -62,37 +62,51 @@ const OneChart = () => {
     fetchChartsData();
   }, [chartsId, setMusicTracks]);
 
-  const handleSongClick = useCallback(
-    (songId: string) => {
-      const trackIndex = musicTracks.findIndex((track) => track.id === songId);
-      if (trackIndex !== -1) {
-        if (currentTrackIndex === trackIndex) {
-          setPlaybackStatus((prevStatus) =>
-            prevStatus === PlaybackStatus.PLAYING
-              ? PlaybackStatus.PAUSED
-              : PlaybackStatus.PLAYING
-          );
-        } else {
-          setCurrentTrackIndex(trackIndex);
-          setPlaybackStatus(PlaybackStatus.PLAYING);
+  const fetchSongById = async (
+    songId: string
+  ): Promise<SongInterface | null> => {
+    try {
+      const token = localStorage.getItem("accesstoken");
+      const response = await axios.get<SongInterface>(
+        `https://one919-backend.onrender.com/music/${songId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
+      );
+      return response.data;
+    } catch (err) {
+      console.error(`Failed to fetch song with ID ${songId}:`, err);
+      return null;
+    }
+  };
+
+  const handleSongClick = useCallback(
+    async (songId: string) => {
+      const songData = await fetchSongById(songId);
+      if (songData && audioRef.current) {
+        audioRef.current.src = songData.audioUrl || "";
+        setCurrentTrackIndex(
+          musicTracks.findIndex((track) => track.id === songId)
+        );
+        setPlaybackStatus(PlaybackStatus.PLAYING);
+        audioRef.current.play();
       } else {
-        console.warn(`Song with ID ${songId} not found in musicTracks`);
+        console.warn(`Song with ID ${songId} not found`);
       }
     },
-    [currentTrackIndex, musicTracks, setCurrentTrackIndex, setPlaybackStatus]
+    [setCurrentTrackIndex, musicTracks, setPlaybackStatus]
   );
 
   useEffect(() => {
     const audio = audioRef.current;
-    if (audio && musicTracks.length > 0 && musicTracks[currentTrackIndex]) {
-      if (playbackStatus === PlaybackStatus.PLAYING) {
-        audio.play().catch((err) => console.error("Error playing audio:", err));
-      } else if (playbackStatus === PlaybackStatus.PAUSED) {
-        audio.pause();
-      }
+    if (audio && playbackStatus === PlaybackStatus.PLAYING) {
+      audio.play().catch((err) => console.error("Error playing audio:", err));
+    } else if (audio && playbackStatus === PlaybackStatus.PAUSED) {
+      audio.pause();
     }
-  }, [playbackStatus, currentTrackIndex, musicTracks]);
+  }, [playbackStatus]);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -130,6 +144,7 @@ const OneChart = () => {
           hide={false}
         />
       </div>
+      <audio ref={audioRef} controls hidden />
     </div>
   );
 };
