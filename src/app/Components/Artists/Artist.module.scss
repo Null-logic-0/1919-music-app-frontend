@@ -1,59 +1,79 @@
 .main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 24px;
-    padding: 60px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 60px 24px;
 }
 
 .container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .cards {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
+  display: flex;
+  justify-content: center;
+  overflow-y: hidden;
+  max-height: 200px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 24px;
+  box-sizing: border-box;
 }
 
-
-
-@media (max-width:1024px) {
-    .cards {
-        gap: 16px;
-        max-width: 800px;
-        width: 100%;
-        scroll-behavior: smooth;
-        justify-content: flex-start;
-        flex-wrap: nowrap;
-        padding: 0 20px 0 20px;
-        overflow-x: auto;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-
-    }
-
-    .cards::-webkit-scrollbar {
-        display: none;
-    }
-
-    .main {
-        padding-top: 48px;
-    }
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 60px;
 }
 
-@media (max-width:768px) {
-    .cards {
-        max-width: 600px;
+.seeMore {
+  color: #2bd9a8;
+  font-size: 24px;
+  font-weight: 500;
+  cursor: pointer;
+}
 
-    }
+@media (max-width: 1024px) {
+  .cards {
+    gap: 16px;
+    max-width: 800px;
+    width: 100%;
+    scroll-behavior: smooth;
+    flex-wrap: nowrap;
+    padding: 0 20px 0 20px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
 
-    .main {
-        padding-top: 16px;
-    }
+  .cards::-webkit-scrollbar {
+    display: none;
+  }
+
+  .main {
+    padding-top: 48px;
+  }
+
+  .button {
+    display: none;
+  }
+
+  .seeMore {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cards {
+    max-width: 600px;
+  }
+
+  .main {
+    padding-top: 16px;
+  }
 }

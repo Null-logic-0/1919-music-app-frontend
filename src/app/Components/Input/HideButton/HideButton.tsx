@@ -8,7 +8,7 @@ interface ToggleButtonProps {
 
 const HideButton = ({ toggleShowPassword }:ToggleButtonProps) => {
   return (
-    <button className={styles.hideBTN} onClick={toggleShowPassword}>
+    <button className={styles.hideBTN} onClick={toggleShowPassword} type='button'>
       <Image src={'/Icons/eye-crossed.svg'} alt='icon' width={24} height={24} />
     </button>
   );

@@ -8,6 +8,7 @@ import SeeAllButton from "../SeeAllButton/SeeAllButton";
 import CardsHelper from "@/app/helpers/CardsHelper";
 import { photoInterface } from "@/app/interfaces/photo.interface";
 import axios from "axios";
+import Link from "next/link";
 
 interface Charts {
   id: number;
@@ -16,8 +17,6 @@ interface Charts {
 
 const Charts = () => {
   const [charts, setCharts] = useState<Charts[]>([]);
-  const [showAll, setShowAll] = useState<boolean>(false);
-  const cardsToShow = CardsHelper();
 
   useEffect(() => {
     const fetchHits = async () => {
@@ -40,20 +39,19 @@ const Charts = () => {
     fetchHits();
   }, []);
 
-  const toggleShowAll = () => setShowAll((prevShowAll) => !prevShowAll);
-
-  const trimmedData = showAll ? charts : charts.slice(0, cardsToShow);
-
-
   return (
     <div className={styles.main}>
       <div className={styles.container}>
-        <Heading title="Top Charts" link="/topcharts" />
-        <SeeAllButton showAll={showAll} onclick={toggleShowAll} />
+        <Heading title="Top Charts" />
+        <div className={styles.button}>
+          <Link href={"/topcharts"}>
+            <span className={styles.seeMore}>see more</span>
+          </Link>
+        </div>
       </div>
       <div className={styles.cardsContainer}>
         <div className={styles.cards}>
-          {trimmedData.map((item) => (
+          {charts.map((item) => (
             <Card
               key={item.id}
               images={item.photo.url}

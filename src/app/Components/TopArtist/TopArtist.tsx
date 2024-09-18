@@ -9,10 +9,10 @@ import axios from "axios";
 import { photoInterface } from "@/app/interfaces/photo.interface";
 
 interface Artist {
-  id:number;
-  photo:photoInterface;
-  firstName:string;
-  lastName:string;
+  id: number;
+  photo: photoInterface;
+  firstName: string;
+  lastName: string;
 }
 
 const TopArtist = () => {
@@ -22,28 +22,28 @@ const TopArtist = () => {
 
   useEffect(() => {
     const fetchArtists = async () => {
-        try {
-            const token = localStorage.getItem('accesstoken'); 
+      try {
+        const token = localStorage.getItem("accesstoken");
 
-            const response = await axios.get('https://one919-backend.onrender.com/author/top', {
-                headers: {
-                    Authorization: `Bearer ${token}` 
-                }
-            });
+        const response = await axios.get(
+          "https://one919-backend.onrender.com/author/top",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
-            console.log(response,'zd');
-            
-
-            setArtistData(response.data);
-        } catch (error) {
-            setError('Failed to fetch artist data');
-        } finally {
-            setLoading(false);
-        }
+        setArtistData(response.data);
+      } catch (error) {
+        setError("Failed to fetch artist data");
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchArtists();
-}, []);
+  }, []);
   return (
     <div className={styles.container}>
       <Heading title="Top Artists" />
