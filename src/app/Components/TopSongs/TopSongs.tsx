@@ -110,7 +110,9 @@ const TopSongs = () => {
 
       <div className={styles.container}>
         {loading ? (
-          <div className={styles.spinner}><Spinner/></div>
+          <div className={styles.spinner}>
+            <Spinner />
+          </div>
         ) : error ? (
           <p>{error}</p>
         ) : (

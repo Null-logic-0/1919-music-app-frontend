@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "./HeartLike.module.scss";
 import { HeartLikeEnum } from "../../enums/HeartLike.enums";
@@ -11,7 +11,10 @@ interface Props {
 }
 
 const HeartLike = ({ musicId, isDisabled, initialIsLiked = false }: Props) => {
-  const [isLiked, setIsLiked] = useState(initialIsLiked); 
+  const [isLiked, setIsLiked] = useState(() => {
+    const savedLikeStatus = localStorage.getItem(`liked-${musicId}`);
+    return savedLikeStatus === "true" || initialIsLiked; 
+  });
 
   const getIconSource = () => {
     if (isDisabled) return HeartLikeEnum.Disabled;
@@ -23,11 +26,14 @@ const HeartLike = ({ musicId, isDisabled, initialIsLiked = false }: Props) => {
 
     const accessToken = localStorage.getItem("accesstoken");
     if (!accessToken) {
-      console.error("No access token found");
       return;
     }
 
-    setIsLiked((prev) => !prev); 
+    setIsLiked((prev) => {
+      const newLikedStatus = !prev;
+      localStorage.setItem(`liked-${musicId}`, newLikedStatus.toString());
+      return newLikedStatus;
+    });
 
     try {
       if (isLiked) {
