@@ -28,16 +28,13 @@ const TopCharts = () => {
             },
           }
         );
-        
+
         setCharts(response.data);
-      } catch (error) {
-      }
+      } catch (error) {}
     };
 
     fetchHits();
   }, []);
-
-
 
   return (
     <div className={styles.container}>
@@ -51,12 +48,12 @@ const TopCharts = () => {
             name={item.title}
             showDetails
             direction="column"
-            imageSizeVariant={ImageSizeVariant.Medium}
+            imageSizeVariant={ImageSizeVariant.XLarge}
           />
         ))}
       </div>
     </div>
   );
-}
+};
 
 export default TopCharts;

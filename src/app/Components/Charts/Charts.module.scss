@@ -19,12 +19,12 @@
 
 .cards {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   overflow-y: hidden;
   max-height: 300px;
   align-items: flex-start;
   flex-wrap: wrap;
-  gap: 24px;
+  gap: 7px;
   box-sizing: border-box;
 }
 

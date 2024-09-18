@@ -49,7 +49,7 @@ const TopHits = () => {
             name={item.title}
             showDetails
             direction="column"
-            imageSizeVariant={ImageSizeVariant.Medium}
+            imageSizeVariant={ImageSizeVariant.XLarge}
           />
         ))}
       </div>
