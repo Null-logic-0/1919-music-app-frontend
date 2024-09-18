@@ -31,9 +31,9 @@ const TableComponent = ({
 }: TableProps) => {
   const columns = [
     {
-      title: "Title",
-      dataIndex: "title",
-      key: "title",
+      title: "Musics",
+      dataIndex: "musics",
+      key: "musics",
       render: (text: string, record: SongInterface) =>
         renderTitleColumn(record),
     },
