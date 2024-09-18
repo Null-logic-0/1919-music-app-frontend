@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import axios from "axios";
 import PagesHeaderTop from "../PagesHeaderTop/PagesHeaderTop";
 import styles from "./SinglePlaylist.module.scss";
@@ -37,6 +37,8 @@ const SinglePlaylist = () => {
   const [playbackStatus, setPlaybackStatus] =
     useRecoilState(playbackStatusState);
 
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
   useEffect(() => {
     const fetchPlaylist = async () => {
       const token = localStorage.getItem("accesstoken");
@@ -50,12 +52,10 @@ const SinglePlaylist = () => {
               },
             }
           );
-          console.log(response.data, "response.data");
           setPlaylist(response.data);
           setMusicList(response.data.musics);
           setMusicTracks(response.data.musics);
         } catch (error) {
-          console.error("Error fetching playlist:", error);
           setError("Failed to load playlist");
         } finally {
           setLoading(false);
@@ -69,42 +69,62 @@ const SinglePlaylist = () => {
     fetchPlaylist();
   }, [playlistId, setMusicTracks]);
 
-  useEffect(() => {
-    const searchMusic = async () => {
+  const fetchSongById = async (
+    songId: string
+  ): Promise<SongInterface | null> => {
+    try {
       const token = localStorage.getItem("accesstoken");
-      if (searchTerm && playlistId) {
-        try {
-          const response = await axios.get(
-            `https://one919-backend.onrender.com/search?q=${searchTerm}`,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
-          setMusicList(response.data || []);
-        } catch (error) {
-          setError("Failed to search music");
+      const response = await axios.get<SongInterface>(
+        `https://one919-backend.onrender.com/music/${songId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-      } else if (!searchTerm && playlistId) {
-        try {
-          const response = await axios.get(
-            `https://one919-backend.onrender.com/music/InPlaylist/${playlistId}`,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
-          setMusicList(response.data || []);
-        } catch (error) {
-          setError("Failed to load music list");
-        }
-      }
-    };
+      );
+      return response.data;
+    } catch (err) {
+      console.error(`Failed to fetch song with ID ${songId}:`, err);
+      return null;
+    }
+  };
 
-    searchMusic();
-  }, [playlistId, searchTerm]);
+  const handleSongClick = useCallback(
+    async (songId: string) => {
+      const songData = await fetchSongById(songId);
+      if (songData && audioRef.current) {
+        audioRef.current.src = songData.audioUrl || "";
+        setCurrentTrackIndex(
+          musicTracks.findIndex((track) => track.id === songId)
+        );
+        setPlaybackStatus(PlaybackStatus.PLAYING);
+        audioRef.current.play();
+      } else {
+        console.warn(`Song with ID ${songId} not found`);
+      }
+    },
+    [setCurrentTrackIndex, musicTracks, setPlaybackStatus]
+  );
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (audio && playbackStatus === PlaybackStatus.PLAYING) {
+      audio.play().catch((err) => console.error("Error playing audio:", err));
+    } else if (audio && playbackStatus === PlaybackStatus.PAUSED) {
+      audio.pause();
+    }
+  }, [playbackStatus]);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (audio && musicTracks[currentTrackIndex]) {
+      const currentTrack = musicTracks[currentTrackIndex];
+      audio.src = currentTrack.audioUrl || "";
+      if (playbackStatus === PlaybackStatus.PLAYING) {
+        audio.play().catch((err) => console.error("Error playing audio:", err));
+      }
+    }
+  }, [currentTrackIndex, musicTracks, playbackStatus]);
 
   const handleAddMusicToPlaylist = async (musicId: string) => {
     const token = localStorage.getItem("accesstoken");
@@ -135,7 +155,9 @@ const SinglePlaylist = () => {
       );
       setMusicList(response.data || []);
       setShowRecommended(false);
-    } catch (error) {}
+    } catch (error) {
+      console.error("Error adding music to playlist:", error);
+    }
   };
 
   const handleDeleteMusicFromPlaylist = async (musicId: string) => {
@@ -160,28 +182,10 @@ const SinglePlaylist = () => {
         }
       );
       setMusicList(response.data || []);
-    } catch (error) {}
+    } catch (error) {
+      console.error("Error deleting music from playlist:", error);
+    }
   };
-
-  const handleSongClick = useCallback(
-    (songId: string) => {
-      const trackIndex = musicTracks.findIndex((track) => track.id === songId);
-      if (trackIndex !== -1) {
-        if (currentTrackIndex === trackIndex) {
-          setPlaybackStatus((prevStatus) =>
-            prevStatus === PlaybackStatus.PLAYING
-              ? PlaybackStatus.PAUSED
-              : PlaybackStatus.PLAYING
-          );
-        } else {
-          setCurrentTrackIndex(trackIndex);
-          setPlaybackStatus(PlaybackStatus.PLAYING);
-        }
-      } else {
-      }
-    },
-    [currentTrackIndex, musicTracks, setCurrentTrackIndex, setPlaybackStatus]
-  );
 
   if (loading)
     return (
@@ -194,7 +198,6 @@ const SinglePlaylist = () => {
   const isTableFull = musicList.length > 0;
   const isEmpty = musicList.length === 0;
 
-  
   return (
     <div className={styles.main}>
       <PagesHeaderTop link="/createdPlaylists" />
@@ -211,6 +214,15 @@ const SinglePlaylist = () => {
               />
             </div>
             <div className={styles.tables}>
+              {showRecommended && playlistId && (
+                <Recomended
+                  playlistId={playlistId}
+                  onclick={() => setShowRecommended(false)}
+                  addMusic={handleAddMusicToPlaylist}
+                  onPlayMusic={(song) => handleSongClick(song.id)}
+                  hide={true}
+                />
+              )}
               {isTableFull && (
                 <TableComponent
                   replaceButton={true}
@@ -229,19 +241,11 @@ const SinglePlaylist = () => {
                   hide={true}
                 />
               )}
-              {showRecommended && playlistId && (
-                <Recomended
-                  playlistId={playlistId}
-                  onclick={() => setShowRecommended(false)}
-                  addMusic={handleAddMusicToPlaylist}
-                  onPlayMusic={(song) => handleSongClick(song.id)}
-                  hide={true}
-                />
-              )}
             </div>
           </>
         )}
       </div>
+      <audio ref={audioRef} controls hidden />
     </div>
   );
 };
