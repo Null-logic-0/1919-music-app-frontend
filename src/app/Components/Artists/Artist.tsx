@@ -5,8 +5,6 @@ import Card from "../AlbumCard/Card";
 import Heading from "../Heading/Heading";
 import { ImageSizeVariant } from "@/app/enums/imageSizeVariants";
 import styles from "./Artist.module.scss";
-import SeeAllButton from "../SeeAllButton/SeeAllButton";
-import ArtistsCardsHelper from "@/app/helpers/ArtistsCardsHelper";
 import { photoInterface } from "@/app/interfaces/photo.interface";
 import Spinner from "../LoadingSpiner/Spiner";
 import Link from "next/link";

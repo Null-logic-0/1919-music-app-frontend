@@ -4,8 +4,6 @@ import Card from "../AlbumCard/Card";
 import Heading from "../Heading/Heading";
 import { ImageSizeVariant } from "@/app/enums/imageSizeVariants";
 import styles from "./Charts.module.scss";
-import SeeAllButton from "../SeeAllButton/SeeAllButton";
-import CardsHelper from "@/app/helpers/CardsHelper";
 import { photoInterface } from "@/app/interfaces/photo.interface";
 import axios from "axios";
 import Link from "next/link";
