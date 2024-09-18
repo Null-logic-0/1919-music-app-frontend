@@ -1,11 +1,10 @@
-import { ImageSizeVariant } from '@/app/enums/imageSizeVariants';
-import Card from '../../AlbumCard/Card';
-import MusicPlayerCounter from '../../MusicPlayerCounter/MusicPlayerCounter';
-import AlbumName from '../../AlbumName/AlbumName';
-import MusicDuration from '../../MusicDuration/MusicDuration';
-import { SongInterface } from '@/app/interfaces/Song.interface';
-import styles from './TableItem.module.scss';
-
+import { ImageSizeVariant } from "@/app/enums/imageSizeVariants";
+import Card from "../../AlbumCard/Card";
+import MusicPlayerCounter from "../../MusicPlayerCounter/MusicPlayerCounter";
+import AlbumName from "../../AlbumName/AlbumName";
+import MusicDuration from "../../MusicDuration/MusicDuration";
+import { SongInterface } from "@/app/interfaces/Song.interface";
+import styles from "./TableItem.module.scss";
 
 export const renderTitleColumn = (record: SongInterface) => (
   <Card
