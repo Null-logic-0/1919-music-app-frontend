@@ -1,18 +1,18 @@
-"use client";
-import classNames from "classnames";
-import Input from "../Input/Input";
-import styles from "./AuthForm.module.scss";
-import { useForm } from "react-hook-form";
-import Button from "../Button/Button";
-import Toggle from "../Toggle/Toggle";
-import Link from "next/link";
-import Image from "next/image";
+'use client'
+import { authState } from "@/app/helpers/authState";
 import { loginInterface } from "@/app/interfaces/login.interface";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useRecoilState } from "recoil";
-import { authState } from "@/app/helpers/authState";
 import { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { useRecoilState } from "recoil";
+import Image from 'next/image'
+import styles from './AuthForm.module.scss'
+import Input from "../Input/Input";
+import classNames from "classnames";
+import Toggle from "../Toggle/Toggle";
+import Button from "../Button/Button";
+import Link from "next/link";
 import Spinner from "../LoadingSpiner/Spiner";
 
 const AuthForm = () => {
@@ -28,6 +28,7 @@ const AuthForm = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [savedEmail, setSavedEmail] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null); 
 
   useEffect(() => {
     const email = localStorage.getItem("savedEmail");
@@ -68,6 +69,7 @@ const AuthForm = () => {
 
   const submitLogin = async (values: loginInterface) => {
     setLoading(true);
+    setErrorMessage(null); 
 
     try {
       if (isChecked) {
@@ -88,6 +90,16 @@ const AuthForm = () => {
       if (status === 200 || status === 201) {
         handleLoginSuccess(data);
       }
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 401) {
+          setErrorMessage("Invalid email or password."); 
+        } else if (error.response?.status === 404) {
+          setErrorMessage("Email doesn't exist.");
+        } else {
+          setErrorMessage("Email or Pasword is wrong. Please try again later.");
+        }
+      }
     } finally {
       setLoading(false);
     }
@@ -97,6 +109,8 @@ const AuthForm = () => {
     <div className={styles.main}>
       <Image src="/Icons/Logo.svg" alt="logo" width={100} height={105} />
       <p className={styles.title}>Log in to TnNdshN</p>
+
+      {errorMessage && <p className={styles.error}>{errorMessage}</p>} 
 
       <form className={styles.form} onSubmit={handleSubmit(submitLogin)}>
         <div className={styles.inputs}>

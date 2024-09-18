@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
@@ -10,7 +11,6 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useRecoilState } from "recoil";
 import { authState } from "@/app/helpers/authState";
-import { useState } from "react";
 import Spinner from "../LoadingSpiner/Spiner";
 
 const RegisterFrom = () => {
@@ -23,6 +23,7 @@ const RegisterFrom = () => {
   const router = useRouter();
   const [auth, setAuth] = useRecoilState(authState);
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null); 
 
   const handleRegistrationSuccess = (user: any, token: string) => {
     setAuth({
@@ -46,6 +47,8 @@ const RegisterFrom = () => {
 
   const submitRegister = async (values: RegisterFormInterface) => {
     setLoading(true);
+    setErrorMessage(null); 
+
     try {
       const response = await axios.post(
         "https://one919-backend.onrender.com/user/signup",
@@ -61,6 +64,14 @@ const RegisterFrom = () => {
         const { user, token } = response.data;
         handleRegistrationSuccess(user, token);
       }
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 409) {
+          setErrorMessage("The email is already in use. Please use a different email.");
+        } else {
+          setErrorMessage("The email is already in use. Please use a different email.");
+        }
+      }
     } finally {
       setLoading(false);
     }
@@ -75,6 +86,9 @@ const RegisterFrom = () => {
         </p>
         <p className={styles.subtitle}>Sign up with your email address</p>
       </div>
+
+      {errorMessage && <p className={styles.error}>{errorMessage}</p>} 
+
       <form className={styles.form} onSubmit={handleSubmit(submitRegister)}>
         <div className={styles.inputs}>
           <Input
@@ -137,6 +151,7 @@ const RegisterFrom = () => {
           />
         </div>
       </form>
+
       {loading && (
         <div className={styles.background}>
           <Spinner />
