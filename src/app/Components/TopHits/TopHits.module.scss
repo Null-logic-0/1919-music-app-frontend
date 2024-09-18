@@ -4,9 +4,7 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 24px;
-  margin-bottom: 50px;
   padding: 0px 24px 0 24px;
-
 }
 
 .albumWrapper {
@@ -16,16 +14,4 @@
   justify-content: flex-start;
   width: 100%;
   gap: 24px;
-}
-
-@media (max-width: 1024px) {
-  .container {
-    padding-top: 68px;
-  }
-}
-
-@media (max-width: 768px) {
-  .container {
-    padding-top: 20px;
-  }
 }

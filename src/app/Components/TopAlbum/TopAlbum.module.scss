@@ -5,7 +5,6 @@
   align-items: flex-start;
   gap: 24px;
   padding: 0px 24px 0 24px;
-  margin-bottom: 50px;
 }
 
 .albumWrapper {
@@ -17,14 +16,3 @@
   gap: 24px;
 }
 
-@media (max-width: 1024px) {
-  .container {
-    padding-top: 68px;
-  }
-}
-
-@media (max-width: 768px) {
-  .container {
-    padding-top: 20px;
-  }
-}

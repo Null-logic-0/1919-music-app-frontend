@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   gap: 24px;
-  padding:0 24px 0 24px;
+  padding: 0 24px 0 24px;
 }
 
 .container {
@@ -41,6 +41,7 @@
 @media (max-width: 1024px) {
   .cards {
     gap: 16px;
+    justify-content: flex-start;
     max-width: 800px;
     width: 100%;
     scroll-behavior: smooth;
@@ -55,14 +56,6 @@
     display: none;
   }
 
-  .main {
-    padding-top: 48px;
-  }
-
-  .button {
-    display: none;
-  }
-
   .seeMore {
     font-size: 18px;
   }
@@ -71,9 +64,5 @@
 @media (max-width: 768px) {
   .cards {
     max-width: 600px;
-  }
-
-  .main {
-    padding-top: 16px;
   }
 }
