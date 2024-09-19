@@ -1,53 +1,55 @@
-@import '../../../styles/globalColors/color.scss';
+@import "../../../styles/globalColors/color.scss";
 
 .title {
-    color: $lighter;
-    text-align: start;
-
+  color: $lighter;
+  text-align: start;
 }
 
 .mediumTitle {
-    font-size: 24px;
-    font-weight: 500px;
+  font-size: 24px;
+  font-weight: 500px;
+}
+
+.smallTitle {
+  font-size: 18px;
+  font-weight: 500px;
 }
 
 .largeTitle {
+  font-size: 36px;
+  font-weight: 900px;
+}
+
+@media (max-width: 768px) {
+  .mediumTitle {
+    font-size: 14px;
+    font-weight: 500px;
+  }
+
+  .largeTitle {
+    font-size: 20px;
+    font-weight: 500px;
+  }
+
+  .mediumSubtitle {
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+  .largeSubtitle {
+    font-size: 16px;
+    font-weight: 400;
+  }
+}
+
+@media (max-width: 1024px) {
+  .mediumTitle {
+    font-size: 14px;
+    font-weight: 500px;
+  }
+
+  .largeTitle {
     font-size: 36px;
-    font-weight: 900px;
-}
-
-@media (max-width:768px) {
-    
-    .mediumTitle {
-        font-size: 14px;
-        font-weight: 500px;
-    }
-
-    .largeTitle {
-        font-size: 20px;
-        font-weight: 500px;
-    }
-
-    .mediumSubtitle {
-        font-size: 12px;
-        font-weight: 400;
-    }
-
-    .largeSubtitle {
-        font-size: 16px;
-        font-weight: 400;
-    }    
-}
-
-@media (max-width:1024px) {
-    .mediumTitle {
-        font-size: 14px;
-        font-weight: 500px;
-    }
-
-    .largeTitle {
-        font-size: 36px;
-        font-weight: 500px;
-    }
-
+    font-weight: 500px;
+  }
 }

@@ -11,16 +11,19 @@ type CardProps = {
   showDetails?: boolean;
   name?: string;
   title?: string;
-  count?: number; 
-  listens?:any;
-  authorName?: string; 
+  count?: number;
+  listens?: any;
+  authorName?: string;
+  firstName?: string;
+  lastName?: string;
   direction?: "row" | "column";
   imageSizeVariant?: ImageSizeVariant;
-  images: string;
+  images: any;
   link?: string;
   id?: any;
   remove?: (id: number) => void;
-  biography?:string;
+  biography?: string;
+  route?:string;
 };
 
 const Card = ({
@@ -31,10 +34,13 @@ const Card = ({
   imageSizeVariant = ImageSizeVariant.Medium,
   images,
   link,
+  route,
   count,
   remove,
   id,
-  biography
+  biography,
+  firstName,
+  title,
 }: CardProps) => {
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
@@ -88,7 +94,23 @@ const Card = ({
         <div className={styles.remove}>
           <div className={`${classes.join(" ").trim()} `}>
             {name && (
-              <CardTitle name={name} imageSizeVariant={imageSizeVariant} />
+              <Link href={route || '#'}>
+                 <CardTitle name={name} imageSizeVariant={imageSizeVariant} />
+              </Link>
+             
+            )}
+            {title && (
+              <Link href={route || '#'}>
+                <CardTitle name={name} imageSizeVariant={imageSizeVariant} />
+              </Link>
+            )}
+            {firstName && (
+              <Link href={route || '#'}>
+                <CardTitle
+                  name={firstName}
+                  imageSizeVariant={imageSizeVariant}
+                />
+              </Link>
             )}
             {authorName && (
               <CardSubtitle

@@ -7,13 +7,13 @@ import axios from "axios";
 interface Props {
   musicId: string;
   isDisabled?: boolean;
-  initialIsLiked?: boolean; 
+  initialIsLiked?: boolean;
 }
 
 const HeartLike = ({ musicId, isDisabled, initialIsLiked = false }: Props) => {
   const [isLiked, setIsLiked] = useState(() => {
     const savedLikeStatus = localStorage.getItem(`liked-${musicId}`);
-    return savedLikeStatus === "true" || initialIsLiked; 
+    return savedLikeStatus === "true" || initialIsLiked;
   });
 
   const getIconSource = () => {
@@ -38,7 +38,7 @@ const HeartLike = ({ musicId, isDisabled, initialIsLiked = false }: Props) => {
     try {
       if (isLiked) {
         await axios.delete(
-          `https://one919-backend.onrender.com/favorites/deleteMusic/${musicId}`,
+          `https://one919-backend-1.onrender.com/favorites/deleteMusic/${musicId}`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -47,7 +47,7 @@ const HeartLike = ({ musicId, isDisabled, initialIsLiked = false }: Props) => {
         );
       } else {
         await axios.put(
-          `https://one919-backend.onrender.com/favorites/addMusic/${musicId}`,
+          `https://one919-backend-1.onrender.com/favorites/addMusic/${musicId}`,
           {},
           {
             headers: {
@@ -58,12 +58,16 @@ const HeartLike = ({ musicId, isDisabled, initialIsLiked = false }: Props) => {
       }
     } catch (error) {
       console.error("Failed to update favorite status:", error);
-      setIsLiked((prev) => !prev); 
+      setIsLiked((prev) => !prev);
     }
   };
 
   return (
-    <button className={styles.heartLike} onClick={handleClick} disabled={isDisabled}>
+    <button
+      className={styles.heartLike}
+      onClick={handleClick}
+      disabled={isDisabled}
+    >
       <Image
         src={getIconSource()}
         alt="Heart Icon"

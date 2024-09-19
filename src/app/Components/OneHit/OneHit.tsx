@@ -40,7 +40,7 @@ const OneHit = () => {
       if (hitsId) {
         try {
           const response = await axios.get<ArtistInterface>(
-            `https://one919-backend.onrender.com/album/${hitsId}`,
+            `https://one919-backend-1.onrender.com/album/${hitsId}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -67,7 +67,7 @@ const OneHit = () => {
     try {
       const token = localStorage.getItem("accesstoken");
       const response = await axios.get<SongInterface>(
-        `https://one919-backend.onrender.com/music/${songId}`,
+        `https://one919-backend-1.onrender.com/music/${songId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

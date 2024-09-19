@@ -21,7 +21,7 @@ const Albums = () => {
       try {
         const accessToken = localStorage.getItem("accesstoken");
         const response = await axios.get(
-          "https://one919-backend.onrender.com/album/top",
+          "https://one919-backend-1.onrender.com/album/top",
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -29,8 +29,7 @@ const Albums = () => {
           }
         );
         setAlbums(response.data);
-      } catch (error) {
-      }
+      } catch (error) {}
     };
 
     fetchAlbums();
@@ -39,7 +38,7 @@ const Albums = () => {
   return (
     <div className={styles.main}>
       <div className={styles.container}>
-        <Heading title="Top Albums"/>
+        <Heading title="Top Albums" />
         <div className={styles.button}>
           <Link href={"/topalbum"}>
             <span className={styles.seeMore}>see more</span>

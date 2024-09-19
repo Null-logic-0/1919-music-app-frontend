@@ -9,12 +9,12 @@ interface addButtonProps {
 
 const AddButton = ({onClick,text}:addButtonProps) =>{
     return(
-        <div className={styles.container}>
+        <>
             <button onClick={onClick} className={styles.button}>
                 <Image src={'/Icons/plus.png'} alt='icon' width={32} height={32}/>
+                <span className={styles.title}>{text}</span>
             </button>
-            <span className={styles.title}>{text}</span>
-        </div>
+        </>
     )
 }
 

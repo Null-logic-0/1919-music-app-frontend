@@ -23,7 +23,6 @@ const SinglePlaylist = () => {
   const [musicList, setMusicList] = useState<SongInterface[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [searchTerm, setSearchTerm] = useState("");
   const [showRecommended, setShowRecommended] = useState(false);
   const { id: playlistIdParam } = useParams();
   const playlistId = Array.isArray(playlistIdParam)
@@ -45,7 +44,7 @@ const SinglePlaylist = () => {
       if (playlistId) {
         try {
           const response = await axios.get(
-            `https://one919-backend.onrender.com/playlist/${playlistId}`,
+            `https://one919-backend-1.onrender.com/playlist/${playlistId}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -75,7 +74,7 @@ const SinglePlaylist = () => {
     try {
       const token = localStorage.getItem("accesstoken");
       const response = await axios.get<SongInterface>(
-        `https://one919-backend.onrender.com/music/${songId}`,
+        `https://one919-backend-1.onrender.com/music/${songId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -84,7 +83,6 @@ const SinglePlaylist = () => {
       );
       return response.data;
     } catch (err) {
-      console.error(`Failed to fetch song with ID ${songId}:`, err);
       return null;
     }
   };
@@ -135,7 +133,7 @@ const SinglePlaylist = () => {
 
     try {
       await axios.put(
-        `https://one919-backend.onrender.com/playlist/${playlistId}/music/${musicId}`,
+        `https://one919-backend-1.onrender.com/playlist/${playlistId}/music/${musicId}`,
         {},
         {
           headers: {
@@ -146,7 +144,7 @@ const SinglePlaylist = () => {
       );
 
       const response = await axios.get(
-        `https://one919-backend.onrender.com/music/InPlaylist/${playlistId}`,
+        `https://one919-backend-1.onrender.com/music/InPlaylist/${playlistId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -165,7 +163,7 @@ const SinglePlaylist = () => {
 
     try {
       await axios.delete(
-        `https://one919-backend.onrender.com/playlist/${playlistId}/music/${musicId}`,
+        `https://one919-backend-1.onrender.com/playlist/${playlistId}/music/${musicId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -174,7 +172,7 @@ const SinglePlaylist = () => {
       );
 
       const response = await axios.get(
-        `https://one919-backend.onrender.com/music/InPlaylist/${playlistId}`,
+        `https://one919-backend-1.onrender.com/music/InPlaylist/${playlistId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -207,8 +205,6 @@ const SinglePlaylist = () => {
             <div className={styles.playlistHeader}>
               <PlaylistHeader
                 playlist={playlist}
-                searchTerm={searchTerm}
-                setSearchTerm={setSearchTerm}
                 addMusics={() => setShowRecommended(true)}
                 isTablefull={isTableFull}
               />

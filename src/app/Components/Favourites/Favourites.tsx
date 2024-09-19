@@ -35,7 +35,7 @@ const Favourites = () => {
       try {
         const token = localStorage.getItem("accesstoken");
         const response = await axios.get(
-          "https://one919-backend.onrender.com/favorites",
+          "https://one919-backend-1.onrender.com/favorites",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -61,7 +61,7 @@ const Favourites = () => {
       const musicIDAsNumber = Number(musicID);
 
       await axios.delete(
-        `https://one919-backend.onrender.com/favorites/deleteMusic/${musicIDAsNumber}`,
+        `https://one919-backend-1.onrender.com/favorites/deleteMusic/${musicIDAsNumber}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
