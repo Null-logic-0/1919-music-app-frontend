@@ -1,15 +1,13 @@
 .container {
-    padding: 30px 24px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+  padding: 30px 24px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
 }
 
-
-
-@media(max-width:1024px) {
-    .container {
-        padding-top: 110px;
-
-    }
+@media (max-width: 1024px) {
+  .container {
+    padding-top: 110px;
+  }
 }

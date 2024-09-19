@@ -46,7 +46,7 @@ const NavMenu = () => {
   const fetchPlaylist = async () => {
     try {
       const response = await axios.get(
-        "https://one919-backend.onrender.com/playlist",
+        "https://one919-backend-1.onrender.com/playlist",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accesstoken")}`,
@@ -64,11 +64,14 @@ const NavMenu = () => {
 
   const deletePlaylist = async (id: number) => {
     try {
-      await axios.delete(`https://one919-backend.onrender.com/playlist/${id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accesstoken")}`,
-        },
-      });
+      await axios.delete(
+        `https://one919-backend-1.onrender.com/playlist/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accesstoken")}`,
+          },
+        }
+      );
       setDataSource((prevPlaylists) =>
         prevPlaylists.filter((playlist) => playlist.id !== id)
       );
@@ -81,7 +84,7 @@ const NavMenu = () => {
 
   return (
     <div className={style.main}>
-      <Link href='/'>
+      <Link href="/">
         <Image src={"/Icons/Logo.svg"} alt="logo" width={70} height={75} />
       </Link>
 

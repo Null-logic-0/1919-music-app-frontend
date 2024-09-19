@@ -25,7 +25,7 @@ const Artist = () => {
         const token = localStorage.getItem("accesstoken");
 
         const response = await axios.get(
-          "https://one919-backend.onrender.com/author/top",
+          "https://one919-backend-1.onrender.com/author/top",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -44,8 +44,6 @@ const Artist = () => {
     fetchArtists();
   }, []);
 
-  
-
   if (loading) {
     return (
       <div className={styles.spinner}>
@@ -61,11 +59,11 @@ const Artist = () => {
   return (
     <div className={styles.main}>
       <div className={styles.container}>
-        <Heading title="Top Artists"/>
+        <Heading title="Top Artists" />
         <div className={styles.button}>
-            <Link href={'/topartist'}>
-                <span className={styles.seeMore}>see more</span>
-            </Link>
+          <Link href={"/topartist"}>
+            <span className={styles.seeMore}>see more</span>
+          </Link>
         </div>
       </div>
       <div className={styles.cards}>

@@ -9,6 +9,7 @@
     display: flex;
     flex-direction: column;
     gap: 24px;
+    position: relative;
 }
 
 .edit {
@@ -20,6 +21,7 @@
 .search {
     max-width: 636px;
     width: 100%;
+   
 }
 
 .text {

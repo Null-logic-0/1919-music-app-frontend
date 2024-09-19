@@ -42,7 +42,7 @@ const PlayerController = () => {
       const accessToken = localStorage.getItem("accesstoken");
       try {
         const response = await axios.get(
-          "https://one919-backend.onrender.com/music",
+          "https://one919-backend-1.onrender.com/music",
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -198,7 +198,12 @@ const PlayerController = () => {
           onDoubleClick={fastForward}
         />
         <VolumeControl volume={volume} onVolumeChange={changeVolume} />
-        {currentTrack && <audio ref={audioRef} src={currentTrack.audio?.url || currentTrack.music?.audio?.url}/>}
+        {currentTrack && (
+          <audio
+            ref={audioRef}
+            src={currentTrack.audio?.url || currentTrack.music?.audio?.url}
+          />
+        )}
       </div>
     </div>
   );

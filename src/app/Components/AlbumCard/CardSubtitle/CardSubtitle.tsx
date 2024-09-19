@@ -27,15 +27,17 @@ const CardSubtitle = ({
       imageSizeVariant === ImageSizeVariant.Small ||
       imageSizeVariant === ImageSizeVariant.RoundedXL ||
       imageSizeVariant === ImageSizeVariant.Absolute
+
     ) {
       return styles.mediumSubtitle;
     } else if (
       imageSizeVariant === ImageSizeVariant.Large ||
       imageSizeVariant === ImageSizeVariant.RoundedXXL
     ) {
-      return styles.largeSubtitle;
-    }
-    return "";
+    } else if (
+      imageSizeVariant === ImageSizeVariant.extraSmall)
+      
+    return styles.largeSubtitle;
   };
 
   const subtitleClass = `${styles.subtitle} ${getSubtitleClass()}`;

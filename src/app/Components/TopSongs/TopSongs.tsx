@@ -46,16 +46,16 @@ const TopSongs = () => {
         let endpoint = "";
         switch (selectedOption.toLowerCase()) {
           case "day":
-            endpoint = "https://one919-backend.onrender.com/music/day";
+            endpoint = "https://one919-backend-1.onrender.com/music/day";
             break;
           case "week":
-            endpoint = "https://one919-backend.onrender.com/music/week";
+            endpoint = "https://one919-backend-1.onrender.com/music/week";
             break;
           case "month":
-            endpoint = "https://one919-backend.onrender.com/music/month";
+            endpoint = "https://one919-backend-1.onrender.com/music/month";
             break;
           default:
-            endpoint = "https://one919-backend.onrender.com/music/week";
+            endpoint = "https://one919-backend-1.onrender.com/music/week";
         }
         const response = await axios.get(endpoint, {
           headers: {

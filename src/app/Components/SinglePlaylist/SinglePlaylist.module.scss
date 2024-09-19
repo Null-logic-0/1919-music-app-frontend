@@ -1,38 +1,36 @@
 .main {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .container {
-    display: flex;
-    flex-direction: column;
-    padding-left: 24px;
-    padding-right: 24px;
-
+  display: flex;
+  flex-direction: column;
+  padding-left: 24px;
+  padding-right: 24px;
 }
 
 .alert {
-    color:#fff;
-    font-size: 20px;
-    font-weight: 400;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 400;
 }
 
 .playlistHeader {
-    padding-bottom: 40px;
+  padding-bottom: 40px;
 }
 
 .spinner {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 60px;
 }
 
-
 .tables {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 100%;
-    padding-left: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  padding-left: 24px;
 }

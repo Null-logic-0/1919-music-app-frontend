@@ -1,19 +1,15 @@
-.container {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-
-}
-
 .button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .title {
-    color:  #FFF;
-    font-size: 20px;
-    font-weight: 500;
-    line-height: 28px;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 28px;
 }

@@ -27,7 +27,7 @@ const Playlists = () => {
 
     try {
       const response = await axios.get(
-        "https://one919-backend.onrender.com/playlist",
+        "https://one919-backend-1.onrender.com/playlist",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -35,8 +35,7 @@ const Playlists = () => {
         }
       );
       setPlaylists(response.data);
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -52,7 +51,7 @@ const Playlists = () => {
   const handleAddPlaylist = async (newPlaylist: FormDataInterface) => {
     try {
       const response = await axios.post(
-        "https://one919-backend.onrender.com/playlist",
+        "https://one919-backend-1.onrender.com/playlist",
         newPlaylist,
         {
           headers: {
@@ -60,24 +59,25 @@ const Playlists = () => {
           },
         }
       );
-      setPlaylists((prevPlaylists) => [...prevPlaylists, response.data]); 
-      setShowModal(false); 
-    } catch (error) {
-    }
+      setPlaylists((prevPlaylists) => [...prevPlaylists, response.data]);
+      setShowModal(false);
+    } catch (error) {}
   };
 
   const deletePlaylist = async (id: number) => {
     try {
-      await axios.delete(`https://one919-backend.onrender.com/playlist/${id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accesstoken")}`,
-        },
-      });
+      await axios.delete(
+        `https://one919-backend-1.onrender.com/playlist/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accesstoken")}`,
+          },
+        }
+      );
       setPlaylists((prevPlaylists) =>
         prevPlaylists.filter((playlist) => playlist.id !== id)
       );
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   return (
@@ -103,10 +103,7 @@ const Playlists = () => {
       </div>
 
       {showModal && (
-        <Modal
-          setShowModal={setShowModal}
-          isOpen={showModal}
-        >
+        <Modal setShowModal={setShowModal} isOpen={showModal}>
           <PlayListFrom
             setShowModal={setShowModal}
             addNewPlaylist={handleAddPlaylist}

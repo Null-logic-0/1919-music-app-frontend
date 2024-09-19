@@ -41,7 +41,7 @@ const OneChart = () => {
       if (chartsId) {
         try {
           const response = await axios.get<ArtistInterface>(
-            `https://one919-backend.onrender.com/album/${chartsId}`,
+            `https://one919-backend-1.onrender.com/album/${chartsId}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -68,7 +68,7 @@ const OneChart = () => {
     try {
       const token = localStorage.getItem("accesstoken");
       const response = await axios.get<SongInterface>(
-        `https://one919-backend.onrender.com/music/${songId}`,
+        `https://one919-backend-1.onrender.com/music/${songId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

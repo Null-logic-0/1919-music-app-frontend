@@ -51,7 +51,7 @@ const RegisterFrom = () => {
 
     try {
       const response = await axios.post(
-        "https://one919-backend.onrender.com/user/signup",
+        "https://one919-backend-1.onrender.com/user/signup",
         values,
         {
           headers: {

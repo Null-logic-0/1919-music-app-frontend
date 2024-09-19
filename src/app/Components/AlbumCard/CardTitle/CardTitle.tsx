@@ -12,11 +12,13 @@ const CardTitle = ({ name, imageSizeVariant }: TitleProps) => {
         if (imageSizeVariant === ImageSizeVariant.XLarge || 
             imageSizeVariant === ImageSizeVariant.Small || 
             imageSizeVariant === ImageSizeVariant.RoundedXL|| 
-            imageSizeVariant === ImageSizeVariant.Absolute) {
+            imageSizeVariant === ImageSizeVariant.Absolute ) {
             return styles.mediumTitle;
         } else if (imageSizeVariant === ImageSizeVariant.Large ||
             imageSizeVariant === ImageSizeVariant.RoundedXXL) {
             return styles.largeTitle;
+        } else if (imageSizeVariant === ImageSizeVariant.extraSmall){
+            return styles.smallTitle;
         }
         return '';
     };

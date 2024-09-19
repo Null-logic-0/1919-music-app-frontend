@@ -1,59 +1,61 @@
-@import '../../../styles/globalColors/color.scss';
+@import "../../../styles/globalColors/color.scss";
 
 .subtitle {
-    color: $lighter;
-    text-align: start;
+  color: $lighter;
+  text-align: start;
 }
 
 .mediumSubtitle {
-    font-size: 20px;
-    font-weight: 400;
+  font-size: 20px;
+  font-weight: 400;
 }
 
 .largeSubtitle {
-    font-size: 24px;
-    font-weight: 400;
+  font-size: 24px;
+  font-weight: 400;
+}
+.smallTitle {
+  font-size: 18px;
+  font-weight: 500px;
 }
 
 .trimerButton {
-    font-size: 20px;
-    font-weight: 500;
-    color: #3B8C75;
-    background-color: transparent;
-    width: 100px;
-    cursor: pointer;
+  font-size: 20px;
+  font-weight: 500;
+  color: #3b8c75;
+  background-color: transparent;
+  width: 100px;
+  cursor: pointer;
 }
 
 .bio {
-    width: 400px;
-    height:100px;
-    text-align: justify;
-    font-size: 18px;
-    padding-bottom: 20px;
+  width: 400px;
+  height: 100px;
+  text-align: justify;
+  font-size: 18px;
+  padding-bottom: 20px;
 }
 
-@media (max-width:768px) {
+@media (max-width: 768px) {
+  .mediumSubtitle {
+    font-size: 12px;
+    font-weight: 400;
+  }
 
-    .mediumSubtitle {
-        font-size: 12px;
-        font-weight: 400;
-    }
-
-    .largeSubtitle {
-        font-size: 16px;
-        font-weight: 400;
-    }
+  .largeSubtitle {
+    font-size: 16px;
+    font-weight: 400;
+  }
 }
 
+@media (max-width: 1024px) {
+  .mediumSubtitle {
+    font-size: 16px;
+    font-weight: 400;
+  }
 
-@media (max-width:1024px) {
-    .mediumSubtitle {
-        font-size: 16px;
-        font-weight: 400;
-    }
-
-    .largeSubtitle {
-        font-size: 24px;
-        font-weight: 400;
-    }
+  .largeSubtitle {
+    font-size: 24px;
+    font-weight: 400;
+  }
 }
