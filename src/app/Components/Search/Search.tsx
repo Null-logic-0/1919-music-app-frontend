@@ -20,7 +20,7 @@ type SearchResult = {
   title?: string;
   name?: string;
   lastName?: string;
-  type: "album" | "author";
+  type: "album" | "author" | "music";
   photo?: {
     url: string;
   };
@@ -34,6 +34,7 @@ const Search = ({
   searchTerm,
 }: SearchProps) => {
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSearchTerm(value);
@@ -55,7 +56,9 @@ const Search = ({
           },
         }
       );
-      const { author = [], album = [] } = response.data;
+      const { author = [], album = [], music = [] } = response.data;
+      console.log(response,'zd');
+      
 
       const formattedAuthors = author.map((item: any) => ({
         id: item.id,
@@ -71,7 +74,18 @@ const Search = ({
         photo: item.photo,
       }));
 
-      const mergedResults = [...formattedAuthors, ...formattedAlbums];
+      const formattedSongs = music.map((item: any) => ({
+        id: item.id,
+        title: item.name,
+        type: "music",
+        photo: item.photo,
+      }));
+
+      const mergedResults = [
+        ...formattedAuthors,
+        ...formattedAlbums,
+        ...formattedSongs,
+      ];
 
       if (Array.isArray(mergedResults)) {
         setSearchResults(mergedResults);
@@ -130,15 +144,23 @@ const Search = ({
                 result.type === "author" ? result.name : result.authorName
               }
               images={result.photo?.url}
-              name={result.type === "album" ? result?.title : undefined}
+              name={
+                result.type === "album" || result.type === "music"
+                  ? result?.title
+                  : undefined
+              }
               link={
                 result.type === "album"
                   ? `/topalbum/${result.id}`
+                  : result.type === "music"
+                  ? '/musics'
                   : `/topartist/${result.id}`
               }
               route={
                 result.type === "album"
                   ? `/topalbum/${result.id}`
+                  : result.type === "music"
+                  ? '/musics'
                   : `/topartist/${result.id}`
               }
               imageSizeVariant={ImageSizeVariant.extraSmall}

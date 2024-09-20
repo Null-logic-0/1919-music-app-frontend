@@ -1,6 +1,7 @@
 import MultiTaskButton from "../../MultiTaskButton/MultiTaskButton";
 import { SongInterface } from "@/app/interfaces/Song.interface";
 import styles from "./ActionsColumn.module.scss";
+import HeartLike from "../../HeartLike/HeartLike";
 
 type ActionsColumnProps = {
   record: SongInterface;
@@ -10,6 +11,8 @@ type ActionsColumnProps = {
   remove?: (musicId: number) => void;
   addMusic?: (musicId: number) => void;
   hide: boolean;
+  like?:boolean;
+  musicId?: string;
 };
 
 const ActionsColumn = ({
@@ -20,6 +23,8 @@ const ActionsColumn = ({
   addMusic,
   remove,
   hide,
+  like,
+  musicId
 }: ActionsColumnProps) => (
   <div className={styles.buttons}>
     <MultiTaskButton
@@ -43,6 +48,11 @@ const ActionsColumn = ({
         ) : null}
       </>
     )}
+    {
+      like && (
+        <HeartLike musicId={musicId ||'#'}/>
+      )
+    }
   </div>
 );
 

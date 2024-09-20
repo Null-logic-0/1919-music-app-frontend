@@ -20,6 +20,13 @@ const links = [
     iconSrc: "/Icons/home.svg",
   },
   {
+    key: "musics",
+    href: "/musics",
+    text: "Musics",
+    activeIcon: "/Icons/musics-active.svg",
+    iconSrc: "/Icons/musics.svg",
+  },
+  {
     key: "Playlists",
     href: "/createdPlaylists",
     text: "Playlists",

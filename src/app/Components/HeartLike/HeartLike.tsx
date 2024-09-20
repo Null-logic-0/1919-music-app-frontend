@@ -57,10 +57,12 @@ const HeartLike = ({ musicId, isDisabled, initialIsLiked = false }: Props) => {
         );
       }
     } catch (error) {
-      console.error("Failed to update favorite status:", error);
       setIsLiked((prev) => !prev);
     }
   };
+
+  useEffect(() => {
+  }, [musicId]);
 
   return (
     <button

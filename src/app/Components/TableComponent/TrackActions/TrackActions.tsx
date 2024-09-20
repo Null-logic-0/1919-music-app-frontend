@@ -15,6 +15,8 @@ type TrackActionsProps = {
   remove: (musicId: string) => void;
   onPlayMusic?: (track: SongInterface) => void;  
   hide:boolean;
+  musicId?:string;
+  like?:boolean
 };
 
 const TrackActions = ({
@@ -24,7 +26,9 @@ const TrackActions = ({
   addMusic,
   remove,
   onPlayMusic, 
-  hide
+  hide,
+  musicId,
+  like
 }: TrackActionsProps) => {
   const [currentTrackId, setCurrentTrackId] = useRecoilState(currentTrackIdState);  
   const [playbackStatus, setPlaybackStatus] = useRecoilState(playbackStatusState);
@@ -53,6 +57,8 @@ const TrackActions = ({
       onPlayPauseClick={onPlayPauseClick}
       addMusic={() => addMusic(record.id)}
       remove={() => remove(record.id)}
+      musicId={musicId}
+      like={like}
     />
   );
 };

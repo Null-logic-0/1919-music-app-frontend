@@ -40,6 +40,13 @@
     font-size: 16px;
     font-weight: 400;
   }
+
+  .smallTitle {
+    font-size: 12px;
+    font-weight: 500px;
+  }
+
+  
 }
 
 @media (max-width: 1024px) {
@@ -52,4 +59,10 @@
     font-size: 36px;
     font-weight: 500px;
   }
+
+  .smallTitle {
+    font-size: 10px;
+    font-weight: 500px;
+  }
+
 }
