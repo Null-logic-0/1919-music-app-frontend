@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { authState } from "@/app/helpers/authState";
 import { loginInterface } from "@/app/interfaces/login.interface";
 import axios from "axios";
@@ -6,8 +6,8 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
-import Image from 'next/image'
-import styles from './AuthForm.module.scss'
+import Image from "next/image";
+import styles from "./AuthForm.module.scss";
 import Input from "../Input/Input";
 import classNames from "classnames";
 import Toggle from "../Toggle/Toggle";
@@ -28,7 +28,7 @@ const AuthForm = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [savedEmail, setSavedEmail] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null); 
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     const email = localStorage.getItem("savedEmail");
@@ -46,6 +46,9 @@ const AuthForm = () => {
   const handleLoginSuccess = (data: any) => {
     const { access_token, refresh_token, role } = data;
 
+    const millisecondsInOneWeek = 7 * 24 * 60 * 60 * 1000;
+    const expirationTime = Date.now() + millisecondsInOneWeek;
+
     localStorage.setItem(
       "auth",
       JSON.stringify({
@@ -53,6 +56,7 @@ const AuthForm = () => {
         accessToken: access_token,
         refreshToken: refresh_token,
         role: role,
+        expirationTime: expirationTime,
       })
     );
 
@@ -67,9 +71,16 @@ const AuthForm = () => {
     localStorage.setItem("accesstoken", access_token);
   };
 
+  const isTokenExpired = (): boolean => {
+    const authData = JSON.parse(localStorage.getItem("auth") || "{}");
+    return authData.expirationTime
+      ? Date.now() > authData.expirationTime
+      : true;
+  };
+
   const submitLogin = async (values: loginInterface) => {
     setLoading(true);
-    setErrorMessage(null); 
+    setErrorMessage(null);
 
     try {
       if (isChecked) {
@@ -93,11 +104,20 @@ const AuthForm = () => {
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response?.status === 401) {
-          setErrorMessage("Invalid email or password."); 
+          setErrorMessage("Invalid email or password.");
         } else if (error.response?.status === 404) {
           setErrorMessage("Email doesn't exist.");
+        } else if (error.response?.status === 403) {
+          setErrorMessage("Your account is blocked.");
+
+          setAuth({ isAuthenticated: false, role: undefined });
+          localStorage.removeItem("auth");
+          localStorage.removeItem("accesstoken");
+          await router.push("/auth");
         } else {
-          setErrorMessage("Email or Pasword is wrong. Please try again later.");
+          setErrorMessage(
+            "Email or Password is wrong. Please try again later."
+          );
         }
       }
     } finally {
@@ -105,12 +125,29 @@ const AuthForm = () => {
     }
   };
 
+  useEffect(() => {
+    const checkTokenExpiration = () => {
+      if (isTokenExpired()) {
+        setAuth({ isAuthenticated: false, role: undefined });
+        localStorage.removeItem("auth");
+        localStorage.removeItem("accesstoken");
+        router.push("/auth");
+      }
+    };
+
+    checkTokenExpiration();
+
+    const intervalId = setInterval(checkTokenExpiration, 60000);
+
+    return () => clearInterval(intervalId);
+  }, [setAuth, router]);
+
   return (
     <div className={styles.main}>
       <Image src="/Icons/Logo.svg" alt="logo" width={100} height={105} />
       <p className={styles.title}>Log in to TnNdshN</p>
 
-      {errorMessage && <p className={styles.error}>{errorMessage}</p>} 
+      {errorMessage && <p className={styles.error}>{errorMessage}</p>}
 
       <form className={styles.form} onSubmit={handleSubmit(submitLogin)}>
         <div className={styles.inputs}>
@@ -163,9 +200,6 @@ const AuthForm = () => {
         <div className={styles.container}>
           <Link href="/register" className={styles.link}>
             Don&apos;t have an account?
-          </Link>
-          <Link href="/" className={styles.link}>
-            {savedEmail ? `Sign Up For ${savedEmail}` : ""}
           </Link>
         </div>
       </form>

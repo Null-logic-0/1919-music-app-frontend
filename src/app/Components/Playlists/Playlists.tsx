@@ -92,7 +92,6 @@ const Playlists = () => {
             images={list.photo.url}
             showDetails
             name={list.name}
-            count={list.count}
             imageSizeVariant={ImageSizeVariant.Medium}
             direction="column"
             link={`/createdPlaylists/${list.id}`}
