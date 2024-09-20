@@ -46,7 +46,11 @@
 
     }
 
-
+    &.extraSmall {
+        width: 40px;
+        height: 40px;
+        border-radius: 25px;
+    }
 
 }
 
@@ -96,6 +100,11 @@
             width: 146px;
             height: 146px;
 
+        }
+        &.extraSmall {
+            width: 25px;
+            height: 25px;
+            border-radius: 25px;
         }
     }
 }

@@ -1,13 +1,8 @@
 "use client";
-import styles from "./OneChart.module.scss";
-import PagesHeaderTop from "@/app/Components/PagesHeaderTop/PagesHeaderTop";
-import TableComponent from "@/app/Components/TableComponent/TableComponent";
-import Card from "../AlbumCard/Card";
-import { ImageSizeVariant } from "@/app/enums/imageSizeVariants";
-import { ArtistInterface } from "@/app/interfaces/Artist.interface";
-import { useEffect, useState, useCallback, useRef } from "react";
-import { useParams } from "next/navigation";
-import axios from "axios";
+import React, { useEffect, useState, useCallback, useRef } from "react";
+import TableComponent from "../TableComponent/TableComponent";
+import styles from "./AllMusics.module.scss";
+import Spinner from "../LoadingSpiner/Spiner";
 import { useRecoilState } from "recoil";
 import {
   currentTrackIndexState,
@@ -17,14 +12,10 @@ import {
 import { PlaybackStatus } from "@/app/enums/player.enums";
 import { SongInterface } from "@/app/interfaces/Song.interface";
 
-const OneChart = () => {
-  const [charts, setCharts] = useState<ArtistInterface | null>(null);
+const AllMusics = () => {
+  const [musicData, setMusicData] = useState<SongInterface[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const { id: chartsIdParam } = useParams();
-  const chartsId = Array.isArray(chartsIdParam)
-    ? chartsIdParam[0]
-    : chartsIdParam;
 
   const [currentTrackIndex, setCurrentTrackIndex] = useRecoilState(
     currentTrackIndexState
@@ -36,49 +27,52 @@ const OneChart = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    const fetchChartsData = async () => {
-      const token = localStorage.getItem("accesstoken");
-      if (chartsId) {
-        try {
-          const response = await axios.get<ArtistInterface>(
-            `https://one919-backend-1.onrender.com/album/${chartsId}`,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
-          setCharts(response.data);
-          // @ts-ignore
-          setMusicTracks(response.data.musics || []);
-        } catch (err) {
-          setError("Failed to fetch charts data");
-        } finally {
-          setLoading(false);
-        }
+    const fetchMusicData = async () => {
+      const accessToken = localStorage.getItem("accesstoken");
+      try {
+        const response = await fetch(
+          "https://one919-backend-1.onrender.com/music",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        );
+        const data = await response.json();
+        setMusicData(data);
+        setMusicTracks(data); 
+      } catch (err) {
+        setError("Failed to fetch music data");
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchChartsData();
-  }, [chartsId, setMusicTracks]);
+    fetchMusicData();
+  }, [setMusicTracks]);
 
   const fetchSongById = async (
     songId: string
   ): Promise<SongInterface | null> => {
     try {
       const token = localStorage.getItem("accesstoken");
-      const response = await axios.get<SongInterface>(
+      const response = await fetch(
         `https://one919-backend-1.onrender.com/music/${songId}`,
         {
+          method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
-      return response.data;
+      if (response.ok) {
+        return await response.json();
+      }
     } catch (err) {
-      return null;
     }
+    return null;
   };
 
   const handleSongClick = useCallback(
@@ -92,7 +86,6 @@ const OneChart = () => {
         setPlaybackStatus(PlaybackStatus.PLAYING);
         audioRef.current.play();
       } else {
-        console.warn(`Song with ID ${songId} not found`);
       }
     },
     [setCurrentTrackIndex, musicTracks, setPlaybackStatus]
@@ -118,34 +111,30 @@ const OneChart = () => {
     }
   }, [currentTrackIndex, musicTracks, playbackStatus]);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
-  if (!charts) return <div>No chart data available</div>;
+  if (loading) {
+    return (
+      <div className={styles.Spinner}>
+        <Spinner />
+      </div>
+    );
+  }
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
 
   return (
     <div className={styles.main}>
-      <PagesHeaderTop link="/topcharts" />
-      <div className={styles.card}>
-        <Card
-          images={charts.photo.url}
-          name={charts.title}
-          authorName={charts.authorName}
-          showDetails
-          imageSizeVariant={ImageSizeVariant.Large}
-          direction="row"
-        />
-      </div>
-      <div className={styles.table}>
-        <TableComponent
-          replaceButton={false}
-          dataSource={charts.musics}
-          onPlayMusic={(song: SongInterface) => handleSongClick(song.id)}
-          hide={false}
-        />
-      </div>
+      <TableComponent
+        replaceButton={false}
+        dataSource={musicData}
+        onPlayMusic={(song: SongInterface) => handleSongClick(song.id)}
+        hide={false}
+        like={true}
+      />
       <audio ref={audioRef} controls hidden />
     </div>
   );
 };
 
-export default OneChart;
+export default AllMusics;

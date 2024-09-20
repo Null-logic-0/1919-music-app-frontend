@@ -6,6 +6,9 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    height: 56px;
+    max-width: 336px;
+    width: 100%;
 }
 
 .inputWrapper {
@@ -72,12 +75,20 @@
     -ms-overflow-style: none; 
     position: absolute; 
     z-index: 20; 
-    top: 86px;
+    top: 85px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
 }
 
 .searchResults::-webkit-scrollbar {
     display: none; 
+}
+
+@media(max-width:1024px){
+    .searchResults {
+        top:168px;
+    }
+
+   
 }
 
 @media (max-width:768px){
@@ -89,5 +100,14 @@
     .input,
     .input::placeholder{
         font-size: 14px;
+    }
+
+    .searchResults {
+        top:165px;
+        width: 220px;
+    }
+
+    .container{
+        max-width: 230px;
     }
 }
