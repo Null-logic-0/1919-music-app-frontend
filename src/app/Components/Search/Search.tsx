@@ -20,7 +20,7 @@ type SearchResult = {
   title?: string;
   name?: string;
   lastName?: string;
-  type: "album" | "author" | "music";
+  type: "album" | "author";
   photo?: {
     url: string;
   };
@@ -56,9 +56,7 @@ const Search = ({
           },
         }
       );
-      const { author = [], album = [], music = [] } = response.data;
-      console.log(response,'zd');
-      
+      const { author = [], album = [] } = response.data;
 
       const formattedAuthors = author.map((item: any) => ({
         id: item.id,
@@ -74,20 +72,19 @@ const Search = ({
         photo: item.photo,
       }));
 
-      const formattedSongs = music.map((item: any) => ({
-        id: item.id,
-        title: item.name,
-        type: "music",
-        photo: item.photo,
-      }));
+      const mergedResults = [...formattedAuthors, ...formattedAlbums];
 
-      const mergedResults = [
-        ...formattedAuthors,
-        ...formattedAlbums,
-        ...formattedSongs,
-      ];
+      const fullMatchResult = mergedResults.find(
+        (result) =>
+          (result.type === "author" &&
+            result.name.toLowerCase() === value.toLowerCase()) ||
+          (result.type === "album" &&
+            result.title?.toLowerCase() === value.toLowerCase())
+      );
 
-      if (Array.isArray(mergedResults)) {
+      if (fullMatchResult) {
+        setSearchResults([fullMatchResult]);
+      } else if (Array.isArray(mergedResults)) {
         setSearchResults(mergedResults);
       } else {
         console.error("Unexpected response data format:", response.data);
@@ -144,23 +141,15 @@ const Search = ({
                 result.type === "author" ? result.name : result.authorName
               }
               images={result.photo?.url}
-              name={
-                result.type === "album" || result.type === "music"
-                  ? result?.title
-                  : undefined
-              }
+              name={result.type === "album" ? result?.title : undefined}
               link={
                 result.type === "album"
                   ? `/topalbum/${result.id}`
-                  : result.type === "music"
-                  ? '/musics'
                   : `/topartist/${result.id}`
               }
               route={
                 result.type === "album"
                   ? `/topalbum/${result.id}`
-                  : result.type === "music"
-                  ? '/musics'
                   : `/topartist/${result.id}`
               }
               imageSizeVariant={ImageSizeVariant.extraSmall}
