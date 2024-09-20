@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { useRecoilState } from "recoil";
 import { authState } from "@/app/helpers/authState";
 import Spinner from "../LoadingSpiner/Spiner";
+import Link from "next/link";
 
 const RegisterFrom = () => {
   const {
@@ -23,7 +24,7 @@ const RegisterFrom = () => {
   const router = useRouter();
   const [auth, setAuth] = useRecoilState(authState);
   const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null); 
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleRegistrationSuccess = (user: any, token: string) => {
     setAuth({
@@ -47,7 +48,7 @@ const RegisterFrom = () => {
 
   const submitRegister = async (values: RegisterFormInterface) => {
     setLoading(true);
-    setErrorMessage(null); 
+    setErrorMessage(null);
 
     try {
       const response = await axios.post(
@@ -67,9 +68,13 @@ const RegisterFrom = () => {
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response?.status === 409) {
-          setErrorMessage("The email is already in use. Please use a different email.");
+          setErrorMessage(
+            "The email is already in use. Please use a different email."
+          );
         } else {
-          setErrorMessage("The email is already in use. Please use a different email.");
+          setErrorMessage(
+            "The email is already in use. Please use a different email."
+          );
         }
       }
     } finally {
@@ -87,7 +92,7 @@ const RegisterFrom = () => {
         <p className={styles.subtitle}>Sign up with your email address</p>
       </div>
 
-      {errorMessage && <p className={styles.error}>{errorMessage}</p>} 
+      {errorMessage && <p className={styles.error}>{errorMessage}</p>}
 
       <form className={styles.form} onSubmit={handleSubmit(submitRegister)}>
         <div className={styles.inputs}>
@@ -149,6 +154,9 @@ const RegisterFrom = () => {
             text={loading ? "Registration..." : "Sign up"}
             disabled={loading}
           />
+          <Link href={"/auth"}>
+            <p className={styles.text}>I already have an account</p>
+          </Link>
         </div>
       </form>
 
