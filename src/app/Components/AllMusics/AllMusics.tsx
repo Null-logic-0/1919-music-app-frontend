@@ -153,7 +153,6 @@ const AllMusics = () => {
           placeHolder={"search music"}
           searchTerm={searchTerm}
           onSearch={handleSearch}
-          icon
         />
       </div>
 
